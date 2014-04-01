@@ -16,7 +16,7 @@ public:
         if(n>0){
             return power(x,n);
         }else{
-            return power(x,-n);
+            return 1.0/power(x,-n);
         }
     }
     
@@ -24,10 +24,11 @@ public:
     static double power(double x, int n){
         if(n==0)
             return 1;
+         double v = power(x, n / 2);
         if(n%2==0)
-            return power(x, n/2)*power(x, n/2);
+             return v*v;
         else
-            return power(x,n/2)*power(x,n/2)*x;
+             return v*v*x;
     }
 };
 
@@ -37,7 +38,7 @@ int main(int argc, const char * argv[])
 
     // insert code here...
     
-    double result= Solution::pow(.2,4);
+    double result= Solution::pow(2,-2);
     std::cout << result<<endl;
     return 0;
 }
