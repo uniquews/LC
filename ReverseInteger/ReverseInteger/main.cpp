@@ -42,7 +42,7 @@ int main(int argc, const char * argv[])
 
     // insert code here...
     Solution *s = new Solution();
-    int a =-123;
+    int a =2147471119;
     cout<< s->reverse(a)<<endl;
     return 0;
 }

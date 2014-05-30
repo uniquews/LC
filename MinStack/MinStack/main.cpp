@@ -29,6 +29,9 @@ public:
     MinStack(){
         //this->eachPair = new pair<int, int>();
         this->min=new stack<pair<int,int>>();
+        
+        /////////
+        pair<int, int> *mm=make_pair
     
     }
     
