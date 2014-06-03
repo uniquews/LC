@@ -120,7 +120,7 @@ public:
                 removeNode(head);
             }
             Node * node = new Node(key,value);
-            mp[key] = node;
+            map[key] = node;
             insertNode(node);
         }
     }
