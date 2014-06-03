@@ -98,7 +98,7 @@ public:
     // get method
     ///////////////////////////////////////////////////////////////////////
     int get(int key) {
-        if (map.find(key)==mp.end()){
+        if (map.find(key)==map.end()){
             return -1;
         }else{
             Node *tmp = map[key];
