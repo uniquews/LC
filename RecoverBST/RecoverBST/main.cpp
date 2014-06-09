@@ -134,6 +134,11 @@ int main(int argc, const char * argv[])
     TreeNode *d = new TreeNode(13);
     TreeNode *e = new TreeNode(5);
     
+//    TreeNode *root = new TreeNode(2);
+//    Tree t(root);
+//    TreeNode *a = new TreeNode(3);
+//    TreeNode *b = new TreeNode(1);
+//    
     root->left = a;
     root->right = d;
     a->left = b;
@@ -147,7 +152,7 @@ int main(int argc, const char * argv[])
     
     vector<int>::iterator it = r.begin();
     for(; it!=r.end(); it++){
-        cout << *it;
+        cout << *it<<"--";
     }
     cout << endl;
     
