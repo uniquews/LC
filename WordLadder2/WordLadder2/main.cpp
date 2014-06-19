@@ -57,8 +57,8 @@ public:
                             father[newString].push_back(temp);
                             //push to the result
                             eachResultInSameLevel.push_back(newString);
-                             getEachResultInOneLevel(father, newString, result, eachResultInSameLevel);
-//                            result.push_back(eachResultInSameLevel);
+                            getEachResultInOneLevel(father, newString, result, eachResultInSameLevel);
+                            //                            result.push_back(eachResultInSameLevel);
                             father.erase(newString);
                             eachResultInSameLevel.pop_back();
                             nextLevel.clear();
@@ -73,7 +73,7 @@ public:
                             }
                             father[newString].push_back(temp);
                             
-//                            visited.insert(newString);
+                            //                            visited.insert(newString);
                         }
                         
                         
@@ -103,8 +103,8 @@ public:
     
     void getEachResultInOneLevel(unordered_map<string, vector<string>> &m, string newString, vector<vector<string>> &resultAbov, vector<string> &result){
         
-//        result.push_back(newString);
-
+        //        result.push_back(newString);
+        
         unordered_map<string, vector<string>>::iterator got =m.find(newString);
         
         
@@ -118,51 +118,51 @@ public:
             reverse(result.begin(), result.end());
             
             return;
-        
+            
         }else{
-         
+            
             vector<string> temp = got->second;
             for(auto each: temp){
                 result.push_back(each);
-            
+                
                 getEachResultInOneLevel(m, each, resultAbov, result);
                 result.pop_back();
                 
             }
             
-
+            
             return;
-        
+            
         }
-
+        
     }
 };
 
 int main(int argc, const char * argv[])
 {
-
+    
     // insert code here...
-//    unordered_map<string, string> m = {{"hot", "hit"},
-//        {"dot", "hot"},
-//        {"dog", "dot"},
-//        {"cog", "dog"}
-//    };
-//    
-//    string newString = "cog";
+    //    unordered_map<string, string> m = {{"hot", "hit"},
+    //        {"dot", "hot"},
+    //        {"dog", "dot"},
+    //        {"cog", "dog"}
+    //    };
+    //
+    //    string newString = "cog";
     
     
     
-//    string start = "hit";
-//    string end = "cog";
-//    unordered_set<string>  dict = {"hot","dot","dog","lot","log"};
+    //    string start = "hit";
+    //    string end = "cog";
+    //    unordered_set<string>  dict = {"hot","dot","dog","lot","log"};
     
     string start = "red";
     string end = "tax";
     unordered_set<string>  dict = {"ted","tex","red","tax","tad","den","rex","pee"};
     
-//    string start = "a";
-//    string end = "c";
-//    unordered_set<string>  dict = {"a","b","c"};
+    //    string start = "a";
+    //    string end = "c";
+    //    unordered_set<string>  dict = {"a","b","c"};
     
     
     Solution s;
@@ -173,18 +173,18 @@ int main(int argc, const char * argv[])
     for(; it!=result.end(); it++){
         vector<string> :: iterator it2 = it->begin();
         for(; it2!= it->end(); it2++){
-        
+            
             cout << *it2 <<" ";
         }
         cout << endl;
-    
+        
     }
     
     
     
     
     
-//    s.getEachResultInOneLevel(m, newString);
+    //    s.getEachResultInOneLevel(m, newString);
     return 0;
 }
 
