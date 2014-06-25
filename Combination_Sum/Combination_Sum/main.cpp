@@ -30,13 +30,14 @@ public:
         vector<int> eachResult;
         
         int start =0;
+        int last = candidates[start];
         
-        dfs(candidates, target, eachResult, result, start);
+        dfs(candidates, target, eachResult, result, start, last);
         
         return result;
     }
     
-    void dfs(vector<int> candidates, int target, vector<int> &eachResult, vector<vector<int>> &result, int &start){
+    void dfs(vector<int> candidates, int target, vector<int> &eachResult, vector<vector<int>> &result, int &start, int last){
         
         if(target == 0) {
         
@@ -46,15 +47,20 @@ public:
         
         for(int i = start; i<candidates.size(); i++){
             int fetch = candidates[i];
+           
+            int last = eachResult.back();
+            if(fetch == last) continue;
             int remain = target - fetch;
             
             if(remain < 0) return;
             else{
                 eachResult.push_back(fetch);
-                dfs(candidates, remain, eachResult, result, i);
+                dfs(candidates, remain, eachResult, result, i, last);
                 eachResult.pop_back();
             
             }
+            
+            
 
         }
     
