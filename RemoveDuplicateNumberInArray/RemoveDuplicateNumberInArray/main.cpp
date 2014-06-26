@@ -10,16 +10,17 @@
 class Solution {
 public:
     int removeDuplicates(int A[], int n) {
-        if(n==0) return 0;
-        int i=1;
-        int j=0;
-        for(;i<n;i++){
-            if(A[i]==A[i-1])
-                continue;
-            else
-                A[++j]=A[i];
+        if(n<=1) return n;
+        int cur = 0;
+        
+        for(int i = 1; i< n; i++){
+            if(A[cur] != A[i])
+                A[++cur] = A[i];
+            
         }
-        return j+1;
+        
+        return cur+1;
+        
     }
     
 };
