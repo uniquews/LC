@@ -42,6 +42,7 @@ public:
         if(day ==1){
             max_profit = max1[0];
         }else{
+            //如果最后一个和之前的差很大，那么单单最后一天卖一次就可以是最大收入，所以max_profit要初始化这样
             max_profit = max(max1[day-1], max1[day-2]);
             if(prices[day-1] > prices[day-2]){
                 tempProfit =prices[day-1] - prices[day-2];;
@@ -52,6 +53,7 @@ public:
                 
                 //2,1,4,5,2,9,7
                 _max = prices[day-2];
+                //_min要以9为界，所以不能初始化成7
                 _min = _max;
             }
             
@@ -62,18 +64,15 @@ public:
         
         
         for(int i=day-3; i>=0; i--){
+            //必须要先更新_min
             if(prices[i] <  _min){
                 _min = prices[i];
-                
             }
+            
             tempProfit = _max - _min;
- 
-//            int tempProfit = max1[i]+(_max-prices[i]);
             if(tempProfit + max1[i] > max_profit)
                 max_profit = tempProfit+ max1[i];
-        
-            
-            
+
             if(prices[i]>_max){
                 _max = prices[i];
                 _min = _max;
