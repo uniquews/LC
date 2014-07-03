@@ -9,40 +9,22 @@
 #include <iostream>
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-    //Too trivial to use recursion
-    static int climbstair(int n){
-        if(n==1) return 1;
-        if(n==2) return 2;
-        return climbstair(n-1)+climbstair(n-2);
-    }
-
-    
-    static int climbStair(int n){
-        if(n==1) return 1;
-        if(n==2) return 2;
-        int last=0;
-        int lastlast =0;
-        int result=0;
-        for(int i=1; i<=n; i++){
-            if(i==1){
-                last=1;
-                result = last+lastlast;
-                lastlast=last;
-                last=result;
-            }else{
-                result = last+lastlast;
-                lastlast=last;
-                last=result;
-            
-            }
+    int climbStairs(int n) {
+        vector<int> f(n+1);
         
+        f[0] = 0;
+        f[1] = 1;
+        f[2] = 2;
+        
+        for(int i=3; i<= n; i++){
+            f[i] =f[i-2] + f[i-1];
+            
         }
-        return result;
-    
+        
+        return f[n];
     }
-    
 };
 
 
