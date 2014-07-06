@@ -21,10 +21,10 @@ public:
             }
             
             if(i >m){
-                prev->next = head->next;
-                head->next = prepareToReverse->next;
-                prepareToReverse ->next = head;
-                head = prev;
+                prev->next = head->next; //1
+                head->next = prepareToReverse->next;//2
+                prepareToReverse ->next = head;//2
+                head = prev;//1
             }
             
             prev = head;
