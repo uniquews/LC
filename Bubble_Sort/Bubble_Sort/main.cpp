@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Shuai Wang. All rights reserved.
 //
 
+
+
+// Bubble sort is stable sorting alg.
+
 #include <iostream>
 
 using namespace std;
