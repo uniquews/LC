@@ -31,57 +31,45 @@ public:
 class Solution {
 public:
     void recoverTree(TreeNode *root) {
-        //firstly, implement the morris in-order traverse
-        TreeNode *cur=root;
+        pair<TreeNode *, TreeNode *> broken;
+        TreeNode *cur = root;
         TreeNode *prev = nullptr;
-        TreeNode *parent=nullptr; // record the last tree node
-        TreeNode *f1 =  nullptr;
-        TreeNode *f2 = nullptr;
-        bool found = false;
         
         while(cur!=nullptr){
-            if(cur->left==nullptr){
-                if(parent && parent->val > cur->val){
-                    if(!found){
-                        found = true;
-                        f1 = parent; // if found is true, then the f1 will not be changed
-                    }
-                    f2 = cur; // make sure to store the first biggest and last small. If parent ->val > cur, f2 must be updated
-                    
-                }
-                parent = cur;
-                cur = cur->right;  //every time we change the cure, we need to update the parent node
+            if(cur->left == nullptr){
+                detect(broken, prev, cur);
+                prev = cur;
+                cur = cur->right;
             }else{
-                // auto node = cur->left;
-                prev = cur->left;
-                while(prev->right!=nullptr && prev->right!= cur){
-                    prev=prev->right;
+                auto node = cur -> left; // node is specifically for thread pointer
+                while(node->right!=nullptr && node->right !=cur){
+                    node = node->right;
                 }
                 
-                if(prev->right==nullptr){
-                    prev->right=cur;      // modify the threaded pointer
-                    cur= cur->left;
+                if(node->right == nullptr){
+                    node->right = cur;
+                    cur = cur->left;
                 }else{
-                    prev->right=nullptr;
-                    if(parent->val > cur->val){
-                        if(!found){
-                            found = true;
-                            f1 = parent;
-                            
-                        }
-                        f2 = cur;
-                        
-                    }
-                    parent = cur;
-                    cur = cur->right;
+                    node->right = nullptr;
+                    detect(broken, prev, cur);
                     
+                    prev = cur;
+                    cur = cur->right;
                 }
-                
             }
-            
         }
-        if(f1&&f2){
-            swap(f1->val, f2->val);
+        
+        swap(broken.first->val, broken.second->val);
+    }
+    
+    
+    void detect(pair<TreeNode *, TreeNode *>& broken, TreeNode *prev, TreeNode *cur){
+        if(prev != nullptr && prev->val > cur->val){
+            if(broken.first==nullptr){
+                broken.first = prev;
+            }
+            // no else here!
+            broken.second = cur;//will be change
         }
         
     }
