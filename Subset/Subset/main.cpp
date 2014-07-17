@@ -16,6 +16,7 @@ public:
     vector<vector<int> > subsets(vector<int> &S) {
         vector<vector<int>> result;
         vector<int> level;
+        result.push_back(level);
         sort(S.begin(), S.end());
         dfs(result, level, 0, S);
         
@@ -23,16 +24,16 @@ public:
     }
     
     void dfs(vector<vector<int>> &result, vector<int> &level, int step, vector<int> &S){
-        if(S.size() == step){
+        for(int i = step; i<S.size(); i++){
+            level.push_back(S[i]);
             result.push_back(level);
-            return;
+            
+            if(i< S.size()-1){
+                dfs(result, level, i+1, S);
+            }
+            
+            level.pop_back();
         }
-        
-        dfs(result, level, step+1, S); // do
-        not push S[step] in level
-        level.push_back(S[step]);
-        dfs(result, level, step+1, S);
-        level.pop_back();
     }
 };
 
