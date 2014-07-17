@@ -28,7 +28,8 @@ public:
             return;
         }
         
-        dfs(result, level, step+1, S); // do not push S[step] in level
+        dfs(result, level, step+1, S); // do
+        not push S[step] in level
         level.push_back(S[step]);
         dfs(result, level, step+1, S);
         level.pop_back();

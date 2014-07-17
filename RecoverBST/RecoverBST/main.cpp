@@ -66,7 +66,7 @@ public:
     void detect(pair<TreeNode *, TreeNode *>& broken, TreeNode *prev, TreeNode *cur){
         if(prev != nullptr && prev->val > cur->val){
             if(broken.first==nullptr){
-                broken.first = prev;
+                broken.first = prev; // because this is based on in order traverse, so the first wrong one must be bigger .
             }
             // no else here!
             broken.second = cur;//will be change

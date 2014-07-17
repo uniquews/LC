@@ -7,7 +7,7 @@
 //
 
 
-//Insertion sort is stable sorting alg. 
+//Insertion sort is stable sorting alg.
 
 #include <iostream>
 
