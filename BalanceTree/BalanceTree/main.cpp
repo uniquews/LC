@@ -31,27 +31,29 @@ public:
 class Solution {
 public:
     bool isBalanced(TreeNode *root) {
-        if(root==nullptr) return true;
-        int value = valid(root);
-        if(value == -1) return false;
-        return true;
+        if(root == nullptr) return true;
+        
+        if(valid(root) == -1)
+            return false;
+        else
+            return true;
+        
     }
     
-    int valid(TreeNode *node){
-        if(node==nullptr) return 0;
-        // else{
-        int left = valid(node->left);
+    int valid (TreeNode * p){
+        if(p == nullptr) return 0;
+        int left = valid(p->left);
         if(left == -1) return -1;
-        int right = valid(node->right);
-        if(right== -1) return -1;
-        if(abs(left-right)>1) return -1;
+        int right = valid(p->right);
+        if(right == -1) return -1;
+        
+        if(abs(left - right) >1) return -1;
+        
+//        if(left == right) return 0; cannot add this, because as long as you explore a this level, at least you should add one on its children node. Here, since the children level are already balanced, this return number is for parent node to compare with its sibling. Thus we can easliy add 1 to its left or right children.
         
         return left>right?left+1:right+1;
-        
-        // }
-        
-        
     }
+    
 };
 
 int main(int argc, const char * argv[])
