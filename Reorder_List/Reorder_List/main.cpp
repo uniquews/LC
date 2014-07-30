@@ -18,39 +18,51 @@ class Solution {
 public:
     void reorderList(ListNode *head) {
         if(head == nullptr) return;
-        ListNode *cur = head;
-        int length = 0;
-        while(cur!=nullptr){
-            cur = cur->next;
-            length++;
+
+        ListNode *fast = head;
+        ListNode *slow = head;
+        
+        // find the median node
+        while(true){
+            fast = fast->next;
+            if(fast == nullptr)
+                break;
+            fast = fast ->next;
+            if(fast == nullptr)
+                break;
+            slow = slow->next;
         }
         
-        ListNode *start = head;
-        ListNode *nextStart = head->next;
-        ListNode *last = head;
-        ListNode *dummy = new ListNode(-1);
-        dummy->next = last;
+        // reverse second half of link list
+        ListNode *cur = slow;
+        ListNode *prev = slow->next;
         
-        for(int i=0; i< length/2; i++){
-            int lengthRemain = length-1-i;
-            while(lengthRemain!=0){
-                dummy = last;
-                last = last->next;
-                lengthRemain--;
-            }
+        cur->next = nullptr;
+        while(prev != nullptr){
+            ListNode *temp = prev->next;
+            prev->next = cur;
+            cur = prev;
+            prev = temp;
             
-            if(start == last) break;
-            
-            dummy->next = last->next;
-            last->next = start->next;
-            start->next = last;
-            start = nextStart;
-            nextStart = nextStart->next;
-            
-            last = start;
         }
+        
+        // merge two lists
+        ListNode *first = head;
+        ListNode *second = cur;
+        
+        while(first != nullptr && second != nullptr && first != second){
+            ListNode *nextFirst = first->next;
+            ListNode *nextSecond = second->next;
+            second->next = first->next;
+            first->next = second;
+            first = nextFirst;
+            second = nextSecond;
+        }
+        
         return;
     }
+    
+>>>>>>> 227dfc20ed400c0a3aa8229ab87c848f39a472dd
 };
 
 int main(int argc, const char * argv[])
@@ -58,7 +70,23 @@ int main(int argc, const char * argv[])
 
     ListNode *a = new ListNode(1);
     ListNode *b = new ListNode(2);
+<<<<<<< HEAD
     ListNode *c = new ListNode ()
+=======
+//    ListNode *c = new ListNode(3);
+//    ListNode *d = new ListNode(4);
+//    ListNode *e = new ListNode(5);
+    
+    a->next = b;
+//    b->next = c;
+//    c->next = d;
+//    d->next = e;
+    
+    Solution su;
+    su.reorderList(a);
+    
+    
+>>>>>>> 227dfc20ed400c0a3aa8229ab87c848f39a472dd
     return 0;
 }
 
