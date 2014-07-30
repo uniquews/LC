@@ -20,66 +20,47 @@ struct myfunction{
     
 } myobject;
 
-class Solution{
-
+class Solution {
 public:
-    vector<vector<int> > combinationSum2(vector<int> &num, int target) {
+    vector<vector<int>> combinationSum2(vector<int> &num, int target) {
         vector<vector<int>> result;
-        
-        sort(num.begin(), num.end(), myobject);
-        
         vector<int> eachResult;
         
-        int start =0;
-//        int last = INT_MIN;
+        sort(num.begin(), num.end());
         
-        dfs(num, target, eachResult, result, start);
+        int start = 0;
         
+        dfs(num, start, target, eachResult, result);
         return result;
-    
-    
     }
-
     
-    void dfs(vector<int> candidates, int target, vector<int> &eachResult, vector<vector<int>> &result, int start){
-        
-        if(target == 0) {
-            
-//            if(!compareIn(eachResult, result))
+    void dfs(vector<int> &num, int start, int target, vector<int> &eachResult, vector<vector<int>> &result){
+        if(target == 0){
             result.push_back(eachResult);
-                
-//            return;
+            return;  //??
+        }else{
+            if(start +1 <= num.size()){
+                for(int i=start; i<num.size();i++){
+                    int fetch = num[i];
+                    
+                    int remain = target - fetch;
+                    
+                    if(remain < 0)
+                        return;
+                    eachResult.push_back(fetch);
+                    dfs(num, i+1, target - fetch, eachResult, result);
+                    eachResult.pop_back();
+                    
+                    while(i < num.size()-1 && num[i] == num[i+1]){
+                        i++;
+                    }
+                }
+            }
         }
         
-        if(start+1 <= candidates.size()){
-            for(int i = start; i<candidates.size(); i++){
-            int fetch = candidates[i];
-            
-            
-//            if(fetch == last) continue;
-            int remain = target - fetch;
-            
-            if(remain < 0) return;
-            else{
-                eachResult.push_back(fetch);
-//                last = fetch;
-                
-                dfs(candidates, remain, eachResult, result, i+1);
-                    
-                
-                eachResult.pop_back();
-                
-                while(i<candidates.size()-1 && candidates[i] == candidates[i+1])
-                    i++;
-     
-            }
-    
-            
-            }
-        }
         return;
     }
-
+    
 };
 
 int main(int argc, const char * argv[])
