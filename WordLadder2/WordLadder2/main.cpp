@@ -17,127 +17,94 @@ using namespace std;
 class Solution {
 public:
     vector<vector<string>> findLadders(string start, string end, unordered_set<string> &dict) {
-        
-        int level = 0;
-        
         vector<string> stringVec;
         vector<string> nextLevel;
         unordered_map<string, vector<string>> father;
-        vector<vector<string>> result;
-        vector<string> eachResultInSameLevel;
-        stringVec.push_back(start);
         
         unordered_set<string> visited;
+        vector<vector<string>> allResult;
+        vector<string> result;
+        bool found = false;
+        
+        
+        stringVec.push_back(start);
         visited.insert(start);
         
         while(!stringVec.empty()){
             
             if(find(stringVec.begin(), stringVec.end(), end)!=stringVec.end())
-                return result;
+                return allResult;
             
-            for(auto current: stringVec)
-                visited.insert(current);
-            
+            for(auto str: stringVec){
+                visited.insert(str);
+            }
             
             while(!stringVec.empty()){
-                string temp = stringVec.back();
+                string beginString = stringVec.back();
                 stringVec.pop_back();
                 
-                for(int i=0;i<temp.size(); i++){
-                    for(char tri = 'a'; tri <='z';tri++){
+                for(int i=0; i<beginString.size(); i++){
+                    for(char c = 'a'; c<='z'; c++){
+                        if(beginString[i] == c) continue;
                         
-                        string newString;
-                        newString = temp;
-                        
-                        if(tri == newString[i]) continue;
-                        
-                        newString[i]=tri;
+                        string newString = beginString;
+                        newString[i] = c;
                         
                         if(newString == end){
-                            father[newString].push_back(temp);
-                            //push to the result
-                            eachResultInSameLevel.push_back(newString);
-                            getEachResultInOneLevel(father, newString, result, eachResultInSameLevel);
-                            //                            result.push_back(eachResultInSameLevel);
+                            father[newString].push_back(beginString);
+                            result.push_back(newString);
+                            getResultInEachLevel(father, newString, allResult, result);
+                            result.pop_back();
                             father.erase(newString);
-                            eachResultInSameLevel.pop_back();
-                            nextLevel.clear();
-                            break; // cannot be replaced by other char
+                            found = true;
+                            break;
                         }
                         
-                        if((dict.find(newString)!=dict.end() && visited.count(newString)==0)){
-                            
-                            if(find(nextLevel.begin(), nextLevel.end(),newString)==nextLevel.end()){
+                        
+                        if(dict.find(newString) != dict.end() && visited.count(newString) == 0){
+                            if(find(nextLevel.begin(), nextLevel.end(), newString) == nextLevel.end()){
                                 nextLevel.push_back(newString);
-                                
                             }
-                            father[newString].push_back(temp);
                             
-                            //                            visited.insert(newString);
+                            father[newString].push_back(beginString);
                         }
-                        
-                        
-                        newString.clear();
-                        
-                        
                     }
                 }
             }
             
-            if(!nextLevel.empty()){
-                level++;
-                
+            if(found){
+                nextLevel.clear();
+            }else{
+                stringVec = nextLevel;
+                nextLevel.clear();
             }
-            
-            stringVec = nextLevel;
-            nextLevel.clear();
             
         }
         
-        return result;
-        
+        return allResult;
     }
     
-    
-    
-    
-    void getEachResultInOneLevel(unordered_map<string, vector<string>> &m, string newString, vector<vector<string>> &resultAbov, vector<string> &result){
+    void getResultInEachLevel(unordered_map<string, vector<string>> &m, string newString, vector<vector<string>> &allResult, vector<string> &result){
         
-        //        result.push_back(newString);
-        
-        unordered_map<string, vector<string>>::iterator got =m.find(newString);
-        
-        
+        unordered_map<string, vector<string>> :: iterator got = m.find(newString);
         
         if(got == m.end()){
-            
             reverse(result.begin(), result.end());
-            
-            resultAbov.push_back(result);
-            
+            allResult.push_back(result);
             reverse(result.begin(), result.end());
-            
             return;
-            
         }else{
-            
             vector<string> temp = got->second;
             for(auto each: temp){
                 result.push_back(each);
-                
-                getEachResultInOneLevel(m, each, resultAbov, result);
+                getResultInEachLevel(m, each, allResult, result);
                 result.pop_back();
-                
             }
-            
-            
-            return;
-            
         }
         
+        return;
     }
 };
-
 int main(int argc, const char * argv[])
 {
     
