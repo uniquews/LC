@@ -14,77 +14,56 @@ using namespace std;
 class Solution {
 public:
     bool exist(vector<vector<char> > &board, string word) {
-        string first = word.substr(0, 1);
-//        vector<vector<bool>> visited = {(int)board.size(), {(int)board[0].size()}, false};
-        const int row= (int)board.size();
-        const int col = (int)board[0].size();
+        string firstLetter = word.substr(0,1);
         
-        vector<vector<bool>> visited (row, vector<bool>(col, false));
+        int row = board.size();
+        int column = board[0].size();
         
-        for(int i = 0; i<board.size(); i++){
-            for(int j = 0; j<board[i].size(); j++){
-         
-                if(board[i][j] == *first.c_str()){
-                   
-                   if( dfs(word, board, 0, i, j, visited))
-                       return true;
-                
+        vector<vector<bool>> visited (row, vector<bool> (column, false));
+        
+        for(int i=0; i<row; i++){
+            for(int j=0; j<column; j++){
+                if(board[i][j] == *firstLetter.c_str()){
+                    if(dfs(board, word, 0, i, j, visited))
+                        return true;
                 }
-                    
             }
         }
+        
         return false;
     }
     
     
-    bool dfs(string &str, vector<vector<char>> &board, int position, int i, int j, vector<vector<bool>> &visited){
-//         if(position > str.length()-1) return false;
-        int row =(int)board.size()-1;
-        int col =(int)board[0].size()-1;
-        
-        if(i<0 || j<0 || i>row || j > col)
+    bool dfs(vector<vector<char>> &board, string word, int position, int i, int j, vector<vector<bool>> &visited){
+        int row = board.size()-1;
+        int column = board[0].size()-1;
+        if(i <0 || j<0 || i>row || j> column)
             return false;
         
-        
-        if(position == str.length()-1){
-            if(visited[i][j] ==false && isExist(str.substr(position, 1), board, i, j)){
-                visited[i][j] = true;
+        if(position == word.size()-1){
+            if(visited[i][j] == false && word[position] == board[i][j]){
+                visited[i][j];
                 return true;
             }else
                 return false;
+        }else{
+            if(visited[i][j] == true)
+                return false;
+            else{
+                if(word[position] == board[i][j]){
+                    visited[i][j] = true;
+                    
+                    if(dfs(board, word, position+1, i-1, j, visited) || dfs(board, word, position+1, i+1, j, visited) ||
+                       dfs(board, word, position+1, i, j-1, visited) || dfs(board, word, position+1, i, j+1, visited))
+                        return true;
+                }
+                
+                visited[i][j] = false;
+                return false;
+            }
         }
-        
-        if(visited[i][j] == true)
-            return false;
-        
-        
-        if(isExist(str.substr(position, 1), board, i, j)){
-            
-            visited[i][j] = true;
-            
-            if( dfs(str, board, position +1, i-1, j, visited) || dfs(str, board, position +1, i+1, j, visited) || dfs(str, board, position+1, i, j-1, visited) || dfs(str, board, position+1, i, j+1, visited))
-                return true;
-        
-        }
-        
-        visited[i][j] =false;
-           return false;
-    }
-    
-    
-    bool isExist(string str, vector<vector<char>> &board, int i, int j){
-     
-        
-        if(i >=0 && j>=0 && i<board.size() && j<board[0].size()){
-            if(board[i][j] == *str.c_str())
-                return true;
-            
-        }
-        
-        return false;
     }
 };
-
 int main(int argc, const char * argv[])
 {
 
