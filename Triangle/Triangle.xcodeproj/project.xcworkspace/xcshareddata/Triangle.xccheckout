@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>EB85BEDF-26D9-466D-9B73-1BB35774D98C</string>
+	<string>D8FC6EDC-8863-40B2-8C0A-2C4C0BF9B8BC</string>
 	<key>IDESourceControlProjectName</key>
-	<string>test</string>
+	<string>Triangle</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>77773B29-3EA4-4DF6-929B-AD71EAB5EA58</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>test/test.xcodeproj/project.xcworkspace</string>
+	<string>Triangle/Triangle.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>77773B29-3EA4-4DF6-929B-AD71EAB5EA58</key>
