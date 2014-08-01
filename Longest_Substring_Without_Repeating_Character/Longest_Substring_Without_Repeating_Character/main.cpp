@@ -16,37 +16,28 @@ using namespace std;
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+        int left=0;
+        int right=0;
         if(s.size() == 0) return 0;
-        unordered_map<char, int> showUp;
+        if(s.size() ==1) return 1;
+        unordered_map<char, bool> showUp; // map don't need to be initialized?
+        int _max=1;
         
-        for(char temp = 'a'; temp <='z'; temp++){
-            showUp[temp] = -1;
-        }
-        
-        
-        vector<int> f(s.size(), 0);
-        f[0] = 1;
-        int _max  = 0;
-        showUp[s[0]] = 0;
-        
-        for(int i=1; i<s.size();){
-            if(showUp[s[i]] !=-1){
-                f[i] = 1;
-                int lastPosition = showUp[s[i]];
-                for(int j = i; j>=lastPosition; j--){
-                    showUp[s[j]] = -1;
-                }
-                i = lastPosition+1;
+        while(left <s.size()  && right < s.size()){
+            if(showUp[s[right]] == false){
+                showUp[s[right]] = true;
+                _max = max(_max, right -left +1);
+                right++;
             }else{
-                f[i] = f[i-1] +1;
-                showUp[s[i]] = i;
-                _max = max(f[i], _max);
-                i++;
+                showUp[s[left]] = false;
+                _max = max(_max, right-left);
+                left++;
             }
         }
         
         return _max;
     }
+    
 };
 
 
