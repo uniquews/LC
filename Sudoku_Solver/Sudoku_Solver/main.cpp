@@ -13,64 +13,55 @@ using namespace std;
 
 class Solution {
 public:
-
-    
-    bool solveSudoku( vector<vector<char>> &board){
-        for(int m =0; m<9; m++){
-            for(int n=0; n<9; n++){
-                if(board[m][n] == '.'){
-                    for(int p =0; p<9; p++){
-                        board[m][n] = '1'+p;
-                        if(isValid(m, n, board) && solveSudoku(board)){
+    bool solveSudoku(vector<vector<char>> &board){
+        for(int row = 0; row<9; row++){
+            for(int column=0; column<9; column++){
+                if(board[row][column] == '.'){
+                    for(int tri = 0; tri<9; tri++){
+                        board[row][column] = '1'+tri;
+                        if(isValid(board, row, column) && solveSudoku(board)){
                             return true;
                         }
-                        board[m][n] = '.';
-                    
+                        board[row][column] = '.';
                     }
-
+                    
                     return false;
-                
                 }
-            
             }
-        }
+        }  // for the last number is not '.', you should return true here. Otherwise, it will return false and the board will be empty.
         
         return true;
     }
     
-    
-    bool isValid(int i, int j,  vector<vector<char>> &board){
-        for(int m =0; m<9; m++){
-            if(board[i][m] == board[i][j] && j!= m)
-                return false;
-        
-        }
-        
-        
+    bool isValid(vector<vector<char>> &board, int row, int column){
         for(int n =0; n<9; n++){
-            if(board[n][j] == board[i][j] && i!=n)
+            if(board[row][n] == board[row][column] && n !=column)
                 return false;
+        }
         
+        for(int m = 0; m<9; m++){
+            if(board[m][column] == board[row][column] && m!=row)
+                return false;
         }
         
         
         
-        int rowMod = i/3;
-        int colMod = j/3;
+        int rowMod = row/3;
+        int columnMod = column/3;
         
         
-        for(int x=0; x<3; x++){
-            for(int y = 0; y<3; y++){
-                if(board[rowMod*3+x][colMod*3+y] == board[i][j] && rowMod*3+x!=i && colMod*3+y!=j)
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                if(board[rowMod*3+i][columnMod*3+j] == board[row][column] && rowMod*3+i != row && columnMod*3+j!=column){
                     return false;
-                
+                }
             }
-        
         }
-        
-        
         return true;
     }
+    
+    
+    
 };
 
 

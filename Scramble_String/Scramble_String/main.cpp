@@ -9,98 +9,60 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <vector>
+
+
 
 using namespace std;
 
 class Solution {
 public:
-//    bool isScramble(string s1, string s2) {
-//        if(s1.length()==0 && s2.length()==0)
-//            return true;
-//        return dfs(s1.begin(), s1.end(), s2.begin());
-//    }
-
     
-// small test set is ok; cannot pass the large set
-
-//    bool dfs(string::iterator first1, string::iterator last1, string::iterator first2){
-//        auto length = distance(first1, last1);
-//        auto last2 = next(first2, length);
-//        if(length == 1) return *first1 == *first2;
-//        
-//        
-//        for(int i=1; i<length; i++){
-//            if ((dfs(first1, first1+i, first2) && dfs(first1+i, last1, first2+i)) || (dfs(first1, first1+i, last2-i) && dfs(first1+i, last1, first2)))
-//                return true;
-//        
-//        }
-//        return false;
-//    }
-    
-    
-// add cut edge. check all char in string
-//    bool dfs(string:: iterator first1, string:: iterator last1, string::iterator first2){
-//        
-//        auto length = distance(first1, last1);
-//        auto last2= next(first2, length);
-//        
-//        if(length == 1) return *first1 == *first2;
-//        
-//        int A[26] = {0};
-//        for(int i=0; i< length; i++) A[*(first1+i)-'a']++;
-//        for(int i = 0; i<length; i++) A[*(first2+i)-'a']--;
-//        
-//        for(int i=0; i< 26; i++) if(A[i]!=0) return false;
-//        
-//        for(int i=1; i<length; i++){
-//            if ((dfs(first1, first1+i, first2) && dfs(first1+i, last1, first2+i)) || (dfs(first1, first1+i, last2-i) && dfs(first1+i, last1, first2)))
-//                return true;
-//            
-//        }
-//        return false;
-//    
-//    
-//    }
-    typedef string::iterator Iterator;
-    typedef tuple<Iterator, Iterator, Iterator> Key;
-    unordered_map<Key, bool> cache;
+    int CHAR_SIZE = 26;
     
     bool isScramble(string s1, string s2) {
-        cache.clear();
-        return dfs(s1.begin(), s1.end(), s2.begin());
-       
+        return isScrambleHelper(s1, s2);
     }
     
-    
-    bool dfs(Iterator first1, Iterator last1, Iterator first2){
-        auto length = distance(first1, last1);
-        auto last2 = next(first2, length);
+    bool isScrambleHelper(string &s1, string &s2) {
+        if (s1.size() != s2.size())
+            return false;
+        if (s1 == s2)
+            return true;
         
-        if(length == 1) return *first1 == *first2;
+        int size = s1.size();
+        vector<int> bucket(CHAR_SIZE, 0);
+        string s11, s12, s21, s22;
+        
+        // Check wheter they have the same chars
+        for (int i = 0; i < s1.size(); ++i) {
+            bucket[s1[i] - 'a'] += 1;
+            bucket[s2[i] - 'a'] -= 1;
+        }
+        for (int i = 0; i < CHAR_SIZE; ++i) {
+            if (bucket[i] != 0)
+                return false;
+        }
         
         
-        
-        for(int i=1; i<length; i++){
-            if((cacheCheck(first1, first1+i, first2) && cacheCheck(first+i, last1, first2+i)) || (cacheCheck(first1, first1+i, last1-i) && cacheCheck(first1+i, last1, first2)))
+        for (int i = 1; i < size; ++i) {
+            s11 = s1.substr(0, i);
+            s12 = s1.substr(i);
+            
+            s21 = s2.substr(0, i);
+            s22 = s2.substr(i);
+            if (isScrambleHelper(s11, s21) && isScrambleHelper(s12, s22))
                 return true;
             
+            s21 = s2.substr(size - i);
+            s22 = s2.substr(0, size - i);
+            if (isScrambleHelper(s11, s21) && isScrambleHelper(s12, s22))
+                return true;
         }
         
         return false;
-    
     }
     
-    
-    
-    bool cacheCheck(Iterator it1, Iterator it2, Iterator it3){
-        auto key  = make_tuple(it1, it2, it3);
-        if(find(cache.begin(), cache.end(), key)!=cache.end())
-            return cache[key];
-        else{
-            return cache[key]= dfs(it1, it2, it3);
-        }
-    
-    }
     
 };
 

@@ -10,6 +10,8 @@
 #include <vector>
 #include <list>
 #include <queue>
+#include <unordered_map>
+#include <unordered_set>
 using namespace std;
 
 
@@ -21,63 +23,106 @@ struct TreeNode {
 };
 
 
-class Solution {
-public:
-    void recoverTree(TreeNode *root) {
-        pair<TreeNode *, TreeNode *> broken;
-        TreeNode *cur = root;
-        TreeNode *prev = nullptr;
-        
-        while(cur!=nullptr){
-            if(cur->left == nullptr){
-                detect(broken, prev, cur);
-                prev = cur;
-                cur = cur->right;
-            }else{
-                auto node = cur -> left; // node is specifically for thread pointer
-                while(node->right!=nullptr && node->right !=cur){
-                    node = node->right;
-                }
-                
-                if(node->right == nullptr){
-                    node->right = cur;
-                    cur = cur->left;
-                }else{
-                    prev->right = nullptr;
-                    detect(broken, prev, cur);
-                    cur = cur->right;
-                }
-            }
-        }
-        
-        swap(broken.first->val, broken.second->val);
-    }
-    
-    
-    void detect(pair<TreeNode *, TreeNode *>& broken, TreeNode *prev, TreeNode *cur){
-        if(prev != nullptr && prev->val > cur->val){
-            if(broken.first==nullptr){
-                broken.first = prev;
-            }
-            // no else here!
-            broken.second = cur;//will be change
-        }
-    }
-};
+//class Solution {
+//public:
+//    void solve(vector<vector<char>> &board) {
+//        int row = board.size();
+//        if(row == 0) return;
+//        int column  = board[0].size();
+//        
+//        vector<int> xIndex;
+//        vector<int> yIndex;
+//        
+//        for(int i=0; i<row; i++){
+//            if(board[i][0] == 'O'){
+//                xIndex.push_back(i);
+//                yIndex.push_back(0);
+//            }
+//        }
+//        
+//        for(int i=0; i<row; i++){
+//            if(board[i][column-1] = 'O'){
+//                xIndex.push_back(i);
+//                yIndex.push_back(column-1);
+//            }
+//        }
+//        
+//        for(int i=0; i<column; i++){
+//            if(board[0][i] == 'O'){
+//                xIndex.push_back(0);
+//                yIndex.push_back(i);
+//            }
+//        }
+//        
+//        for(int i=0; i<column; i++){
+//            if(board[row-1][i] == 'O'){
+//                xIndex.push_back(row-1);
+//                yIndex.push_back(i);
+//            }
+//        }
+//        
+//        
+//        int k=0;
+//        while(k<xIndex.size()){
+//            int x = xIndex[k];
+//            int y = yIndex[k];
+//            
+//            board[x][y] = 'Y';
+//            
+//            if(x>0 && board[x-1][y] == 'O'){
+//                xIndex.push_back(x-1);
+//                yIndex.push_back(y);
+//            }
+//            
+//            if(x<row-1 && board[x+1][y] == 'O'){
+//                xIndex.push_back(x+1);
+//                yIndex.push_back(y);
+//            }
+//            
+//            if(y>0 && board[x][y-1] == 'O'){
+//                xIndex.push_back(x);
+//                yIndex.push_back(y-1);
+//            }
+//            
+//            if(y<column-1 && board[x][y+1] == 'O'){
+//                xIndex.push_back(x);
+//                yIndex.push_back(y+1);
+//            }
+//            
+//            k++;
+//        }
+//        
+//        
+//        for(int i=0; i< row; i++){
+//            for(int j = 0; j<column; j++){
+//                if(board[i][j] == 'O') board[i][j] = 'X';
+//                if(board[i][j] == 'Y') board[i][j] = 'O';
+//            }
+//        }
+//        
+//        return;
+//    }
+//    
+//};
 int main(int argc, const char * argv[])
 {
     
-    // insert code here...
-    TreeNode *a = new TreeNode (1);
-    TreeNode *b = new TreeNode (2);
-//        TreeNode *c = new TreeNode (3);
-//        TreeNode *d = new TreeNode (4);
-//        TreeNode *e = new TreeNode (5);
+//    Solution su;
+//    vector<vector<char>> board= {{'X'}};
+//    su.solve(board);
+//    string start = "hot";
+//    string end = "dog";
+//    unordered_set<string> dict = {"hot","cog","dog","tot","hog","hop","pot","dot"};
+//    su.findLadders(start, end, dict);
+
+        int i;
+        char str[]="c3p  o...";
+        i=0;
+        while (isalnum(str[i])) i++;
+        printf ("The first %d characters are alphanumeric.\n",i);
+        return 0;
+
     
-    b->right = a;
-    
-    Solution su;
-    su.recoverTree(b);
     
     return 0;
 }
