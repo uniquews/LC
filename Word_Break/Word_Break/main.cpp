@@ -11,6 +11,9 @@
 #include <unordered_set>
 #include <vector>
 
+
+// even more makeing sence version
+
 using namespace std;
 
 class Solution {
@@ -18,41 +21,33 @@ public:
     bool wordBreak(string s, unordered_set<string> &dict) {
         vector<vector<bool>> f(s.length(), vector<bool> (s.length(), false));
         
-//        for(int i=0; i< s.length(); i++){
-//            string tempStr = s.substr(i, 1);
-//            if(find(dict.begin(), dict.end(), tempStr)!=dict.end())
-//                f[i][i] = true;
-//        }
-//        
+        int totalLength = s.length();
         
-        for(int length = 1; length<= s.length(); length++){
-            for(int start = 0; start < s.length()-(length-1); start ++){
-                int end = start + length; // not real
+        for(int length = 1; length <= totalLength; length++){
+            for(int start = 0; start <= totalLength - length; start++){
+                int endIndex = start + length - 1;
                 string tempStr = s.substr(start, length);
-                for(int k =0; k<length; k++){
-                    string first = s.substr(start, k+1);
-                    string second = s.substr(start+k+1, length-(k+1));
-//                    cout << first << " "<< second << " " << endl;
-                    if(!second.empty()){
-                        if((f[start][start+k] == true || find(dict.begin(), dict.end(), first)!=dict.end()) && (f[start+k+1][start+length-1] == true || find(dict.begin(), dict.end(), second)!=dict.end()))
-                            f[start][end-1] = true;
-
+                for(int k = 1; k <= length; k++){
+                    string first = s.substr(start, k);
+                    if(start + k > endIndex){
+                        if((f[start][start + k - 1] || find(dict.begin(), dict.end(), first) != dict.end())){
+                            f[start][endIndex] = true;
+                        }
                     }else{
-                        if((f[start][start+k] == true || find(dict.begin(), dict.end(), first)!=dict.end()))
-                            f[start][start+k] = true;
+                        string second = s.substr(start + k, length);
+                        if((f[start][start + k -1] || find(dict.begin(), dict.end(), first) != dict.end()) &&
+                           (f[start + k][start + length - 1] || find(dict.begin(), dict.end(), second)!= dict.end())){
+                            f[start][endIndex] = true;
+                        }
+                        
                     }
-                    
                 }
-            
             }
-        
-        
         }
         
-        return f[0][s.length()-1];
+        return f[0][totalLength-1];
     }
 };
-
 
 
 int main(int argc, const char * argv[])
