@@ -104,6 +104,37 @@ struct TreeNode {
 //    }
 //    
 //};
+
+
+class Solution {
+public:
+    vector<vector<int> > subsets(vector<int> &S) {
+        vector<vector<int>> result;
+        vector<int> eachSet;
+        sort(S.begin(), S.end());
+        result.push_back(eachSet);
+        unordered_map<int, bool> visited;
+        dfs(result, eachSet, 0, visited, S);
+        return result;
+    }
+    
+    
+    void dfs(vector<vector<int>> &result, vector<int> &eachSet, int position, unordered_map<int, bool> &visited, vector<int> &S) {
+        for(int i = position; i < S.size(); i++){
+            if(visited[S[i]] == false){
+                eachSet.push_back(S[i]);
+                visited[S[i]] = true;
+                result.push_back(eachSet);
+                if(i + 1 < S.size())
+                    dfs(result, eachSet, i + 1, visited, S);
+                eachSet.pop_back();
+                visited[S[i]] = false;
+            }
+        }
+    }
+};
+
+
 int main(int argc, const char * argv[])
 {
     
@@ -115,14 +146,16 @@ int main(int argc, const char * argv[])
 //    unordered_set<string> dict = {"hot","cog","dog","tot","hog","hop","pot","dot"};
 //    su.findLadders(start, end, dict);
 
-        int i;
-        char str[]="c3p  o...";
-        i=0;
-        while (isalnum(str[i])) i++;
-        printf ("The first %d characters are alphanumeric.\n",i);
-        return 0;
+//        int i;
+//        char str[]="c3p  o...";
+//        i=0;
+//        while (isalnum(str[i])) i++;
+//        printf ("The first %d characters are alphanumeric.\n",i);
+//        return 0;
 
-    
+    vector<int> S = {1,2};
+    Solution su;
+    su.subsets(S);
     
     return 0;
 }
