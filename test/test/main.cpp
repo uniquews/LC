@@ -153,9 +153,21 @@ int main(int argc, const char * argv[])
 //        printf ("The first %d characters are alphanumeric.\n",i);
 //        return 0;
 
-    vector<int> S = {1,2};
-    Solution su;
-    su.subsets(S);
+//    vector<int> S = {1,2};
+//    Solution su;
+//    su.subsets(S);
+    
+    unordered_map<int, int> needed;
+    char temp = 'C';
+    char temp2 = 'D';
+    char temp3 = 'F';
+    needed[temp] = 1;
+    needed[temp2] = 2;
+    needed[temp3] = 3;
+    unordered_map<int, int> :: iterator it = needed.begin();
+    for(; it != needed.end(); it++){
+        cout << it->first << " - " << it->second << endl;
+    }
     
     return 0;
 }
