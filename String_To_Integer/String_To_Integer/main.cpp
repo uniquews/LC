@@ -7,6 +7,9 @@
 //
 
 #include <iostream>
+#include <string>
+
+using namespace std;
 
 class Solution {
 public:
@@ -18,7 +21,7 @@ public:
         
         while(str[i]==' ') {i++;}
         
-        if(str[i] == '+'){
+        if(str[i] == '+'){ // e.g.: +-2
             if(str[i+1] == '+' || str[i+1]=='-')
                 return 0;
             else
@@ -49,11 +52,16 @@ public:
     }
 };
 
+
+
+
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    char *s = "+-2";
+    Solution su;
+    su.atoi(s);
+    
     return 0;
 }
 
