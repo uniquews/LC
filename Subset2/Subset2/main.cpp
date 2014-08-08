@@ -29,10 +29,10 @@ public:
             level.push_back(S[i]);
             result.push_back(level);
             if(i < S.size()-1){
-                dfs(result,level, i+1, S);
+                dfs(result,level, i+1, S);  // i + 1 not start + 1
             }
             level.pop_back();
-            while(i<S.size()-1 && S[i] == S[i+1]){
+            while(i<S.size()-1 && S[i] == S[i+1]){ // i < S.size - 1
                 i++;
             }
         }
