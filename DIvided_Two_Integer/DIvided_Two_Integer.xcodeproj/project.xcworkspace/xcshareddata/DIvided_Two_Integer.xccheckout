@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>8EAC449F-5E39-4F45-8295-E53EA2A7BCBB</string>
+	<string>72E44F9C-1AC9-4495-A40E-BD76331F2E37</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Spiral Matrix</string>
+	<string>DIvided_Two_Integer</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2E38EC21-CAFD-481A-96A3-B97F6BC81FF5</key>
-		<string>https://github.com/uniquews/LC.git</string>
+		<key>B5789215-DCA4-4486-B4CF-3067A0605E0D</key>
+		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Spiral Matrix/Spiral Matrix.xcodeproj/project.xcworkspace</string>
+	<string>DIvided_Two_Integer/DIvided_Two_Integer.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2E38EC21-CAFD-481A-96A3-B97F6BC81FF5</key>
+		<key>B5789215-DCA4-4486-B4CF-3067A0605E0D</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/uniquews/LC.git</string>
+	<string>ssh://github.com/uniquews/LC.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2E38EC21-CAFD-481A-96A3-B97F6BC81FF5</string>
+	<string>B5789215-DCA4-4486-B4CF-3067A0605E0D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2E38EC21-CAFD-481A-96A3-B97F6BC81FF5</string>
+			<string>B5789215-DCA4-4486-B4CF-3067A0605E0D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LC</string>
 		</dict>
