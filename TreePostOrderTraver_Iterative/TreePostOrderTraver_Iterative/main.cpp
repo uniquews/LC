@@ -26,6 +26,36 @@ public:
     Tree(TreeNode *t): root(t){};
 
 };
+//class Solution {
+//public:
+//    vector<int> postorderTraversal(TreeNode *root) {
+//        vector<int> result;
+//        if(root==nullptr)
+//            return result;
+//        stack<TreeNode*> st;
+//        TreeNode *last =root;
+//        st.push(root);
+//        
+//        while(!st.empty()){
+//            TreeNode *current;
+//            current = st.top();
+//            if((current->left==nullptr && current->right==nullptr)||current->left==last ||current->right==last){
+//                result.push_back(current->val);
+//                st.pop();
+//                last=current;
+//            }else{
+//                if(current->right) st.push(current->right);
+//                if(current->left) st.push(current->left);
+//                
+//            }
+//        }
+//        
+//        return result;
+//    }
+//};
+
+
+// Think about why this is wrong
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode *root) {
@@ -33,19 +63,22 @@ public:
         if(root==nullptr)
             return result;
         stack<TreeNode*> st;
-        TreeNode *last =root;
+//        TreeNode *last =root;
         st.push(root);
         
         while(!st.empty()){
             TreeNode *current;
             current = st.top();
-            if((current->left==nullptr && current->right==nullptr)||current->left==last ||current->right==last){
+            if((current->left==nullptr && current->right==nullptr)){
                 result.push_back(current->val);
                 st.pop();
-                last=current;
+                // last=current;
             }else{
-                if(current->right) st.push(current->right);
-                if(current->left) st.push(current->left);
+                if(current->right)
+                    st.push(current->right);
+                
+                if(current->left)
+                    st.push(current->left);
                 
             }
         }
@@ -53,6 +86,7 @@ public:
         return result;
     }
 };
+
 
 class LevelOrderTraver{
 public:
@@ -124,9 +158,9 @@ int main(int argc, const char * argv[])
     right1->left = left23;
     right1->right =right24;
     
-//    Solution s;
-//    vector<int> result = s.postorderTraversal(root);
-//    
+    Solution s;
+    vector<int> result = s.postorderTraversal(root);
+//
     
     
     LevelOrderTraver tt;
