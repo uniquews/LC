@@ -19,7 +19,7 @@ public:
         int cur = m+n-1;
         
         while(a>=0 && b>=0){
-            A[cur--]=A[a]>B[b]?A[a--]:B[b--];
+            A[cur--]=A[a]>B[b]?A[a--]:B[b--];  // wrong: A[j--] = B[j--]. minus j twice. A[j] = B[j--] correct
         }
         
         while(b>=0){
