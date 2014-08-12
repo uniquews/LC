@@ -12,57 +12,6 @@
 using namespace std;
 
 
-//struct myfunction{
-//    bool operator() (int i, int j){
-//        return (i< j);
-//        
-//    }
-//    
-//} myobject;
-//
-//class Solution {
-//public:
-//    vector<vector<int>> combinationSum2(vector<int> &num, int target) {
-//        vector<vector<int>> result;
-//        vector<int> eachResult;
-//        
-//        sort(num.begin(), num.end());
-//        
-//        int start = 0;
-//        
-//        dfs(num, start, target, eachResult, result);
-//        return result;
-//    }
-//    
-//    void dfs(vector<int> &num, int start, int target, vector<int> &eachResult, vector<vector<int>> &result){
-//        if(target == 0){
-//            result.push_back(eachResult);
-//            return;  //??
-//        }else{
-//            if(start +1 <= num.size()){
-//                for(int i=start; i<num.size();i++){
-//                    int fetch = num[i];
-//                    
-//                    int remain = target - fetch;
-//                    
-//                    if(remain < 0)
-//                        return;
-//                    eachResult.push_back(fetch);
-//                    dfs(num, i+1, target - fetch, eachResult, result);
-//                    eachResult.pop_back();
-//                    
-//                    while(i < num.size()-1 && num[i] == num[i+1]){
-//                        i++;
-//                    }
-//                }
-//            }
-//        }
-//        
-//        return;
-//    }
-//    
-//};
-
 class Solution {
 public:
     vector<vector<int>> combinationSum2(vector<int> &num, int target) {
@@ -76,16 +25,18 @@ public:
         sort(num.begin(), num.end());
         
         dfs(num, result, level, 0, target);
+        
         return result;
     }
     
     void dfs(vector<int> &num, vector<vector<int>> &result, vector<int> &level, int step, int target) {
-        if (step == num.size()) {
-            return;
-        }
         
         if (target == 0) {
             result.push_back(level);
+            return;
+        }
+        
+        if (step == num.size()) {
             return;
         }
         
@@ -95,7 +46,7 @@ public:
         
         for (int i = step; i < num.size(); i++) {
             level.push_back(num[i]);
-            dfs(num, result, level, step + 1, target - num[i]);
+            dfs(num, result, level, i + 1, target - num[i]);
             level.pop_back();
             
             while (i < num.size() - 1 && num[i] == num[i + 1]) {
@@ -124,8 +75,8 @@ int main(int argc, const char * argv[])
 //        cout << endl;
 //    }
     
-    vector<int> a= {1};
-    int target =1;
+    vector<int> a= {1, 2};
+    int target =4;
     Solution s;
     vector<vector<int>> result = s.combinationSum2(a, target);
     vector<vector<int>> :: iterator it = result.begin();
