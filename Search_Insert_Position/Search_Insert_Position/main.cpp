@@ -13,20 +13,36 @@ using namespace std;
 class Solution {
 public:
     int searchInsert(int A[], int n, int target) {
-        return distance(A, lower_bound(A, A+n, target));
-    }
-    
-    template <typename ForwardIterator, typename T>
-    ForwardIterator lower_bound(ForwardIterator first, ForwardIterator last, T &value){
-        
-        while(first != last){
-            auto mid = next(first, distance(first, last)/2);
-            if(value > *mid) first = ++mid;
-            else last = mid;
+        if (n == 0){
+            return 0;
         }
         
-        return first;
+        int first = 0;
+        int end = n - 1;
+        int mid = (first + end) / 2;
+        
+        while(first <= end){
+            mid = (first + end) / 2;
+            if (A[mid] == target){
+                return mid;
+            }else if (A[mid] < target){
+                first = mid + 1;
+            }else{
+                end = mid - 1;
+            }
+        }
+        
+        if (A[mid] < target){
+            return mid + 1;
+        }
+        
+        if (A[mid] > target){
+            return mid;
+        }
+        
+        return -1;
     }
+    
 };
 
 int main(int argc, const char * argv[])

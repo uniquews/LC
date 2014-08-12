@@ -20,20 +20,33 @@ struct TreeNode {
 class Solution {
 public:
     int maxDepth(TreeNode *root) {
-        if(root==nullptr)    return 0;
-        return _maxDepth(root, 1);
+        if (root == nullptr){
+            return 0;
+        }else{
+            return dqq(root, 1);
+        }
     }
     
-    int _maxDepth(TreeNode *node, int cur){
-        if(node== nullptr) return --cur;
-        
-        int left = _maxDepth(node->left, cur+1);
-        int right = _maxDepth(node->right, cur+1);
-        
-        return max(left, right);
-        
+    int dqq(TreeNode *node, int depth){
+        if (node == nullptr){
+            return depth - 1;
+        }else if (node -> left == nullptr && node -> right == nullptr){
+            return depth;
+        }else{
+            int left = dqq(node -> left, depth + 1);
+            int right = dqq(node -> right, depth + 1);
+            
+            if (left == depth){ // left is null, you have to return the right
+                return right;
+            }
+            
+            if (right == depth){
+                return left;
+            }
+            
+            return max(left, right);
+        }
     }
-    
 };
 
 int main(int argc, const char * argv[])
