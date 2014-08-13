@@ -58,8 +58,19 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    vector<int> candidates = {1,2,3,4,5};
+    Solution su;
+    vector<vector<int>> result = su.combinationSum(candidates, 9);
+    vector<vector<int>> :: iterator it = result.begin();
+    for(; it != result.end(); it++) {
+        vector<int> :: iterator it2 = it->begin();
+        for(; it2 != it->end(); it2++) {
+            cout << *it2 << " ";
+        }
+        cout << endl;
+    }
+    
+    
     return 0;
 }
 
