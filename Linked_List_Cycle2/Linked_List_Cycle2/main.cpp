@@ -43,31 +43,38 @@ struct ListNode {
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        ListNode *dummy = new ListNode(-1);
-        dummy->next = head;
-        if(head == nullptr) return nullptr;
         ListNode *first = head;
-        ListNode *second = head->next;
+        ListNode *second = head;
         
-        while(first !=nullptr && second !=nullptr){
-            if(first  == second) break;
+        while (first != nullptr && second != nullptr) {
             first = first->next;
             second = second->next;
-            if(second == nullptr) break;  // do not return here
+            if (second == nullptr) {
+                return nullptr;
+            }
+            
             second = second->next;
+            
+            if (first == second) {
+                break;
+            }
         }
         
-        if(second == nullptr) return nullptr; // return here for:{1}, no cycle
+        if (second == nullptr) {
+            return nullptr;
+        }
         
-        first = dummy;
-        // second = second->next; // because X cannot add 1
-        while(first!=second){
+        
+        first = head;
+        
+        while (first != second) {
             first = first->next;
             second = second->next;
         }
         
         return first;
     }
+    
 };
 
 int main(int argc, const char * argv[])
