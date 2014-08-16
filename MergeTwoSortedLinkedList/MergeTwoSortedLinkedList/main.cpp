@@ -22,8 +22,8 @@ public:
 class Solution{
 public:
     static  LinkList * merge(LinkList *l1, LinkList *l2){
-        LinkList *p = new LinkList(-1);
-        LinkList *q = p;
+        LinkList *p = new LinkList(-1); // should bedummy node
+        LinkList *q = p;  
         for(;l1!=nullptr || l2!=nullptr;p=p->next){
             int l1_val = l1==nullptr?INT_MAX:l1->val;
             int l2_val = l2==nullptr?INT_MAX:l2->val;
