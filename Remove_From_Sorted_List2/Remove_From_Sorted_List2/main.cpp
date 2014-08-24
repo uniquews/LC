@@ -83,7 +83,7 @@ public:
             
         }
         
-        prev->next = nullptr;
+        prev->next = nullptr; //{1，1，1，1}
         
         return dummy.next;
     }
