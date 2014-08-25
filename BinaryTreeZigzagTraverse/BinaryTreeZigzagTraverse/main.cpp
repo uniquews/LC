@@ -35,6 +35,7 @@ public:
             return vector<vector<int>> {};
         
         vector<vector<int>> result;
+        
         queue<TreeNode *> nodeQueue;
         vector<int> layer;
         vector<int>::iterator it;

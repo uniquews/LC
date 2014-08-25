@@ -19,19 +19,21 @@ public:
     bool hasCycle(ListNode *head) {
         if(head == nullptr) return false;
         ListNode *first = head;
-        ListNode *second = head->next;
+        ListNode *second = head;
         
         while(first!=nullptr &&second!=nullptr){
-            if(first == second) return true; // cycle!!!!
+            
             first = first->next;
             second = second->next;
             if(second == nullptr)
                 return false;
             second = second->next;//do not code as second = second ->next ->next. Null pointer error!!!!!
+            if(first == second) return true; // cycle!!!!
         }
         
         return false;
     }
+    
 };
 
 int main(int argc, const char * argv[])

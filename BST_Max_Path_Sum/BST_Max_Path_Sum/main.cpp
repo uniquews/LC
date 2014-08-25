@@ -41,7 +41,7 @@ public:
         
         result = max(result, sum);
         
-        return max(leftSize, rightSize)>0?node->val+max(leftSize,rightSize):node->val;
+        return max(leftSize, rightSize)>0?node->val+max(leftSize,rightSize):node->val;  // for its parent, only one path of its child can be chosen.
         
     }
 };

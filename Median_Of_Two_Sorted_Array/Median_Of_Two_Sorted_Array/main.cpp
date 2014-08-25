@@ -24,24 +24,24 @@ public:
     
     double findKthNumber(int A[], int m, int B[], int n, int k){
         if(m > n){
-            return findKthNumber(B, n, A, m, k);
+            return findKthNumber(B, n, A, m, k);  // For convenience, we always make array A as the smaller size array
         }
         
-        if(m==0)
+        if(m==0) //edge case
             return B[k-1];
         
-        if(k == 1)
+        if(k == 1) // edge case
             return min(A[0], B[0]);
         
-        int pos = min(k/2, m);
+        int pos = min(k/2, m);  // need to remember
         int posInB = k-pos;
         
         if(A[pos-1] < B[posInB-1]){ // nth to index, code should minus 1
-            return findKthNumber(A+pos, m-pos, B, n, k-pos);
+            return findKthNumber(A+pos, m-pos, B, n, k-pos); // median cannot be in the first part of A
         }else if(A[pos-1] > B[posInB-1]){
-            return findKthNumber(A, m, B+posInB, n-posInB, k-posInB);
+            return findKthNumber(A, m, B+posInB, n-posInB, k-posInB); // median cannot be in the first part of B
         }else{
-            return A[pos-1];
+            return A[pos-1]; 
         }
         
     }

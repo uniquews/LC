@@ -18,7 +18,7 @@ public:
         vector<int> level;
         if(num.size() == 0) return result;
         vector<bool> visited(num.size(), false);
-        sort(num.begin(), num.end());
+        sort(num.begin(), num.end());   // remember to sort it
         dfs(result, level, 0, visited, num);
         
         return result;
