@@ -121,7 +121,7 @@ public:
         
         return dummy.next;
     }
-
+};
 int main(int argc, const char * argv[])
 {
 
