@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0EBE418E-D37C-42B8-AA0A-7F10FBC1F5CD</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Add_Two_Number</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>19D391C8-B10A-4356-AB38-75965FF97377</key>
+		<string>ssh://github.com/uniquews/LC.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Add_Two_Number/Add_Two_Number.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>19D391C8-B10A-4356-AB38-75965FF97377</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/uniquews/LC.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>19D391C8-B10A-4356-AB38-75965FF97377</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>19D391C8-B10A-4356-AB38-75965FF97377</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LC</string>
+		</dict>
+	</array>
+</dict>
+</plist>
