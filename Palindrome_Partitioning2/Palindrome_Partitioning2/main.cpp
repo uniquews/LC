@@ -33,10 +33,6 @@ public:
             return 0;
         }
         
-//        for(int k = 0; k<s.length(); k++){
-//            cout << s[k];
-//        }
-        
         vector<int> f(s.length(), 0);
         f[0] = 0;
         if(s[0] == s[1])
@@ -59,7 +55,6 @@ public:
                     }
       
                 }
-//                 f[i] = min(tempMin, f[i-1]+1);
                 f[i]  = tempMin;
             }
             
@@ -68,35 +63,7 @@ public:
               
         return f[s.length()-1];
     }
-    
-//    bool isPa(string s, int start, int end, vector<vector<bool>> &Pa){
-//        if(start == end) return true;
-//        if(start == end-1){
-//            if(s[start] == s[end])
-//                return true;
-//            else return false;
-//        }
-//        int i =start;
-//        int j = end;
-//        while(s[i] == s[j] && j>=i){
-//            i++;
-//            j--;
-//        
-//        }
-//        
-//        if(j<i){
-////            Pa[start][end] = true;
-//            return true;
-//        }else{
-////            Pa[start][end] = false;
-//            return false;
-//        }
-//        
-//        
-//        
-//    
-//    }
-    
+
     
 };
 
