@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 struct ListNode {
     int val;
     ListNode *next;
@@ -15,60 +17,58 @@ struct ListNode {
 };
 
 
+
+
 class Solution {
 public:
     ListNode *sortList(ListNode *head) {
-        
-        if(head == nullptr) return nullptr;
-        
-        // calculate length
-        ListNode *it = head;
-        int length = 0;
-        while(it!=nullptr){
-            length++;
-            it = it->next;
+        if (head == nullptr || head -> next == nullptr) {
+            return head;
         }
         
-        ListNode *newHead = mergeSort(&head, length);
-        return newHead;
+        ListNode *mid = findMiddle(head);
+        ListNode *right = sortList(mid -> next);
+        mid -> next = nullptr;
+        ListNode *left = sortList(head);
+        
+        return merge(left, right);
     }
     
-    
-    
-    ListNode* mergeSort(ListNode **head, int length){
-        if(length == 1){
-            ListNode *temp = *head;
-            *head = (*head)->next;
-            temp->next=nullptr;
-            return temp;
+    ListNode *findMiddle(ListNode *head) {
+        ListNode *slow = head;
+        ListNode *fast = head -> next;
+        
+        while (fast != nullptr && fast -> next != nullptr) {
+            fast = fast -> next -> next;
+            slow = slow -> next;
         }
         
-        ListNode *leftHead = mergeSort(head, length/2);
-        ListNode *rightHead = mergeSort(head, length-length/2);
-        ListNode *newHead = merge(leftHead, rightHead);
-        return newHead;
+        return slow;
+    
     }
     
-    ListNode* merge(ListNode *leftHead, ListNode *rightHead){
-        ListNode *dummy = new ListNode(-1);
-        ListNode *cur = dummy;
-        while(leftHead !=nullptr || rightHead !=nullptr){
-            int lVal = leftHead==nullptr?INT_MAX:leftHead->val;
-            int rVal = rightHead==nullptr?INT_MAX:rightHead->val;
+    ListNode *merge(ListNode *head1, ListNode *head2) {
+        ListNode dummy(-1);
+        ListNode *prev = &dummy;
+        
+        while (head1 != nullptr || head2 != nullptr) {
+            int val1 = head1 == nullptr ? INT_MAX : head1 -> val;
+            int val2 = head2 == nullptr ? INT_MAX : head2 -> val;
             
-            if(lVal <= rVal){
-                cur->next = leftHead;
-                cur= cur->next;
-                leftHead = leftHead->next;
-            }else{
-                cur->next = rightHead;
-                cur = cur->next;
-                rightHead = rightHead->next;
+            if (val1 <  val2) {
+                prev -> next = head1;
+                head1 = head1 -> next;
+            } else {
+                prev -> next = head2;
+                head2 = head2 -> next;
             }
+            
+            prev = prev -> next;
+        
         }
-        cur = dummy->next;
-        delete dummy;
-        return cur;
+        
+        return dummy.next;
+    
     }
     
 };
@@ -85,8 +85,8 @@ int main(int argc, const char * argv[])
     ListNode *d = new ListNode(2);
     ListNode *e = new ListNode(8);
     ListNode *f = new ListNode (9);
-    ListNode *g = new ListNode(7);
-    ListNode *h = new ListNode(6);
+    ListNode *g = new ListNode(6);
+    ListNode *h = new ListNode(7);
     
     a->next = b;
     b->next = c;
@@ -96,7 +96,15 @@ int main(int argc, const char * argv[])
     f->next = g;
     g->next = h;
     
-    su.sortList(a);
+    ListNode *result = su.sortList(a);
+    
+    while (result != nullptr) {
+        cout << result -> val << " ";
+        result = result -> next;
+    }
+    
+    cout << endl;
+    
     return 0;
 }
 
