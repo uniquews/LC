@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>89AE71C6-0555-49FD-9D29-09C53CD4A236</string>
+	<string>C614883B-E147-4712-84E8-C6B9BDA64CFD</string>
 	<key>IDESourceControlProjectName</key>
-	<string>OptimalStrategyOfGame</string>
+	<string>Rotate_LIst</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>C83C85C6-E850-4DB3-8912-B385AD45AD40</key>
+		<key>02E86731-7D24-4D58-A602-D290F2F5A846</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>OptimalStrategyOfGame/OptimalStrategyOfGame.xcodeproj/project.xcworkspace</string>
+	<string>Rotate_LIst/Rotate_LIst.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>C83C85C6-E850-4DB3-8912-B385AD45AD40</key>
+		<key>02E86731-7D24-4D58-A602-D290F2F5A846</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>C83C85C6-E850-4DB3-8912-B385AD45AD40</string>
+	<string>02E86731-7D24-4D58-A602-D290F2F5A846</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>C83C85C6-E850-4DB3-8912-B385AD45AD40</string>
+			<string>02E86731-7D24-4D58-A602-D290F2F5A846</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LC</string>
 		</dict>

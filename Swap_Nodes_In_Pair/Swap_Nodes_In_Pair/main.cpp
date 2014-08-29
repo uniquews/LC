@@ -8,30 +8,50 @@
 
 #include <iostream>
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
 class Solution {
 public:
     ListNode *swapPairs(ListNode *head) {
-        ListNode dummy(-1);
-        ListNode *prev = &dummy;
-        dummy.next = head;
+//        ListNode dummy(-1);
+//        ListNode *prev = &dummy;
+//        dummy.next = head;
+//        
+//        while(head && head->next){
+//            ListNode *temp = head->next->next;
+//            prev->next = head->next;
+//            head->next->next = head;
+//            head->next = temp;
+//            prev = head;
+//            head = head->next;
+//        }
+//        
+//        
+//        return dummy.next;
         
-        while(head && head->next){
-            ListNode *temp = head->next->next;
-            prev->next = head->next;
-            head->next->next = head;
-            head->next = temp;
-            prev = head;
-            head = head->next;
+        if (head == nullptr || head -> next == nullptr) {
+            return head;
         }
         
+        ListNode dummy (-1);
+        ListNode *prev = &dummy;
+        
+        ListNode *p = prev;
+        ListNode *q = prev;
+        
+        while (prev -> next != nullptr && prev -> next -> next != nullptr) {
+            p = prev -> next;
+            q = prev -> next -> next;
+            
+            prev -> next = q;
+            p -> next = q -> next;
+            q -> next = p;
+            
+            prev = p;
+        }
         
         return dummy.next;
     }
@@ -40,8 +60,12 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    ListNode *a = new ListNode (1);
+    ListNode *b = new ListNode (2);
+    a -> next = b;
+    b -> next = nullptr;
+    Solution su;
+    su.swapPairs(a);
     return 0;
 }
 

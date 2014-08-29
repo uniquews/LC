@@ -14,47 +14,93 @@ struct RandomListNode {
     RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
 };
 
+//class Solution {
+//public:
+//    RandomListNode *copyRandomList(RandomListNode *head) {
+//        RandomListNode dummy(-1);
+//        dummy.next = head;
+//        if(head == nullptr) return nullptr;
+//        
+//        RandomListNode *cur = head;
+//        while(cur!=nullptr){
+//            RandomListNode *temp = new RandomListNode(cur->label);
+//            temp->next = cur->next;
+//            cur->next  = temp;
+//            cur = temp->next;
+//        }
+//        
+//        
+//        cur = head;
+//        while(cur != nullptr){
+//            RandomListNode *temp = cur->next;
+//            if(cur->random!=nullptr){
+//                temp->random = cur->random->next; //!!!!!
+//                
+//            }
+//            cur = temp->next;
+//        }
+//        
+//        cur = head;
+//        dummy.next = cur->next;
+//        while(cur!=nullptr){
+//            RandomListNode *temp = cur->next;
+//            cur->next = temp->next;//!!!!!
+//            if(temp->next!=nullptr){
+//                temp->next = temp->next->next;
+//            }
+//            cur = cur->next;
+//            
+//            
+//        }
+//        return dummy.next;
+//    }
+//    
+//};
+
+
 class Solution {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
-        RandomListNode dummy(-1);
-        dummy.next = head;
-        if(head == nullptr) return nullptr;
-        
         RandomListNode *cur = head;
-        while(cur!=nullptr){
-            RandomListNode *temp = new RandomListNode(cur->label);
-            temp->next = cur->next;
-            cur->next  = temp;
-            cur = temp->next;
+        if (head == nullptr) {
+            return nullptr;
         }
         
-        
-        cur = head;
-        while(cur != nullptr){
-            RandomListNode *temp = cur->next;
-            if(cur->random!=nullptr){
-                temp->random = cur->random->next; //!!!!!
-                
-            }
-            cur = temp->next;
+        while (cur != nullptr) {
+            RandomListNode *tmp = new RandomListNode (cur -> label);
+            RandomListNode *nextNode = cur -> next;
+            tmp -> next = cur -> next;
+            cur -> next = tmp;
+            cur = nextNode;
         }
         
         cur = head;
-        dummy.next = cur->next;
-        while(cur!=nullptr){
-            RandomListNode *temp = cur->next;
-            cur->next = temp->next;//!!!!!
-            if(temp->next!=nullptr){
-                temp->next = temp->next->next;
+        while (cur != nullptr) {
+            if (cur -> random != nullptr) {
+                cur -> next -> random = cur -> random -> next;
             }
-            cur = cur->next;
             
-            
+            cur = cur -> next -> next;
         }
-        return dummy.next;
+        
+        cur = head;
+        RandomListNode *resultHead = head -> next;
+        while (cur != nullptr) {
+            RandomListNode *nextNode = cur -> next -> next;
+            if (nextNode != nullptr) {
+                cur -> next -> next = nextNode -> next;
+                cur -> next = nextNode;
+            } else {
+                cur -> next ->next = nullptr;
+                cur -> next = nullptr;
+            }
+            
+            cur = nextNode;
+        }
+        
+        return resultHead;
+        
     }
-    
 };
 
 int main(int argc, const char * argv[])

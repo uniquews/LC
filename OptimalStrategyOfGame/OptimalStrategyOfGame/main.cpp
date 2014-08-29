@@ -69,12 +69,22 @@ int main(int argc, const char * argv[])
     vector<int> pot4 = {};
     vector<int> pot5 = {2,0,2};
     vector<int> pot6 = {0,2,0};
+    vector<int> pot7 = {2,2,2};
+    vector<int> pot8 = {1,2,3,4,5,6,7};
+    vector<int> pot9 = {8,7,6,5,4,3,2,1};
+    vector<int> pot10 = {7,6,5,4,3,2,1};
+    vector<int> pot11 = {9,8,7,1,4,10,11};
 //    cout << su.optimalStrategyGame(pot1) << endl;
 //    cout << su.optimalStrategyGame(pot2) << endl;
 //    cout << su.optimalStrategyGame(pot3) << endl;
 //    cout << su.optimalStrategyGame(pot4) << endl;
 //    cout << su.optimalStrategyGame(pot5) << endl;
-    cout << su.optimalStrategyGame(pot6) << endl;
+//    cout << su.optimalStrategyGame(pot6) << endl;
+//    cout << su.optimalStrategyGame(pot7) << endl;
+//    cout << su.optimalStrategyGame(pot8) << endl;
+//    cout << su.optimalStrategyGame(pot9) << endl;
+//    cout << su.optimalStrategyGame(pot10) << endl;
+      cout << su.optimalStrategyGame(pot11) << endl;
     return 0;
 }
 

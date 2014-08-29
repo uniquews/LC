@@ -14,12 +14,13 @@ class Solution{
 public:
     static  void quickSort(vector<int> &arr, int left, int right){
         int index = partition(arr, left, right);
-        if(left<index-1){ //[start, end]?
+        if(left<index-1){ //one number doesn't need sort
             quickSort(arr,left,index-1);
-            
-            if(index<right){
-                quickSort(arr, index, right);
-            }
+         
+        }
+        
+        if(index<right){
+            quickSort(arr, index, right);
         }
     }
     
@@ -49,10 +50,11 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    cout<<"hhhh"<<endl;
+//    cout<<"hhhh"<<endl;
     // insert code here...
 //    int a[]={1,2,3,4,5};
-    vector<int> a={1,2,3,4,5,4,2};
+//    vector<int> a={1,2,3,4,5,4,2};
+    vector<int> a={8,7,6,1,4,3,10,9};
     int end = (int)a.size();
 
     
