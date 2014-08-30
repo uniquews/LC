@@ -7,21 +7,28 @@
 //
 
 #include <iostream>
+#include <vector>
+
+using namespace std;
 
 class Solution {
 public:
     bool canJump(int A[], int n) {
+        vector<bool> table(n);
+        table[0] = true;
         
-        int rightMost = 0;
-        for(int start = 0; start <=rightMost; start++){
-            if(rightMost < start + A[start])
-                rightMost = start + A[start];
-            if(rightMost >= n-1)
-                return true;
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (table[j] && A[j] + j >= i) {
+                    table[i] = true;
+                    break;
+                }
+            }
         }
         
-        return false;
+        return table[n - 1];
     }
+    
 };
 
 int main(int argc, const char * argv[])
