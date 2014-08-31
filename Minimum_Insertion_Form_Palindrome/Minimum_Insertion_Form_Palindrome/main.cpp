@@ -64,6 +64,11 @@ int main(int argc, const char * argv[])
     string str5 = "aa";
     string str6 = "abcd";
     string str7 = "cbcda";
+    
+    int num;
+    cin >> num;
+    
+    
     string str8 = "abcde";
     cout << su.findMinInsertion(str1) << endl;
     cout << su.findMinInsertion(str2) << endl;

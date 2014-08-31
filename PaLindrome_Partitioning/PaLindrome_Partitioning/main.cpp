@@ -11,63 +11,60 @@
 
 using namespace std;
 
-class Solution{
-    
+class Solution {
 public:
     vector<vector<string>> partition(string s) {
-        
         vector<vector<string>> result;
-        vector<string> eachLevel;
+        vector<string> eachResult;
         
-        dfs(s, 0, (int)s.size()-1, eachLevel, result);
+        if (s.size() == 0) {
+            result.push_back(eachResult);
+            return result;
+        }
         
+        dfs(s, 0, s.size() - 1, eachResult, result);
         return result;
     }
     
-    void dfs(string s, int start, int end, vector<string> &eachLevel, vector<vector<string>> &result){
-        
-        if(start == end+1){
-//            eachLevel.push_back(s.substr(start, 1));
-            result.push_back(eachLevel);
-//            eachLevel.pop_back();
+    
+    void dfs(string s, int start, int end, vector<string> &eachResult, vector<vector<string>> &result) {
+        if (start > end) {
+            result.push_back(eachResult);
             return;
         }
         
-        for(int _start = start; _start <=end; _start++){
-            if(isPP(s, start, _start)){
-                eachLevel.push_back(s.substr(start, _start-start+1));
-
-                dfs(s, _start+1, end, eachLevel, result);
-
-                
-                eachLevel.pop_back();
-                //result.push_back(eachLevel);
+        for (int i = start; i <= end; i++) {
+            if (isPP(s, start, i - start + 1)) {
+                eachResult.push_back(s.substr(start, i - start + 1));
+                dfs (s, i + 1, end, eachResult, result);
+                eachResult.pop_back();
             }
         }
-        
-        
         
         return;
-    
     }
     
-    
-    
-    bool isPP(string s, int start, int tempEnd){
-        while(start <=tempEnd){
-        
-            if(s[start]  != s[tempEnd]){
+    bool isPP (string s, int start, int length) {
+        string tmp = s.substr(start, length);
+        int left = 0;
+        int right = tmp.size() - 1;
+        while (left <= right) {
+            if (tmp[left] == tmp[right]) {
+                left ++;
+                right--;
+            } else {
                 return false;
-            }else{
-                start ++;
-                tempEnd--;
-            
             }
         }
+        
         return true;
     }
-
 };
+
+
+
+
+
 
 int main(int argc, const char * argv[])
 {

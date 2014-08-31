@@ -2,7 +2,7 @@
 //  main.cpp
 //  Combination
 //
-//  Created by Shuai Wang on 7/17/14.
+//  Created by Shuai Wang on 8/30/14.
 //  Copyright (c) 2014 Shuai Wang. All rights reserved.
 //
 
@@ -11,67 +11,48 @@
 
 using namespace std;
 
+
 class Solution {
 public:
     vector<vector<int> > combine(int n, int k) {
-        
         vector<int> num;
-        vector<int> visited(n, false);
-        for(int i = 0; i<n; i++){
-            num.push_back(i+1);
+        for (int i = 1; i <= n; i++) {
+            num.push_back(i);
         }
         
         vector<vector<int>> result;
-        vector<int> level;
+        vector<int> eachResult;
         
-        
-        dfs(result, level, k, num, visited, 0);
-        
-        
+        dfs(0, num, result, eachResult, 0, k);
         return result;
     }
     
-    void dfs(vector<vector<int>> &result, vector<int> &level, int remain, vector<int> &num, vector<int> &visited, int start){
-        if(remain == 0){
-            result.push_back(level);
+    
+    void dfs (int start, vector<int> num, vector<vector<int>> &result, vector<int> &eachResult, int numOfEachResult, int k) {
+        if (numOfEachResult == k) {
+            result.push_back(eachResult);
             return;
         }
         
-
-        for(int i=start; i<num.size(); i++){
-            if(visited[i] == false){
-                visited[i] = true;
-                level.push_back(num[i]);
-                remain--;
-                dfs(result, level, remain, num, visited, i+1);
-                remain++;
-                level.pop_back();
-                visited[i] = false;
-            }
-        
+        for (int i = start; i < num.size(); i++) {
+            eachResult.push_back(num[i]);
+            dfs(i + 1, num, result, eachResult, numOfEachResult + 1, k);
+            eachResult.pop_back();
         }
-       
+        
+        return;
     }
 };
 
 int main(int argc, const char * argv[])
 {
 
-    int n =4;
-    int k = 2;
-    
+    int n = 1;
+    int k = 1;
     Solution su;
     vector<vector<int>> result = su.combine(n, k);
-    vector<vector<int>> :: iterator it = result.begin();
-    for(; it!=result.end(); it++){
-        vector<int>::iterator it2 = it->begin();
-        for(;it2!=it->end(); it2++){
-            cout << *it2<<" ";
-        }
-        
-        cout << endl;
-    }
     
+
     return 0;
 }
 
