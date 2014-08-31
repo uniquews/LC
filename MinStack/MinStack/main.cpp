@@ -27,11 +27,8 @@ public:
     int minNumber;
     
     MinStack(){
-        //this->eachPair = new pair<int, int>();
-        this->min=new stack<pair<int,int>>();
         
-        /////////
-        pair<int, int> *mm=make_pair
+        this->min=new stack<pair<int,int>>();
     
     }
     
@@ -96,11 +93,13 @@ int main(int argc, const char * argv[])
     minStack->push(8);
     
     
-    for(size_t i =0; i<minStack->size(); i++){
+    while (minStack->size() != 0) {
         cout <<"The top is "<< minStack->top()<<" ";
-        cout<< "The min of the stack now is " << minStack->MinTop()<<" ";
+        cout<< "The min of the stack now is " << minStack->MinTop()<<" " << endl;
         minStack->pop();
     }
+    
+    minStack->push()
     
     return 0;
 }
