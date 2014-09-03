@@ -65,8 +65,8 @@ int main(int argc, const char * argv[])
     string str6 = "abcd";
     string str7 = "cbcda";
     
-    int num;
-    cin >> num;
+//    int num;
+//    cin >> num;
     
     
     string str8 = "abcde";

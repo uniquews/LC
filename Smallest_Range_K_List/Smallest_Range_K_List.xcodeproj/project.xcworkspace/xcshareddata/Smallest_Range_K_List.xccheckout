@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>70119696-9707-47BD-9BEC-902B599356B0</string>
+	<string>22E0CEEA-EA50-4023-9BCA-037363C94021</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Mock</string>
+	<string>Smallest_Range_K_List</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C1FFE669-5432-4482-A9DD-D385691C4C85</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Mock/Mock.xcodeproj/project.xcworkspace</string>
+	<string>Smallest_Range_K_List/Smallest_Range_K_List.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C1FFE669-5432-4482-A9DD-D385691C4C85</key>

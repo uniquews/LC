@@ -9,6 +9,8 @@
 #include <iostream>
 #include <vector>
 
+
+// fix the sale date and iterate the buy day. Find the min buying price and max profit at the same time
 using namespace std;
 
 class Solution {
