@@ -14,19 +14,27 @@ using namespace std;
 class Solution {
 public:
     int maxSubArray(int A[], int n) {
-        if(n == 0) return 0;
-        int maxVal =INT_MIN;
-        vector<int> tempMax (n, INT_MIN);
-        tempMax[0] =A[0];
+        // i ... j sum is equal to sum[j] - sum[i - 1]
         
-        for(int i=1; i<n; i++){
-            tempMax[i] = std::max(tempMax[i-1]+ A[i], A[i]);
-            if(tempMax[i] > maxVal)
-                maxVal = tempMax[i];
+        vector<int> sum(n, 0);
+        for (int i = 0; i < n; i++) {
+            if (i == 0) {
+                sum[0] = A[0];
+            } else {
+                sum[i] = sum[i - 1] + A[i];
+            }
         }
         
-        return maxVal;
+        int result = sum[0]; // not like stock, you have to pick at least one as result
+        int valley = 0; // sum[j] - sum [0] is 1 ....j. In order to get sum[0], valley shoule be 0 at the beginning
+        for (int i = 0; i < sum.size(); i++) {
+            result = max(result, sum[i] - valley);
+            valley = min(valley, sum[i]);
+        }
+        
+        return result;
     }
+    
 };
 
 int main(int argc, const char * argv[])
