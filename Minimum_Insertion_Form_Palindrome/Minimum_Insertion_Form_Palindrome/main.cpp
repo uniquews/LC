@@ -79,5 +79,15 @@ int main(int argc, const char * argv[])
     cout << su.findMinInsertion(str7) << endl;
     cout << su.findMinInsertion(str8) << endl;
     return 0;
+    
+    
+// 3
+// 0
+// 0
+// 1
+// 0
+// 3
+// 2
+// 4
 }
 
