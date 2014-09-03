@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FEF6169E-DB3C-4CE9-9ED9-8975F3CF391C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Best_Time_To_Buy_And_Sell2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E4D162AD-06B2-4D47-91B3-D18E891C56E5</key>
+		<string>ssh://github.com/uniquews/LC.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Best_Time_To_Buy_And_Sell2/Best_Time_To_Buy_And_Sell2.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E4D162AD-06B2-4D47-91B3-D18E891C56E5</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/uniquews/LC.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E4D162AD-06B2-4D47-91B3-D18E891C56E5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E4D162AD-06B2-4D47-91B3-D18E891C56E5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LC</string>
+		</dict>
+	</array>
+</dict>
+</plist>

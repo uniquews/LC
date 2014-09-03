@@ -11,16 +11,21 @@
 
 using namespace std;
 
+
 class Solution {
 public:
     int maxProfit(vector<int> &prices) {
-        if(prices.size()<2) return 0;
-        int diff = 0;
+        if (prices.size() == 0) {
+            return 0;
+        }
+        
         int sum = 0;
-        for(int i =0; i<prices.size(); i++){
-            diff = prices[i] - prices[i-1];
-            if(diff >0)
-                sum +=diff;
+        for (int i = 1; i < prices.size(); i++) {
+            int tmp = prices[i] - prices[i - 1];
+            if (sum > 0) {
+                sum += tmp;
+            }
+            
         }
         
         return sum;
@@ -30,8 +35,9 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    vector<int> p = {1,2};
+    Solution su;
+    su.maxProfit(p);
     return 0;
 }
 
