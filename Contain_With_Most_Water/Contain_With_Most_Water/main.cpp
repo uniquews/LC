@@ -15,20 +15,27 @@ class Solution {
 public:
     int maxArea(vector<int> &height) {
         int start = 0;
-        int end = height.size()-1;
-        int result = INT_MIN;
-        while(start <end){
-            int area = min(height[start], height[end]) * (end - start);
-            result = max(area, result);
-            if(height[start] <= height[end]){
+        int end = height.size() - 1;
+        int area = min(height[start], height[end]) * (end - start);
+        while (start < end) {
+            
+            if (height[start] < height[end]) {
                 start++;
-            }else{
+            } else {
                 end--;
             }
+            
+            int tmp = min(height[start], height[end]) * (end - start);
+            
+            if (area < tmp) {
+                area = tmp;
+            }
+            
         }
         
-        return result;
+        return area;
     }
+    
 };
 
 
