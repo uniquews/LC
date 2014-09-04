@@ -44,13 +44,6 @@ public:
             int right = num.size() - 1;
             
             while (left < right) {
-                if (left == currentIndex) {
-                    left++;
-                }
-                
-                if (right == currentIndex) {
-                    right--;
-                }
                 
                 int tmp = num[left] + num[right];
                 if (tmp > target) {
