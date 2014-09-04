@@ -10,29 +10,31 @@
 using namespace std;
 class Solution {
 public:
-    int sqrt(int x) {
-        if (x < 2) {
-            return x;
+    double pow(double x, int n) {
+        if (n > 0) {
+            return power(x, n);
+        } else if (n == 0){
+            return 1;
+        } else {
+            return 1.0/power(x, -n);
         }
-        
-        int left = 1;
-        int right = x / 2;
-        int last_mid;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (x / mid > mid) {
-                left = mid + 1;
-                last_mid = mid; // 最后取整形数，3 ^ 1/2 = 1，如果得不到精确值，则保留最后一个小的数作为结果，符合整形数
-            } else if (x / mid < mid) {
-                right = mid - 1;
-            } else {
-                return mid;
-            }
-        }
-        
-        return last_mid;
     }
+    
+    
+    double power(double x, int n) {
+        
+        if (n == 0) {
+            return 1;
+        }
+        
+        double tmp = power(x, n/2) ;
+        if (n % 2 == 0) {
+            return tmp * tmp;
+        } else {
+            return tmp * tmp * x;
+        }
+    }
+    
 };
 int main(int argc, const char * argv[])
 {
