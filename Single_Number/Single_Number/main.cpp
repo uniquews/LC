@@ -1,30 +1,43 @@
 //
 //  main.cpp
-//  Single_Number
+//  SIngle_Number
 //
-//  Created by Shuai Wang on 7/3/14.
+//  Created by Shuai Wang on 8/31/14.
 //  Copyright (c) 2014 Shuai Wang. All rights reserved.
 //
 
 #include <iostream>
 
+using namespace std;
+
 class Solution {
 public:
     int singleNumber(int A[], int n) {
-        int temp = A[0];
-        for(size_t i = 1; i<n; i++){
-            temp = temp ^ A[i];
+        if (n == 0) {
+            return 0;
         }
         
-        return temp;
+        if (n == 1) {
+            return A[0];
+        }
+        
+        int tmp = A[0] ^ A[1];
+        
+        for (int i = 2; i < n - 1; i++) {
+            tmp = A[i] ^ tmp;
+        }
+        
+        return tmp;
     }
 };
 
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    
+    int A[] = {2,2,1};
+    Solution su;
+    cout << su.singleNumber(A, 3) << endl;
     return 0;
 }
 
