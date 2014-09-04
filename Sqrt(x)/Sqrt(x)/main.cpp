@@ -11,28 +11,29 @@
 class Solution {
 public:
     int sqrt(int x) {
+        if (x < 2) {
+            return x;
+        }
+        
         int left = 1;
-        int right = x/2;
-        int mid;
+        int right = x / 2;
         int last_mid = 0;
         
-        if(x<2) return x; // in while, 1 and 0 will both return 0. However, 1 should return 1
-        
-        while(left <= right){
-            int mid = (right+ left)/2;
-            if(x/mid > mid){
-                left = mid+1;
-                last_mid = mid;  // must add this, when input is {2}
-            }else if(x/mid < mid){
-                right = mid-1;
-                // last_mid = mid;  cannot add this, when input is {6}
-            }else{
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (x / mid > mid) {
+                left = mid + 1;
+                last_mid = mid; // 最后取整形数，3 ^ 1/2 = 1，如果得不到精确值，则保留最后一个小的数作为结果，符合整形数
+            } else if (x / mid < mid) {
+                right = mid - 1;
+            } else {
                 return mid;
             }
         }
         
         return last_mid;
     }
+    
 };
 
 int main(int argc, const char * argv[])
