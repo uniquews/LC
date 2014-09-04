@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>A67DFD9B-C85F-4AE6-84AA-BD0DA5016042</string>
+	<string>923C9806-41EA-4165-A256-9F6FF8CF948F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Maximum_Subarray2</string>
+	<string>Maximum_Subarray_Difference</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>1FE8D4C7-2ACB-48F5-8304-8FF413EBF378</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Maximum_Subarray2/Maximum_Subarray2.xcodeproj/project.xcworkspace</string>
+	<string>Maximum_Subarray_Difference/Maximum_Subarray_Difference.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>1FE8D4C7-2ACB-48F5-8304-8FF413EBF378</key>
