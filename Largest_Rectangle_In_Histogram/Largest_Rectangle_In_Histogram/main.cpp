@@ -15,22 +15,35 @@ using namespace std;
 class Solution {
 public:
     int largestRectangleArea(vector<int> &height) {
-        stack<int> stk;
-        height.push_back(0); // for {1}
-        int sum =0;
-        for(int i=0; i<height.size(); i++){
-            if(stk.empty() || height[i] > height[stk.top()]){
-                stk.push(i); // keep track of taller one
-            }else{
-                int tempTallestIndex = stk.top(); // so far the tallest one
-                stk.pop();
-                sum = max(sum, height[tempTallestIndex]*(stk.empty()?i:i-stk.top()-1));
-                i--;
-            }
+        if (height.size() == 0) {
+            return 0;
         }
         
-        return sum;
+        stack<int> stk;
+        int result = 0;
+        for (int i = 0; i <= height.size(); i++) {
+            int curt = i == height.size() ? -1 : height[i];
+            while (stk.size() != 0 && curt < height[stk.top()]) {
+
+                int h = height[stk.top()];
+                stk.pop();
+                
+                int w = 0;
+                if (stk.size() == 0) {
+                    w = i;
+                } else {
+                    w = i - stk.top() - 1;
+                }
+                result = max(result, h * w);
+                
+            }
+            
+            stk.push(i);
+        }
+        
+        return result;
     }
+    
 };
 
 
@@ -39,7 +52,7 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    vector<int> h = {1};
+    vector<int> h = {8, 4};
     Solution su;
     su.largestRectangleArea(h);
     return 0;
