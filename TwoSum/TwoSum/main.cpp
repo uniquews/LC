@@ -12,68 +12,35 @@
 #include <vector>
 
 using namespace std;
-//class Solution{
-//public:
-//    vector<int> twoSum(vector<int> &numbers, int target){
-//        
-//        vector<int> result;
-//        unordered_map<int, int> mapping;
-//        for(int i=0; i<numbers.size();i++){
-//            mapping[numbers[i]]=i;
-//        }
-//        
-//        for(int j=0; j<numbers.size(); j++){
-//            const int temp= target-numbers[j];
-//            if(mapping.find(temp)!=mapping.end()){
-//                cout<<j<<endl;
-//                if(j==mapping[temp])
-//                    continue;
-//                
-//                result.push_back(j+1);
-//                result.push_back(mapping[temp]+1);
-//                break;
-//            }
-//        }
-//        
-//        
-//        return result;
-//    }
-//};
-
-class Solution {
+class Solution{
 public:
-    vector<int> twoSum(vector<int> &numbers, int target) {
+    vector<int> twoSum(vector<int> &numbers, int target){
         
         vector<int> result;
-        
-        if (numbers.size() == 0) {
-            return result;
+        unordered_map<int, int> mapping;
+        for(int i=0; i<numbers.size();i++){
+            mapping[numbers[i]]=i;
         }
         
-        int start = 0;
-        int end = numbers.size() - 1;
-        while (start < end) {
-            if (numbers[start] + numbers[end] > target) {
-                if (numbers[start] > numbers[end]) {
-                    start++;
-                } else {
-                    end--;
-                }
-            } else if(numbers[start] + numbers[end] < target) {
-                if (numbers[start] > numbers[end]) {
-                    end--;
-                } else {
-                    start++;
-                }
-            } else {
-                result.push_back(start);
-                result.push_back(end);
+        for(int j=0; j<numbers.size(); j++){
+            const int temp= target-numbers[j];
+            if(mapping.find(temp)!=mapping.end()){
+                cout<<j<<endl;
+                if(j==mapping[temp])
+                    continue;
+                
+                result.push_back(j+1);
+                result.push_back(mapping[temp]+1);
+                break;
             }
         }
+        
         
         return result;
     }
 };
+
+
 
 
 int main(int argc, const char * argv[])
