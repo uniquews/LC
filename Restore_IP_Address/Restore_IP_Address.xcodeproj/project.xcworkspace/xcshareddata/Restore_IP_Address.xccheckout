@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7EC01864-1FCA-4C59-8949-14C88D3318E2</string>
+	<string>18665982-6C5A-4B16-9CCE-39AB814B27F9</string>
 	<key>IDESourceControlProjectName</key>
-	<string>PaLindrome_Partitioning</string>
+	<string>Restore_IP_Address</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DC71A4CE-D42F-4270-B2E2-2E11FAA1C986</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PaLindrome_Partitioning/PaLindrome_Partitioning.xcodeproj/project.xcworkspace</string>
+	<string>Restore_IP_Address/Restore_IP_Address.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DC71A4CE-D42F-4270-B2E2-2E11FAA1C986</key>
