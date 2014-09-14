@@ -15,55 +15,44 @@ using namespace std;
 class Solution {
 public:
     int minCut(string s) {
-        
-        vector<vector<bool>> Pa(s.length(), vector<bool> (s.length(), false));
-        
-        for (int i=(int)s.size()-1;i>=0;i--){
-            for (int j=i;j<s.size();j++){
-                if ((s[i]==s[j]) && (j-i<2 || Pa[i+1][j-1])){
-                    Pa[i][j]=true;
-                }else{
-                    Pa[i][j]=false;
-                }
-            }
-        }
-        
-        
-        if(s.length() == 0 || s.length() == 1){
+        if (s.size() == 0) {
             return 0;
         }
         
-        vector<int> f(s.length(), 0);
-        f[0] = 0;
-        if(s[0] == s[1])
-            f[1] = 0;
-        else
-            f[1] = 1;
-        
-        for(int i = 2; i<s.length(); i++){
-            
-            if(Pa[0][i]){
-                f[i] = 0;
-            
-            }else{
-                int tempMin = INT_MAX;
-                for(int j =0; j<i; j++){
-                    if(Pa[j+1][i]){
-                        f[i] = f[j]+1;
-                        if(tempMin > f[i])
-                            tempMin = f[i];
-                    }
-      
+        vector<vector<bool>> isPP(s.size(), vector<bool> (s.size(), false));
+        for (int i = s.size() - 1; i >= 0; i--) {
+            for (int j = i; j < s.size(); j++) {
+                if (s[i] == s[j] && (j - i <= 2 || isPP[i + 1][j - 1])) {
+                    isPP[i][j] = true;
                 }
-                f[i]  = tempMin;
             }
-            
-        
         }
-              
-        return f[s.length()-1];
+        
+        vector<int> f(s.size());
+        for (int i = 0; i < s.size(); i++) {
+            f[i] = i;
+        }
+        
+        if (s[0] == s[1]) {
+            f[1] = 0;
+        }
+        
+        for (int i = 2; i < s.size(); i++) {
+            if (isPP[0][i]) {
+                f[i] = 0;
+            } else {
+                for (int j = 0; j < i; j++) {
+                    if (isPP[j + 1][i]) {
+                        f[i] = min(f[i], f[j] + 1);
+                    }
+                }
+            }
+        }
+        
+        return f[s.size() - 1];
+        
+        
     }
-
     
 };
 
