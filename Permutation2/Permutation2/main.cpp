@@ -14,38 +14,46 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int> > permuteUnique(vector<int> &num) {
+        if (num.size() == 0) {
+            return vector<vector<int>> {};
+        }
+        
+        sort(num.begin(), num.end());
+        
         vector<vector<int>> result;
-        vector<int> level;
-        if(num.size() == 0) return result;
+        vector<int> eachResult;
         vector<bool> visited(num.size(), false);
-        sort(num.begin(), num.end());   // remember to sort it
-        dfs(result, level, 0, visited, num);
+        dfs(num, result, eachResult, 0, visited);
         
         return result;
     }
     
-    void dfs(vector<vector<int>> &result, vector<int> &level, int step, vector<bool> &visited, vector<int> &num){
-        
-        
-        if(step == num.size()){
-            result.push_back(level);
+    void dfs(vector<int> &num, vector<vector<int>> &result, vector<int> &eachResult, int step, vector<bool> &visited) {
+        if (step == num.size()) {
+            result.push_back(eachResult);
             return;
         }
         
-        for(int i = 0; i<num.size(); i++){
-            if(visited[i] == false){
-                if(i>0 && num[i] == num[i-1] && visited[i-1] == 0)
-                    continue;
-                visited[i]  = true;
-                level.push_back(num[i]);
-                dfs(result, level, step+1, visited, num); //!!!!!step +1  not i+1
-                level.pop_back();
-                visited[i]  = false;
+        for (int i = 0; i < num.size(); i++) {
+            if (visited[i] == false) {
+                eachResult.push_back(num[i]);
+                visited[i] = true;
+                dfs(num, result, eachResult, step + 1, visited);
+                visited[i] = false;
+                eachResult.pop_back();
+                
+                
+                while (i + 1 < num.size() && num[i] == num[i + 1]) {
+                    i++;
+                }
             }
             
-            
         }
+        
+        return;
+        
     }
+    
 };
 
 int main(int argc, const char * argv[])

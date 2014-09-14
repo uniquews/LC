@@ -21,69 +21,6 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-//class Solution {
-//
-//public:
-//    
-//    void printKey (TreeNode *root, vector<int> range) {
-//        
-//        if (root == nullptr) {
-//            return ;
-//        }
-//        
-//        printKeyInSubTree(root, range);
-//     
-////        printKeyInSubTree(root, range, result);
-////        sort(result.begin(), result.end());
-////        adda(result);
-//        
-//  
-//    };
-//    
-//    
-//    void printKeyInSubTree(TreeNode *node, vector<int> range) {
-//        if (node == nullptr) {
-//            return;
-//        }
-//        
-////        if (node->val > range[1]) {
-////            printKeyInSubTree(node->left, range, result);
-////            return;
-////        }
-////        
-////        if (node->val >= range[0] && node->val <= range[1]) {
-////            result.push_back(node->val);
-////            cout<< node->val << endl;
-////            vector<int> newRange1 = {range[0], node->val};
-////            vector<int> newRange2 = {node->val, range[1]};
-////            
-////            printKeyInSubTree(node->left, newRange1, result);
-////            printKeyInSubTree(node->right, newRange2, result);
-////            return;
-////        }
-////        
-////        if (node->val < range[0]) {
-////            printKeyInSubTree(node->right, range, result);
-////            return;
-////        }
-//        
-//        if (node->val > range[0]) {
-//            printKeyInSubTree(node->left, range);
-//        }
-//        
-//        if (node->val >= range[0] && node->val <= range[1]) {
-//            cout << node->val<<" ";
-//        }
-//        
-//        if (node->val < range[1]) {
-//            printKeyInSubTree(node->right, range);
-//        }
-//        
-//        return;
-//    }
-//    
-//
-//};
 
 class Solution {
 public:
