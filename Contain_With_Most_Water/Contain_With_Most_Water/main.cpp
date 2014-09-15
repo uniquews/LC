@@ -14,35 +14,38 @@ using namespace std;
 class Solution {
 public:
     int maxArea(vector<int> &height) {
-        int start = 0;
-        int end = height.size() - 1;
-        int area = min(height[start], height[end]) * (end - start);
-        while (start < end) {
-            
-            if (height[start] < height[end]) {
-                start++;
-            } else {
-                end--;
-            }
-            
-            int tmp = min(height[start], height[end]) * (end - start);
-            
-            if (area < tmp) {
-                area = tmp;
-            }
-            
+        if (height.size() ==  0) {
+            return 0;
         }
         
-        return area;
+        
+        
+        int left = 0;
+        int right = height.size() - 1;
+        
+        int result = 0;
+        
+        
+        while (left <= right) {
+            int tmp = (right - left) * min(height[left], height[right]);
+            result = max(result, tmp);
+            
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        
+        return result;
     }
-    
 };
 
 
 int main(int argc, const char * argv[])
 {
 
-    vector<int> ex = {1,1};
+    vector<int> ex = {0,2};
     Solution su;
     cout << su.maxArea(ex);
     return 0;
