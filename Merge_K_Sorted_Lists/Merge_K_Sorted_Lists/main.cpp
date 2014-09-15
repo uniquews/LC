@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -18,47 +19,112 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
  
-class Solution {
-public:
-    ListNode *mergeKLists(vector<ListNode *> &lists) {
-        if(lists.size()==0) return nullptr;
-        ListNode *p = lists[0];
-        
-        // for(int i=1; i<lists.size(); i++){
-        //     p = mergeTwoLists(p, list[i]);
-        // }
-        
-        for(int i=1; i<lists.size();i++){
-            p = mergeTwoLists(p,lists[i]);
-        }
-        
-        return p;
+//class Solution {
+//public:
+//    ListNode *mergeKLists(vector<ListNode *> &lists) {
+//        if(lists.size()==0) return nullptr;
+//        ListNode *p = lists[0];
+//        
+//        // for(int i=1; i<lists.size(); i++){
+//        //     p = mergeTwoLists(p, list[i]);
+//        // }
+//        
+//        for(int i=1; i<lists.size();i++){
+//            p = mergeTwoLists(p,lists[i]);
+//        }
+//        
+//        return p;
+//    }
+//    
+//    
+//    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+//        ListNode head(-1);
+//        for(ListNode *p = &head; l1!=nullptr || l2!=nullptr; p = p->next){
+//            int val1 = l1 == nullptr?INT_MAX: l1->val;
+//            int val2 = l2 == nullptr?INT_MAX: l2->val;
+//            if(val1 >=val2){
+//                p->next = l2;
+//                l2 = l2->next;
+//            }else{
+//                p->next = l1;
+//                l1 = l1->next;
+//            }
+//        }
+//        
+//        return head.next;
+//    }
+//};
+
+
+
+struct ListNodeCompare {
+    
+    bool operator() (const ListNode *l1, const ListNode *l2) const {
+        return l1 -> val >= l2 -> val; // greater
+    
     }
     
+};
+
+
+class Solution {
+
+public:
     
-    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
-        ListNode head(-1);
-        for(ListNode *p = &head; l1!=nullptr || l2!=nullptr; p = p->next){
-            int val1 = l1 == nullptr?INT_MAX: l1->val;
-            int val2 = l2 == nullptr?INT_MAX: l2->val;
-            if(val1 >=val2){
-                p->next = l2;
-                l2 = l2->next;
-            }else{
-                p->next = l1;
-                l1 = l1->next;
+    
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        if (lists.size() == 0) {
+            return nullptr;
+        }
+        
+        
+        priority_queue<ListNode *, vector<ListNode *>, ListNodeCompare> heap;
+        
+        for (int i = 0; i < lists.size(); i++) {
+            ListNode *tmp = lists[i];
+            if (tmp != nullptr) {
+                heap.push(tmp);
             }
         }
         
-        return head.next;
+        ListNode dummy(-1);
+        ListNode *tail = &dummy;
+        while (!heap.empty()) {
+            ListNode *smallest = heap.top();
+            heap.pop();
+            tail->next = smallest;
+            tail = tail->next;
+            if (smallest->next != nullptr) {
+                heap.push(smallest->next);
+            }
+        }
+        
+        return dummy.next;
+        
     }
+
 };
 
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    ListNode *a = new ListNode (1);
+    ListNode *b = new ListNode (0);
+    vector<ListNode *> lists;
+    lists.push_back(a);
+    lists.push_back(b);
+    
+    Solution su;
+    ListNode *result = su.mergeKLists(lists);
+    while (result != nullptr) {
+        cout << result->val << " ";
+        result = result->next;
+    }
+    
+    cout << endl;
+    
+    
+    
     return 0;
 }
 
