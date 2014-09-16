@@ -55,10 +55,11 @@ public:
 };
 
 
+
 int main(int argc, const char * argv[])
 {
 
-    vector<int> candidates = {1,2,3,4,5};
+    vector<int> candidates = {1,2, 2,3,4,5};
     Solution su;
     vector<vector<int>> result = su.combinationSum(candidates, 9);
     vector<vector<int>> :: iterator it = result.begin();
