@@ -17,17 +17,16 @@ public:
         
         int left = 1;
         int right = x / 2;
-        int last_mid = 0;
-        
+        int last_mid = 1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            if (x / mid > mid) {
-                left = mid + 1;
-                last_mid = mid; // 最后取整形数，3 ^ 1/2 = 1，如果得不到精确值，则保留最后一个小的数作为结果，符合整形数
-            } else if (x / mid < mid) {
-                right = mid - 1;
-            } else {
+            if (mid == x / mid) {
                 return mid;
+            } else if (mid < x / mid) {
+                left = mid + 1;
+                last_mid = mid;
+            } else {
+                right = mid - 1;
             }
         }
         
