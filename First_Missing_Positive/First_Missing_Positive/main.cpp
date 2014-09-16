@@ -54,10 +54,11 @@ public:
         return n + 1;
     }
     
-    void sortAlg(int A[], int n) {
-        for (int i = 0; i < n; i++) {
-            while (A[i] != i + 1) {
-                if (A[i] <= 0 || A[i] > n || A[i] == A[A[i] - 1]) {
+
+    void sortAlg(int A[], int n){
+        for(int i=0; i<n; i++){
+            while(A[i]!=i+1){
+                if(A[i]<=0 ||  A[i]>n || A[i]==A[A[i]-1]){ //前两种情况：自己不换，等着别人跟自己换；最后一个时换了也没用
                     break;
                 }
                 
