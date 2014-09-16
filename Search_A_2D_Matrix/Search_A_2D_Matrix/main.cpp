@@ -11,28 +11,61 @@
 
 using namespace std;
 
+//class Solution {
+//public:
+//    bool searchMatrix(vector<vector<int> > &matrix, int target) {
+//        int m = matrix.size();
+//        int n = matrix.front().size();
+//        
+//        int first = 0;
+//        int last = m * n;
+//        
+//        while(first < last){
+//            int temp = (first+ last) /2;
+//            int mid = matrix[temp / n][temp % n];
+//            
+//            if(target == mid)
+//                return true;
+//            if(target > mid){
+//                first = ++temp;
+//            }else
+//                last = temp;
+//        }
+//        
+//        return false;
+//    }
+//};
+
+
 class Solution {
 public:
     bool searchMatrix(vector<vector<int> > &matrix, int target) {
-        int m = matrix.size();
-        int n = matrix.front().size();
+        int row = matrix.size();
+        int column = matrix[0].size();
         
-        int first = 0;
-        int last = m * n;
+        int start = 0;
+        int end = row * column - 1;
         
-        while(first < last){
-            int temp = (first+ last) /2;
-            int mid = matrix[temp / n][temp % n];
-            
-            if(target == mid)
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (matrix[mid / column][mid % column] == target) {
                 return true;
-            if(target > mid){
-                first = ++temp;
-            }else
-                last = temp;
+            } else if (matrix[mid / column][mid % column] < target) {
+                start = mid;
+            } else {
+                end = mid;
+            }
         }
         
-        return false;
+        if (matrix[start / column][start % column] == target) {
+            return true;
+        } else if (matrix[end / column][end % column] == target) {
+            return true;
+        } else {
+            return false;
+        }
+        
+        
     }
 };
 

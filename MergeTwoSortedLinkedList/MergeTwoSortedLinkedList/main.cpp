@@ -19,28 +19,38 @@ public:
 
 
 
-class Solution{
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
 public:
-    static  LinkList * merge(LinkList *l1, LinkList *l2){
-        LinkList *p = new LinkList(-1); // should bedummy node
-        LinkList *q = p;  
-        for(;l1!=nullptr || l2!=nullptr;p=p->next){
-            int l1_val = l1==nullptr?INT_MAX:l1->val;
-            int l2_val = l2==nullptr?INT_MAX:l2->val;
+    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+        ListNode dummy(-1);
+        ListNode *tail = &dummy;
+        
+        while (l1 != nullptr || l2 != nullptr) {
+            int val1 = l1 == nullptr ? INT_MAX : l1->val;
+            int val2 = l2 == nullptr ? INT_MAX : l2->val;
             
-            if(l1_val >l2_val){
-                p->next = l2;
-                l2=l2->next;
-            }else{
-                p->next = l1;
-                l1=l1->next;
+            if (val1 >= val2) {
+                tail->next = l2;
+                l2 = l2->next;
+            } else {
+                tail-> next = l1;
+                l1 = l1->next;
             }
+            
+            tail = tail->next;
         }
         
-        return q->next;
-    
+        return dummy.next;
     }
-
+    
 };
 
 
