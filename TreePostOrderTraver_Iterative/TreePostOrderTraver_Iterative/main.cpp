@@ -26,66 +26,50 @@ public:
     Tree(TreeNode *t): root(t){};
 
 };
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode *root) {
-        vector<int> result;
-        if(root==nullptr)
-            return result;
-        stack<TreeNode*> st;
-        TreeNode *last = root;  // cannot be nullptr. {1, 2} then the output only is [1]  current->right == last  root or nothing
-        st.push(root);
-        
-        while(!st.empty()){
-            TreeNode *current = st.top();
-            if((current->left==nullptr && current->right==nullptr)|| current->left == last || current->right == last){
-                result.push_back(current->val);
-                st.pop();
-                last=current;
-            }else{
-                if(current->right) st.push(current->right);
-                if(current->left) st.push(current->left);
-                
-            }
+        if (root == nullptr) {
+            return vector<int> {};
         }
         
+        vector<int> result;
+        stack<TreeNode *> stk;
+        stk.push(root);
+        TreeNode *last = root;
+        while (stk.size() != 0) {
+            TreeNode *current = stk.top();
+            if ((current->left == nullptr && current->right == nullptr) || current->left == last || current->right == last) {
+                result.push_back(current->val);
+                stk.pop();
+                last = current;
+            } else {
+                if (current->right != nullptr) {
+                    stk.push(current);
+                }
+                
+                if (current->left != nullptr) {
+                    stk.push(current);
+                }
+            }
+            
+            
+        }
         return result;
     }
+    
+    
 };
-
-
-// Think about why this is wrong
-//class Solution {
-//public:
-//    vector<int> postorderTraversal(TreeNode *root) {
-//        vector<int> result;
-//        if(root==nullptr)
-//            return result;
-//        stack<TreeNode*> st;
-////        TreeNode *last =root;
-//        TreeNode *last = nullptr;
-//        st.push(root);
-//        
-//        while(!st.empty()){
-////            TreeNode *current;
-//            TreeNode *current = st.top();
-//            if((current->left==nullptr && current->right==nullptr)|| current->left == last || current->right == last){
-//                result.push_back(current->val);
-//                st.pop();
-//                last=current;
-//            }else{
-//                if(current->right)
-//                    st.push(current->right);
-//                
-//                if(current->left)
-//                    st.push(current->left);
-//                
-//            }
-//        }
-//        
-//        return result;
-//    }
-//};
 
 
 class LevelOrderTraver{
