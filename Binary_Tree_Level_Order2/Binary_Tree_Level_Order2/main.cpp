@@ -24,44 +24,39 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int> > levelOrderBottom(TreeNode *root) {
-        if(root == nullptr) return vector<vector<int>>();
-        list<vector<int>> resultT;
-        vector<vector<int>> result;
-        vector<int> layer;
-        int currentLayer = 1;
-        int nextLayer = 0;
-        queue<TreeNode *> nodeQueue;
-        
-        nodeQueue.push(root);
-        
-        while(!nodeQueue.empty()){
-            TreeNode *temp = nodeQueue.front();
-            layer.push_back(temp->val);
-            nodeQueue.pop();
-            
-            if(temp->left){
-                nodeQueue.push(temp->left);
-                nextLayer++;
-            }
-            
-            if(temp->right){
-                nodeQueue.push(temp->right);
-                nextLayer++;
-            }
-            
-            if(layer.size()  == currentLayer){
-                resultT.push_back(layer);
-                currentLayer = nextLayer;
-                layer.clear();
-                nextLayer = 0;
-                
-            }
+        if (root == nullptr) {
+            return vector<vector<int>> {};
         }
         
+        vector<vector<int>> result;
+        vector<int> layer;
+        vector<vector<int>> :: iterator it = result.begin();
+        queue<TreeNode *> treeNodeList;
+        treeNodeList.push(root);
+        int nextLayer = 0;
+        int currentLayer = 1;
         
-        while(!resultT.empty()){
-            result.push_back(resultT.back());
-            resultT.pop_back();
+        while (treeNodeList.size() != 0) {
+            TreeNode *current = treeNodeList.front();
+            treeNodeList.pop();
+            layer.push_back(current->val);
+            if (current->left != nullptr) {
+                treeNodeList.push(current->left);
+                nextLayer++;
+            }
+            
+            if (current->right != nullptr) {
+                treeNodeList.push(current->right);
+                nextLayer++;
+            }
+            
+            if (layer.size() == currentLayer) {
+                result.insert(it, layer);
+                currentLayer = nextLayer;
+                nextLayer = 0;
+                layer.clear();
+                it = result.begin();  ////////////////////!!!!important!!!!
+            }
         }
         
         return result;
@@ -71,8 +66,11 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    TreeNode *a = new TreeNode(1);
+    TreeNode *b = new TreeNode(2);
+    a->left = b;
+    Solution su;
+    su.levelOrderBottom(a);
     return 0;
 }
 
