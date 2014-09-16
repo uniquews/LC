@@ -20,14 +20,6 @@ struct TreeNode {
 };
 
 
-
-class Tree{
-public:
-    TreeNode *root;
-    Tree(TreeNode *t): root(t){};
-    
-};
-
 class Solution {
 public:
     vector<vector<int> > zigzagLevelOrder(TreeNode *root) {

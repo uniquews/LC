@@ -28,6 +28,58 @@ public:
     
 };
 
+class Solution {
+public:
+    void recoverTree(TreeNode *root) {
+        if (root == nullptr) {
+            return;
+        }
+        
+        pair<TreeNode *, TreeNode*> broken;
+        TreeNode *cur = root;
+        TreeNode *prev = nullptr;
+        
+        while (cur != nullptr) {
+            if (cur->left == nullptr) {
+                detect(broken, prev, cur);
+                prev = cur;
+                cur = cur->right;
+            } else {
+                TreeNode *node = cur->left;
+                while (node->right != nullptr && node->right != cur) {
+                    node = node->right;
+                }
+                
+                if (node->right == nullptr) {
+                    node->right = cur;
+                    cur = cur->left;
+                } else {
+                    node->right = nullptr;
+                    detect(broken, prev, cur);
+                    prev = cur;
+                    cur = cur->right;
+                }
+            }
+        }
+        
+        swap(broken.first->val, broken.second->val);
+        return;
+        
+    }
+    
+    void detect(pair<TreeNode *, TreeNode *> &broken, TreeNode *prev, TreeNode *cur) {
+        if (prev != nullptr && prev->val > cur->val) {
+            broken.first = prev;
+        }
+        
+        broken.second = cur;
+        
+        return;
+    }
+    
+    
+};
+//
 //class Solution {
 //public:
 //    void recoverTree(TreeNode *root) {
@@ -74,54 +126,54 @@ public:
 //        
 //    }
 
-class Solution {
-public:
-    void recoverTree(TreeNode *root) {
-        pair<TreeNode *, TreeNode *> broken;
-        TreeNode *cur = root;
-        TreeNode *prev = nullptr;
-        
-        while(cur!=nullptr){
-            if(cur->left == nullptr){
-                detect(broken, prev, cur);
-                prev = cur;
-                cur = cur->right;
-            }else{
-                prev = cur -> left; // node is specifically for thread pointer
-                while(prev->right!=nullptr && prev->right !=cur){
-                    prev = prev->right;
-                }
-                
-                if(prev->right == nullptr){
-                    prev->right = cur;
-                    cur = cur->left;
-                }else{
-                    prev->right = nullptr;
-                    detect(broken, prev, cur);
-                    
-                    prev = cur;
-                    cur = cur->right;
-                }
-            }
-        }
-        
-        swap(broken.first->val, broken.second->val);
-    }
-    
-    void detect(pair<TreeNode *, TreeNode *>& broken, TreeNode *prev, TreeNode *cur){
-        if (prev == cur) {
-            
-            return;
-        }
-        if(prev != nullptr && prev->val > cur->val){
-            if(broken.first==nullptr){
-                broken.first = prev; // because this is based on in order traverse, so the first wrong one must be bigger .
-            }
-            // no else here!
-            broken.second = cur;//will be change
-        }
-        
-    }
+//class Solution {
+//public:
+//    void recoverTree(TreeNode *root) {
+//        pair<TreeNode *, TreeNode *> broken;
+//        TreeNode *cur = root;
+//        TreeNode *prev = nullptr;
+//        
+//        while(cur!=nullptr){
+//            if(cur->left == nullptr){
+//                detect(broken, prev, cur);
+//                prev = cur;
+//                cur = cur->right;
+//            }else{
+//                prev = cur -> left; // node is specifically for thread pointer
+//                while(prev->right!=nullptr && prev->right !=cur){
+//                    prev = prev->right;
+//                }
+//                
+//                if(prev->right == nullptr){
+//                    prev->right = cur;
+//                    cur = cur->left;
+//                }else{
+//                    prev->right = nullptr;
+//                    detect(broken, prev, cur);
+//                    
+//                    prev = cur;
+//                    cur = cur->right;
+//                }
+//            }
+//        }
+//        
+//        swap(broken.first->val, broken.second->val);
+//    }
+//    
+//    void detect(pair<TreeNode *, TreeNode *>& broken, TreeNode *prev, TreeNode *cur){
+//        if (prev == cur) {
+//            
+//            return;
+//        }
+//        if(prev != nullptr && prev->val > cur->val){
+//            if(broken.first==nullptr){
+//                broken.first = prev; // because this is based on in order traverse, so the first wrong one must be bigger .
+//            }
+//            // no else here!
+//            broken.second = cur;//will be change
+//        }
+//        
+//    }
 
 //    vector<int> inorderTraversal(TreeNode *root){
 //        vector<int>result;
@@ -155,7 +207,7 @@ public:
 //        return result;
 //    }
     
-};
+//};
 
 
 
