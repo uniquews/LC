@@ -10,85 +10,93 @@
 
 using namespace std;
 
-// My answer:
 
+
+// Using template
 //class Solution {
 //public:
 //    int searchInsert(int A[], int n, int target) {
-//        if (n == 0){
-//            return 0;
+//        if (n == 0) {
+//            return -1;
 //        }
 //        
 //        int first = 0;
 //        int end = n - 1;
-//        int mid = (first + end) / 2;
-//        
-//        while(first <= end){
-//            mid = (first + end) / 2;
-//            if (A[mid] == target){
+//        while (first + 1 < end) {
+//            int mid = first + (end - first) / 2;
+//            if (A[mid] == target) {
 //                return mid;
-//            }else if (A[mid] < target){
-//                first = mid + 1;
-//            }else{
-//                end = mid - 1;
+//            } else if (A[mid] > target) {
+//                end = mid;
+//            } else {
+//                first = mid;
 //            }
 //        }
 //        
-//        if (A[mid] < target){
-//            return mid + 1;
+//        if (A[first] == target) {
+//            return first;
+//        } else if (A[end] == target) {
+//            return end;
+//        } else if (A[end] < target) {
+//            return end + 1;
+//        } else if (A[first] > target) {
+//            return first + 1;
+//        } else {
+//            return first + 1;
 //        }
 //        
-//        if (A[mid] > target){
-//            return mid;
-//        }
-//        
-//        return -1;
 //    }
-//    
 //};
 
-
-// Using template
 class Solution {
 public:
     int searchInsert(int A[], int n, int target) {
-        if (n == 0) {
-            return -1;
-        }
-        
-        int first = 0;
+        int upper = 0;
+        int lower = 0;
+        int start = 0;
         int end = n - 1;
-        while (first + 1 < end) {
-            int mid = first + (end - first) / 2;
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
             if (A[mid] == target) {
                 return mid;
-            } else if (A[mid] > target) {
+            } else if (A[mid] < target) {
+                start = mid;
+            } else{
                 end = mid;
-            } else {
-                first = mid;
             }
         }
         
-        if (A[first] == target) {
-            return first;
-        } else if (A[end] == target) {
-            return end;
-        } else if (A[end] < target) {
-            return end + 1;
-        } else if (A[first] > target) {
-            return first + 1;
-        } else {
-            return first + 1;
+        if (A[start] == target) {
+            return start;
         }
         
+        if (A[end] == target) {
+            return end;
+        }
+        
+        if (A[start] < target && A[end] > target) {
+            return start + 1;
+        }
+        
+        if (A[start] > target) {
+            return start;
+        }
+        
+        if (A[end] < target) {
+            return end + 1;
+        }
+        
+        return  -1;
     }
 };
 
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    int A[] = {1,3,5,6};
+    int target = 0;
+    Solution su;
+    cout << su.searchInsert(A, 4, target) << endl;
     return 0;
 }
 
