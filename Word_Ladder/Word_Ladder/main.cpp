@@ -2,7 +2,7 @@
 //  main.cpp
 //  Word_Ladder
 //
-//  Created by Shuai Wang on 7/22/14.
+//  Created by Shuai Wang on 9/16/14.
 //  Copyright (c) 2014 Shuai Wang. All rights reserved.
 //
 
@@ -16,48 +16,46 @@ using namespace std;
 class Solution {
 public:
     int ladderLength(string start, string end, unordered_set<string> &dict) {
-        queue<string> tempString;
+        queue<string> curLevel;
         queue<string> nextLevel;
-        tempString.push(start);
         unordered_set<string> visited;
-        visited.insert(start);
+        curLevel.push(start);
         int length = 1;
         
-        while(!tempString.empty()){
+        while (curLevel.empty() == false) {
             length++;
-            
-            while(!tempString.empty()){
-                string needToChange = tempString.front();
-                tempString.pop();
-                
-                for(int i=0; i<needToChange.size(); i++){
-                    for(char c='a'; c<='z'; c++){
-                        string wait =needToChange;
-                        wait[i] = c;
-                        if(needToChange[i] == c) //!!important
+            while (curLevel.empty() == false) {
+                string current = curLevel.front();
+                curLevel.pop();
+                for (int i = 0; i < current.size(); i++) {
+                    for (char tri = 'a'; tri <= 'z'; tri++) {
+                        string tmp = current;
+                        tmp[i] = tri;
+                        
+                        if (current[i] == tri) {
                             continue;
-                        if(wait == end){
-                            
-                            return length;
-                        }
-                        if(dict.find(wait)!=dict.end()&& visited.find(wait) == visited.end()){
-                            
-                            visited.insert(wait);
-                            nextLevel.push(wait);
                         }
                         
+                        if (tmp == end) {
+                            return length;
+                        }
+                        
+                        if (dict.find(tmp) != dict.end() && visited.find(tmp) == visited.end()) {
+                            visited.insert(tmp);
+                            nextLevel.push(tmp);
+                        }
                     }
                 }
                 
             }
-            tempString = nextLevel;
-            while(!nextLevel.empty()){ //!!important
-                nextLevel.pop();
-            }
             
+            if (nextLevel.empty() == false) {
+                curLevel = nextLevel;
+                while(!nextLevel.empty()){ //!!important
+                    nextLevel.pop();
+                }
+            }
         }
-        
-        
         
         return 0;
     }
@@ -66,8 +64,12 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    string start = "hit";
+    string end = "cog";
+    unordered_set<string> dict = {"hot","dot","dog","lot","log"};
+    
+    Solution su;
+    cout << su.ladderLength(start, end, dict) << endl;
     return 0;
 }
 
