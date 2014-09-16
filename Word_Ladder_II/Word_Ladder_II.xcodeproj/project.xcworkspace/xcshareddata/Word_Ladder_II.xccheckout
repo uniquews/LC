@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>B5225821-3C10-4CF3-9EAF-ED184C86DA79</string>
+	<string>255505BA-06D7-4C54-83BB-F984B2F34821</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Word_Ladder</string>
+	<string>Word_Ladder_II</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>0E542159-AA03-4004-99B2-4B6E35FCB11F</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Word_Ladder/Word_Ladder.xcodeproj/project.xcworkspace</string>
+	<string>Word_Ladder_II/Word_Ladder_II.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0E542159-AA03-4004-99B2-4B6E35FCB11F</key>
