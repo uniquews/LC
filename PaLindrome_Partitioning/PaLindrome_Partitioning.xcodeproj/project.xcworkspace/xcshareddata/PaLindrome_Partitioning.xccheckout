@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7EC01864-1FCA-4C59-8949-14C88D3318E2</string>
+	<string>343A7CCD-BF56-4617-B188-3A80CBCE9D72</string>
 	<key>IDESourceControlProjectName</key>
 	<string>PaLindrome_Partitioning</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>DC71A4CE-D42F-4270-B2E2-2E11FAA1C986</key>
+		<key>8F9E43E0-7E2D-4EC4-BB67-20FA7BF5E432</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>PaLindrome_Partitioning/PaLindrome_Partitioning.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>DC71A4CE-D42F-4270-B2E2-2E11FAA1C986</key>
+		<key>8F9E43E0-7E2D-4EC4-BB67-20FA7BF5E432</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DC71A4CE-D42F-4270-B2E2-2E11FAA1C986</string>
+	<string>8F9E43E0-7E2D-4EC4-BB67-20FA7BF5E432</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DC71A4CE-D42F-4270-B2E2-2E11FAA1C986</string>
+			<string>8F9E43E0-7E2D-4EC4-BB67-20FA7BF5E432</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LC</string>
 		</dict>
