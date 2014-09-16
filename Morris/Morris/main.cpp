@@ -27,39 +27,77 @@ public:
     
 };
 
-class Solution{
+//class Solution{
+//public:
+//    vector<int> inorderTraversal(TreeNode *root){
+//        vector<int>result;
+//        
+//        TreeNode *cur=root;
+//        TreeNode *prev = nullptr;
+//        
+//        while(cur!=nullptr){
+//            if(cur->left==nullptr){
+//                result.push_back(cur->val);  // the way to add left and right children
+//                cur = cur->right;
+//            }else{
+//                prev = cur->left;
+//                while(prev->right!=nullptr && prev->right!= cur){
+//                    prev=prev->right;
+//                }
+//                
+//                if(prev->right==nullptr){
+//                    prev->right=cur;      // modify the threaded pointer
+//                    cur= cur->left;
+//                }else{
+//                    prev->right=nullptr;
+//                    result.push_back(cur->val);  // return threaded pointer
+//                    cur = cur->right;
+//                }
+//            
+//            }
+//            
+//        }
+//        
+//        return result;
+//    }
+//};
+
+class Solution {
 public:
-    vector<int> inorderTraversal(TreeNode *root){
-        vector<int>result;
+    vector<int> inorderTraversal(TreeNode *root) {
+        if (root == nullptr) {
+            return vector<int> {};
+        }
         
-        TreeNode *cur=root;
+        vector<int> result;
+        TreeNode *cur = root;
         TreeNode *prev = nullptr;
-        
-        while(cur!=nullptr){
-            if(cur->left==nullptr){
-                result.push_back(cur->val);  // the way to add left and right children
+        while (cur != nullptr) {
+            if (cur->left == nullptr) {
+                result.push_back(cur->val);
                 cur = cur->right;
-            }else{
+            } else {
                 prev = cur->left;
-                while(prev->right!=nullptr && prev->right!= cur){
-                    prev=prev->right;
+                while (prev->right != nullptr && prev->right != cur) {
+                    prev = prev->right;
                 }
                 
-                if(prev->right==nullptr){
-                    prev->right=cur;      // modify the threaded pointer
-                    cur= cur->left;
-                }else{
-                    prev->right=nullptr;
-                    result.push_back(cur->val);  // return threaded pointer
+                if (prev->right == nullptr) {
+                    prev->right = cur;
+                    cur = cur->left;
+                } else {
+                    prev->right = nullptr;
+                    result.push_back(cur->val);
                     cur = cur->right;
                 }
-            
             }
-            
         }
         
         return result;
+        
     }
+    
+    
 };
 
 int main(int argc, const char * argv[])
