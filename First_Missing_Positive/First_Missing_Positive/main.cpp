@@ -43,7 +43,7 @@ public:
     void sortAlg(int A[], int n){
         for(int i=0; i<n; i++){
             while(A[i]!=i+1){
-                if(A[i]<=0 ||  A[i]>n || A[i]==A[A[i]-1]){ //无须交换
+                if(A[i]<=0 ||  A[i]>n || A[i]==A[A[i]-1]){ //前两种情况：自己不换，等着别人跟自己换；最后一个时换了也没用
                     break;
                 }
                 swap(A[i], A[A[i]-1]); //把A[i]放到正确的地方  i是不能改变的  所以A[i]=i+1不能变，只能把A[i]移到A[A[i]-1]
