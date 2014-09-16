@@ -28,45 +28,62 @@ public:
 };
 
 
-/**
- * Definition for binary tree
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+//class Solution {
+//public:
+//    void flatten(TreeNode *root) {
+//        stack<TreeNode *> stk;
+//        
+//        if (root == nullptr) {
+//            return;
+//        }
+//        
+//        stk.push(root);
+//        while (stk.size() != 0) {
+//            TreeNode *tmp = stk.top();
+//            stk.pop();
+//            
+//            if (tmp->right != nullptr) {
+//                stk.push(tmp->right);
+//            }
+//            
+//            if (tmp->left != nullptr) {
+//                stk.push(tmp->left);
+//            }
+//            
+//            tmp->left = nullptr;
+//            if (stk.size() != 0) {
+//                tmp->right = stk.top();
+//            } else {
+//                tmp->right = nullptr;
+//            }
+//            
+//        }
+//        
+//        return;
+//    }
+//};
+
+
 class Solution {
 public:
+    
+    TreeNode *lastNode = nullptr;
     void flatten(TreeNode *root) {
-        stack<TreeNode *> stk;
         
         if (root == nullptr) {
             return;
         }
         
-        stk.push(root);
-        while (stk.size() != 0) {
-            TreeNode *tmp = stk.top();
-            stk.pop();
-            
-            if (tmp->right != nullptr) {
-                stk.push(tmp->right);
-            }
-            
-            if (tmp->left != nullptr) {
-                stk.push(tmp->left);
-            }
-            
-            tmp->left = nullptr;
-            if (stk.size() != 0) {
-                tmp->right = stk.top();
-            } else {
-                tmp->right = nullptr;
-            }
-            
+        if (lastNode != nullptr) {
+            lastNode->left = nullptr;
+            lastNode->right = root;
         }
+        
+        lastNode = root;
+        TreeNode *right = root->right;
+        flatten(root->left);
+        flatten(right);
+        
         
         return;
     }
