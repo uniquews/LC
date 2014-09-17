@@ -12,38 +12,42 @@
 class Solution {
 public:
     int maxPathSum(TreeNode *root) {
-        int result = INT_MIN;
+        if (root == nullptr) {
+            return INT_MIN;
+        }
         
-        _maxPathSum(root, result);
+        int result = INT_MIN;
+        divide(root, result);
         return result;
+        
     }
     
-    int _maxPathSum(TreeNode *node, int &result){
-        if(node == nullptr){
+    
+    int divide(TreeNode *node, int &result) {
+        if (node == nullptr) {
             return 0;
-        }
-        
-        if(node->left == nullptr && node->right == nullptr){
+        } else if (node->left == nullptr && node->right == nullptr) {
             result = max(result, node->val);
             return node->val;
+        } else {
+            int sumAtNode = node->val;
+            int leftVal = divide(node->left, result);
+            int rightVal = divide(node->right, result);
+            
+            if (leftVal > 0) {
+                sumAtNode += leftVal;
+            }
+            
+            if (rightVal > 0) {
+                sumAtNode += rightVal;
+            }
+            
+            result = max(result, sumAtNode);
+            
+            return max(leftVal, rightVal) > 0 ? node->val + max(leftVal, rightVal) : node->val;
         }
-        
-        int sum = node->val;
-        
-        int leftSize = _maxPathSum(node->left, result);
-        int rightSize = _maxPathSum(node->right, result);
-        
-        if(leftSize>0)
-            sum+=leftSize;
-        
-        if(rightSize>0)
-            sum+=rightSize;
-        
-        result = max(result, sum);
-        
-        return max(leftSize, rightSize)>0?node->val+max(leftSize,rightSize):node->val;  // for its parent, only one path of its child can be chosen.
-        
     }
+    
 };
 
 int main(int argc, const char * argv[])
