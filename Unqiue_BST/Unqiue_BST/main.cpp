@@ -14,16 +14,14 @@ using namespace std;
 class Solution {
 public:
     int numTrees(int n) {
-        vector<int> f(n+1, 0);
+        vector<int> f(n + 1);
         f[0] = 1;
         f[1] = 1;
         
-        
-        for(int i =2; i<=n; i++){
-            int temp = i-1;
-            f[i] = 0;
-            for(int j=0; j<=temp; j++){
-                f[i]+=f[j]* f[temp-j];
+        for (int i = 2; i <= n; i++) {
+            int temp = i - 1;
+            for (int j = 0; j <= temp; j++) {
+                f[i] += f[j] * f[temp - j];
             }
         }
         
