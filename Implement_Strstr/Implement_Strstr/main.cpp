@@ -11,25 +11,27 @@
 class Solution {
 public:
     char *strStr(char *haystack, char *needle) {
-        if(haystack==NULL|| needle==NULL)
-            return NULL;
-        int hlength = strlen(haystack);
-        int nlength = strlen(needle);
         
-        if(nlength > hlength)
-            return NULL;
         
-        for(int i=0; i< hlength-nlength+1; i++){
-            int j=0;
-            char *p =&haystack[i];
-            for(; j< nlength; j++){
-                if(*p != needle[j]){
+        if (haystack == nullptr || needle == nullptr) {
+            return NULL;
+        }
+        
+        int hayLength = strlen(haystack);
+        int needleLength = strlen(needle);
+        
+        int i = 0;
+        int j = 0;
+        
+        for (; i < hayLength - needleLength + 1; i++) {
+            for (; j < needleLength; j++) {
+                if (haystack[i + j] != needle[j]) {
+                    j = 0;
                     break;
                 }
-                p++;
             }
             
-            if(j == nlength){
+            if (j == needleLength) {
                 return &haystack[i];
             }
         }
