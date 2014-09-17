@@ -20,39 +20,37 @@ struct TreeNode {
 
 class Solution {
 public:
+    vector<TreeNode *> generateTrees(int n) {
+        vector<TreeNode *> result;
+        generate(1, n, result);
+        return result;
+    }
     
-    void dfs(int start, int end, vector<TreeNode *> &res){
-        if(start>end){
-            res.push_back(NULL);
-        }else{
-            for(int i=start; i<=end; i++){
-                vector<TreeNode *> lefts;
-                dfs(start, i-1, lefts);
-                vector<TreeNode *> rights;
-                dfs(i+1, end, rights);
+    void generate (int start, int end, vector<TreeNode*> &result) {
+        if (start > end) {
+            result.push_back(NULL);
+        } else {
+            for (int i = start; i <= end; i++) {
+                vector<TreeNode *> left;
+                generate(start, i - 1, left);
+                vector<TreeNode *> right;
+                generate(i + 1, end, right);
                 
-                for(int li=0; li<lefts.size(); li++){
-                    for(int ri=0; ri<rights.size(); ri++){
-                        TreeNode *node = new TreeNode(i); // root node (substree)
-                        node->left = lefts[li];
-                        node->right = rights[ri];
-                        res.push_back(node);
+                for (int l = 0; l < left.size(); l++) {
+                    for (int r = 0; r < right.size(); r++) {
+                        TreeNode *newRoot = new TreeNode(i);
+                        newRoot->left = left[l];
+                        newRoot->right = right[r];
+                        result.push_back(newRoot);
                     }
                 }
+                
             }
+            
         }
+        return;
     }
-    vector<TreeNode *> generateTrees(int n) {
-        vector <TreeNode *> res;
-        dfs(1, n, res);
-        return res;
-    }
-    
-    
-    
-    
 };
-
 int main(int argc, const char * argv[])
 {
 
