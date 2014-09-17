@@ -10,36 +10,33 @@
 #include <string>
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-    static bool isPalindrome(string s){
-        // be used to using auto
-        //know transform function
-        transform(s.begin(), s.end(), s.begin(),::tolower);
-        auto start = s.begin();// this return a iterator
-        auto last = prev(s.end());
-        while(start<last){// equal situation doesn't need to check, same char
-            if(!isalnum(*start)){
+    bool isPalindrome(string s) {
+        int start = 0;
+        int end =s.size() - 1;
+        transform(s.begin(), s.end(), s.begin(), ::tolower);
+        while (start <= end) {
+            if (::isalnum(s[start]) == 0) {
                 start++;
                 continue;
             }
-            if(!isalnum(*last)){
-                last--;
+            
+            if (::isalnum(s[end]) == 0) {
+                end--;
                 continue;
             }
-            if(*start==*last){
+            
+            if (s[start] == s[end]) {
                 start++;
-                last--;
-            }else{
+                end--;
+            } else {
                 return false;
             }
-        
-        
         }
         
         return true;
     }
-
 };
 
 
