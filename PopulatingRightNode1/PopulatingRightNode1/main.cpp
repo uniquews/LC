@@ -20,6 +20,64 @@ struct TreeLinkNode {
     
 };
 
+//class Solution {
+//public:
+//    void connect(TreeLinkNode *root) {
+//        if(root==nullptr) return;
+//        vector<TreeLinkNode *> layer;
+//        queue<TreeLinkNode *> nodeQueue;
+//        
+//        int currentLayer = 1;
+//        int nextLayer = 0;
+//        
+//        nodeQueue.push(root);
+//        
+//        while(!nodeQueue.empty()){
+//            TreeLinkNode *p = nodeQueue.front();
+//            nodeQueue.pop();
+//            layer.push_back(p);
+//            
+//            if(p->left){
+//                nodeQueue.push(p->left);
+//                nextLayer++;
+//                
+//            }
+//            
+//            if(p->right){
+//                nodeQueue.push(p->right);
+//                nextLayer++;
+//            }
+//            
+//            if(layer.size()==currentLayer){
+//                for(int i = 0; i<layer.size(); i++){
+//                    if(i==layer.size()-1){
+//                        layer[i]->next = NULL;
+//                    }else{
+//                        layer[i]->next = layer[i+1];
+//                    }
+//                }
+//                
+//                currentLayer = nextLayer;
+//                nextLayer = 0;
+//                layer.clear();
+//            }
+//            
+//        }
+//        
+//        return;
+//    }
+//};
+
+
+/**
+ * Definition for binary tree with next pointer.
+ * struct TreeLinkNode {
+ *  int val;
+ *  TreeLinkNode *left, *right, *next;
+ *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+ * };
+ */
+
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
@@ -32,10 +90,15 @@ public:
         
         nodeQueue.push(root);
         
+        TreeLinkNode dummy(-1);
+        TreeLinkNode *prev = &dummy;
+        
         while(!nodeQueue.empty()){
             TreeLinkNode *p = nodeQueue.front();
             nodeQueue.pop();
-            layer.push_back(p);
+            currentLayer--;
+            prev->next = p;
+            prev = prev->next;
             
             if(p->left){
                 nodeQueue.push(p->left);
@@ -48,18 +111,11 @@ public:
                 nextLayer++;
             }
             
-            if(layer.size()==currentLayer){
-                for(int i = 0; i<layer.size(); i++){
-                    if(i==layer.size()-1){
-                        layer[i]->next = NULL;
-                    }else{
-                        layer[i]->next = layer[i+1];
-                    }
-                }
-                
+            if(currentLayer == 0){
+                prev->next = nullptr;
+                prev = &dummy;
                 currentLayer = nextLayer;
                 nextLayer = 0;
-                layer.clear();
             }
             
         }
@@ -67,6 +123,7 @@ public:
         return;
     }
 };
+
 
 int main(int argc, const char * argv[])
 {
@@ -81,6 +138,7 @@ int main(int argc, const char * argv[])
     
     Solution s;
     s.connect(a);
+    
     
 
     
