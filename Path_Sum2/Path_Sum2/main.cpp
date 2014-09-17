@@ -74,10 +74,12 @@ public:
     void divide(TreeNode *root, int sum, vector<vector<int>> &result, vector<int> &level) {
         if (root == nullptr) {
             return;
-        } else if (root->left == nullptr & & root->right == nullptr) {
+
+        } else if (root->left == nullptr && root->right == nullptr) {
             if (root->val == sum) {
                 level.push_back(root->val);
                 result.push_back(level);
+                level.pop_back();
                 return;
             } else {
                 return;
