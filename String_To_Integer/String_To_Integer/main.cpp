@@ -84,20 +84,23 @@ public:
         for (int j = i; j < length; j++) {
             if (str[j] == ' ') {
                 break;
+
             }
             
             if (str[j] < '0' || str[j] > '9') {
                 break;
             }
             
-            if (INT_MAX / 10 < result || (INT_MAX / 10 == result && str[j] > INT_MAX % 10 )) {
+            if (INT_MAX / 10 < result || (INT_MAX / 10 == result && (str[j] - '0') > INT_MAX % 10 )) {
                 return sign == -1 ? INT_MIN : INT_MAX;
             }
             
             result = result * 10 + (str[j] - '0');
         }
         
-        return result;
+
+        return sign * result;
+
     }
 };
 
