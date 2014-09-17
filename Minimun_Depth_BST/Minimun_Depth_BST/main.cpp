@@ -20,36 +20,34 @@ struct TreeNode {
 class Solution {
 public:
     int minDepth(TreeNode *root) {
-        if (root == nullptr){
+        if (root == nullptr) {
             return 0;
-        }else{
-            return _minDepth(root, 1);
+        } else {
+            return divide(root, 1);
         }
     }
     
-    
-    int _minDepth(TreeNode *node, int depth){
-        if(node == nullptr){
+    int divide(TreeNode *node, int depth) {
+        if (node == nullptr) {
             return depth - 1;
-        }else{
-            int left = _minDepth(node -> left, depth + 1);
-            int right = _minDepth(node ->right, depth + 1);
+        } else if (node->left == nullptr && node->right == nullptr) {
+            return depth;
+        } else {
+            int leftDepth = divide(node->left, depth + 1);
+            int rightDepth = divide(node->right, depth + 1);
             
-            if (left == depth){ // left is null, you have to return the right
-                return right;
+            if (leftDepth == depth) {
+                return rightDepth;
             }
             
-            if (right == depth){
-                return left;
+            if (rightDepth == depth) {
+                return leftDepth;
             }
             
-            return min(left, right);
-            
+            return min(leftDepth, rightDepth);
         }
     }
-    
 };
-
 int main(int argc, const char * argv[])
 {
 
