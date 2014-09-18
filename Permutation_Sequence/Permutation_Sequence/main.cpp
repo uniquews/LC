@@ -16,45 +16,34 @@ class Solution {
 public:
     string getPermutation(int n, int k) {
      
-        string s(n, '0');
-        for(int i=0; i<n; i++){
-            s[i] +=i+1;
+        vector<int> nums(n);
+        int permCount =1;
+        for(int i =0; i< n; i++)
+        {
+            nums[i] = i+1;
+            permCount *= (i+1);
         }
-        
-        for(int i=0; i< k; i++){
-            nextPermutation(s.begin(), s.end());
-            
+        // change K from (1,n) to (0, n-1) to accord to index
+        k--;
+        string targetNum;
+        for(int i =0; i< n; i++)
+        {
+            permCount = permCount/ (n-i);
+            int choosed = k / permCount;
+            targetNum.push_back(nums[choosed] + '0');
+            //restruct nums since one num has been picked
+            for(int j =choosed; j< n-i; j++)
+            {
+                cout << nums[j] << " " << nums[j + 1];
+                nums[j]=nums[j+1];
+            }
+            k = k%permCount;
         }
+        return targetNum;
     }
     
     
-    void nextPermutation(vector<int> &num) {
-        if(num.size() == 0) return;
-        int largestPartitonNumIndex = -1;
-        int largestChangeNumIndex = -1;
-        
-        //step 1
-        for(size_t i =0; i< num.size()-1; i++){
-            if(num[i] < num[i+1])
-                largestPartitonNumIndex = i;
-        }
-        
-        if(largestPartitonNumIndex == -1) // already be the largest permutation
-            return sort(num.begin(), num.end());
-        
-        //step 2
-        for(size_t i=0; i<num.size(); i++){
-            if(num[i] > num[largestPartitonNumIndex])
-                largestChangeNumIndex  = i;
-        }
-        
-        swap(num[largestChangeNumIndex], num[largestPartitonNumIndex]);
-        
-        reverse(num.begin()+largestPartitonNumIndex+1, num.end());
-        return;
-        
-        
-    }
+
 };
 
 
@@ -62,8 +51,10 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    int n = 3;
+    int k = 6;
+    Solution su;
+    cout << su.getPermutation(n, k) <<endl;
     return 0;
 }
 

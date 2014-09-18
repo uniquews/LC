@@ -7,6 +7,10 @@
 //
 
 #include <iostream>
+
+using namespace std;
+
+
 class Solution {
 public:
     int removeDuplicates(int A[], int n) {
@@ -28,11 +32,14 @@ public:
     
 };
 
+
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    int A[ ] = {1,1,2};
+    int n = 3;
+    Solution su;
+    cout << su.removeDuplicates(A, n) << endl;
     return 0;
 }
 
