@@ -12,32 +12,26 @@
 #include <vector>
 
 using namespace std;
-class Solution{
+class Solution {
 public:
-    vector<int> twoSum(vector<int> &numbers, int target){
-        
+    vector<int> twoSum(vector<int> &numbers, int target) {
         vector<int> result;
-        unordered_map<int, int> mapping;
-        for(int i=0; i<numbers.size();i++){
-            mapping[numbers[i]]=i;
+        unordered_map<int, int> _map;
+        for (int i = 0; i < numbers.size(); i++) {
+            _map[numbers[i]] = i;
         }
         
-        for(int j=0; j<numbers.size(); j++){
-            const int temp= target-numbers[j];
-            if(mapping.find(temp)!=mapping.end()){
-                cout<<j<<endl;
-                if(j==mapping[temp])
-                    continue;
-                
-                result.push_back(j+1);
-                result.push_back(mapping[temp]+1);
-                break;
+        for (int i = 0; i < numbers.size(); i++) {
+            int gap = target - numbers[i];
+            if (_map.find(gap) != _map.end() && _map[gap] != i) {
+                result.push_back(i + 1);
+                result.push_back(_map[gap] + 1);
             }
         }
         
-        
         return result;
     }
+    
 };
 
 
