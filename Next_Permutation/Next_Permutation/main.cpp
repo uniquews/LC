@@ -23,28 +23,38 @@ using namespace std;
 class Solution {
 public:
     void nextPermutation(vector<int> &num) {
-        if(num.size() == 0) return;
-        int largestPartitonNumIndex = -1;
-        int largestChangeNumIndex = -1;
-        
-        //step 1
-        for(size_t i =0; i< num.size()-1; i++){
-            if(num[i] < num[i+1])
-                largestPartitonNumIndex = i;
+        if (num.size() == 0) {
+            return;
         }
         
-        if(largestPartitonNumIndex == -1) // already be the largest permutation
+        int largestPartitionIndex = -1;
+        int largestChangeIndex = -1;
+        
+        // step 1
+        for (int i = 0; i < num.size() - 1; i++) {
+            if (num[i] < num[i + 1]) {
+                largestPartitionIndex = i;
+            }
+        }
+        
+        if (largestPartitionIndex == -1) {
             return sort(num.begin(), num.end());
-        
-        //step 2
-        for(size_t i=0; i<num.size(); i++){
-            if(num[i] > num[largestPartitonNumIndex])
-                largestChangeNumIndex  = i;
         }
         
-        swap(num[largestChangeNumIndex], num[largestPartitonNumIndex]);
         
-        reverse(num.begin()+largestPartitonNumIndex+1, num.end());
+        
+        // step 2
+        for (int i = 0; i < num.size(); i++) {
+            if (num[i] > num[largestPartitionIndex]) {
+                largestChangeIndex = i;
+            }
+        }
+        
+        // step 3
+        swap(num[largestPartitionIndex], num[largestChangeIndex]);
+        
+        reverse(num.begin() + largestPartitionIndex + 1, num.end());
+        
         return;
         
         
