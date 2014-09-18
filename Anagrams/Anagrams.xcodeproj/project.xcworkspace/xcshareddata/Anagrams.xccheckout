@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>DF0097AF-BAEE-4E98-BA8B-0ECBBCBA5CB9</string>
+	<string>E800BF18-DADC-483A-8E98-AA5D305025EB</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Length_Of_Last_Word</string>
+	<string>Anagrams</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3BF7CA76-107A-4C6A-8CE9-7B1532D21EF2</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Length_Of_Last_Word/Length_Of_Last_Word.xcodeproj/project.xcworkspace</string>
+	<string>Anagrams/Anagrams.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3BF7CA76-107A-4C6A-8CE9-7B1532D21EF2</key>
