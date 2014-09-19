@@ -14,113 +14,43 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
-//class Solution {
-//public:
-//    ListNode *deleteDuplicates(ListNode *head) {
-//        if(head == nullptr) return nullptr;
-//        ListNode dummy(-1);
-//        dummy.next = head;
-//        ListNode *prev = &dummy;
-//        ListNode *cur = head;
-//        while(cur){
-//            bool duplicate = false;
-//            while(cur->next!=nullptr && cur->next->val == cur->val){
-//                ListNode *temp = cur;
-//                cur = cur->next;
-//                duplicate = true;
-//                delete temp;
-//            }
-//            
-//            if(duplicate){
-//                ListNode *temp = cur;
-//                cur = cur->next;
-//                delete temp;
-//                continue;
-//            }
-//            
-//            prev->next = cur;
-//            prev = cur;
-//            cur = cur->next;
-//        }
-//        
-//        prev->next = nullptr;
-//        
-//        return dummy.next;
-//    }
-//    
-//};
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
-//    ListNode *deleteDuplicates(ListNode *head) {
-//        if (head == nullptr || head->next == nullptr) {
-//            return head;
-//        }
-//        
-//        ListNode dummy(INT_MIN);
-//        ListNode *prev = &dummy;
-//        prev->next = head;
-//        
-//        ListNode *cur = head;
-//        
-//        while (cur != nullptr) {
-//            
-//            bool dup = false;
-//            while (cur->next !=nullptr && cur->val == cur->next->val) {
-//                cur = cur->next;
-//                dup = true;
-//            }
-//            
-//            if (dup == true) {
-//                cur = cur->next;
-//                continue;
-//            }
-//            
-//            prev->next = cur;
-//            prev = cur;
-//            cur = cur->next;
-//            
-//            
-//        }
-//        
-//        prev->next = nullptr; //{1，1，1，1}
-//        
-//        return dummy.next;
-//    }
-    
     ListNode *deleteDuplicates(ListNode *head) {
-        if (head == nullptr || head -> next == nullptr) {
-            return head;
-        }
-        
         ListNode dummy(-1);
-        dummy.next = head;
-        ListNode *prev = &dummy;
+        ListNode *tail = &dummy;
         ListNode *cur = head;
-        bool dup = false;
-        
+        bool isSame = false;
         while (cur != nullptr) {
-            while (cur -> next != nullptr && cur -> val == cur -> next -> val) {
-                cur = cur -> next;
-                dup = true;
+            while (cur->next != nullptr && cur->val == cur->next->val) {
+                cur = cur->next;
+                isSame = true;
             }
             
-            
-            if (dup == true) {
-                cur = cur -> next;
-                dup = false;
+            if (isSame) {
+                cur = cur->next;
+                isSame = false;
                 continue;
             }
             
-            prev -> next = cur;
-            prev = cur;
-            cur = cur -> next;
+            tail->next = cur;
+            cur = cur->next;
+            tail = tail->next;
         }
         
-        prev -> next = nullptr;
-        
+        tail->next = nullptr;
         return dummy.next;
     }
+    
 };
 int main(int argc, const char * argv[])
 {
@@ -129,7 +59,7 @@ int main(int argc, const char * argv[])
     ListNode *b = new ListNode(1);
 //    ListNode *c = new ListNode(1);
 //    ListNode *d = new ListNode(1);
-    ListNode *e = new ListNode(1);
+    ListNode *e = new ListNode(2);
     
     a->next = b;
     b -> next = e;

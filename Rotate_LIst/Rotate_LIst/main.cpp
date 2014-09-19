@@ -14,30 +14,17 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
-//    ListNode *rotateRight(ListNode *head, int k) {
-//        if(head == nullptr || k==0)
-//            return head;
-//        ListNode *cur  =head;
-//        int length = 1;
-//        while(cur->next){
-//            cur = cur->next;
-//            length++;
-//        }
-//        
-//        cur->next = head; // link the end and the start
-//        int index = length-k%length;
-//        
-//        for(int i=0; i< index; i++){
-//            cur = cur->next;
-//        }
-//        
-//        head = cur->next;
-//        cur->next = nullptr;
-//        return head;
-//    }
-    
     ListNode *rotateRight(ListNode *head, int k) {
         ListNode *cur = head;
         ListNode *tail = nullptr;
@@ -63,7 +50,7 @@ public:
         int step = length - k;
         cur = head;
         
-        while (step != 0) {
+        while (step > 1) {
             cur = cur -> next;
             step--;
         }
@@ -72,9 +59,10 @@ public:
         cur -> next = nullptr;
         
         return newHead;
+        
+        
     }
 };
-
 int main(int argc, const char * argv[])
 {
 
