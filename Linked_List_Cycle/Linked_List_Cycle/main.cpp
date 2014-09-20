@@ -14,24 +14,38 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        if(head == nullptr) return false;
-        ListNode *first = head;
-        ListNode *second = head;
+        if (head == nullptr) {
+            return false;
+        }
+        ListNode *slow = head;
+        ListNode *fast = head;
         
-        while(first!=nullptr &&second!=nullptr){
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        
+        if (fast == nullptr || fast->next == nullptr) {
+            return nullptr;
             
-            first = first->next;
-            second = second->next;
-            if(second == nullptr)
-                return false;
-            second = second->next;//do not code as second = second ->next ->next. Null pointer error!!!!!
-            if(first == second) return true; // cycle!!!!
         }
         
         return false;
+        
     }
     
 };

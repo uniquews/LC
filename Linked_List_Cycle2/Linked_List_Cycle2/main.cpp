@@ -43,36 +43,32 @@ struct ListNode {
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        ListNode *first = head;
-        ListNode *second = head;
-        
-        while (first != nullptr && second != nullptr) {
-            first = first->next;
-            second = second->next;
-            if (second == nullptr) {
-                return nullptr;
-            }
-            
-            second = second->next;
-            
-            if (first == second) {
-                break;
-            }
-        }
-        
-        if (second == nullptr) {
+        if (head == nullptr) {
             return nullptr;
         }
         
+        ListNode *slow = head;
+        ListNode *fast = head;
         
-        first = head;
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+            
+            if (slow == fast) {
+                break;
+            }
+        }
+        if (fast == nullptr || fast->next == nullptr) {
+            return nullptr;
+        }
+        slow = head;
         
-        while (first != second) {
-            first = first->next;
-            second = second->next;
+        while (slow != fast) {
+            slow = slow->next;
+            fast = fast->next;
         }
         
-        return first;
+        return slow;
     }
     
 };
