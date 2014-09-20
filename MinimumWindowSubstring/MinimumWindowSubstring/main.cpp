@@ -7,75 +7,80 @@
 //
 
 #include <iostream>
+#include <vector>
 using namespace std;
+
 
 class Solution {
 public:
     string minWindow(string S, string T) {
-        // check some edge case
-        // The string S is empty
-        if(S.empty()) return "";
-        //The string T is empty
-        if(T.empty()) return "";
-        
-        //if S'size is smaller than T's size
-        if(S.size() < T.size())
+        if (S.size() == 0) {
             return "";
-        
-        // Then find the smallest window. There are two cases: find it or not
-        const int ASCII_MAX = 256; //Total 256 char
-        int existed_count[ASCII_MAX];
-        int needed_count[ASCII_MAX];
-        
-        fill(existed_count, existed_count+ASCII_MAX, 0); //Initialize
-        fill(needed_count, needed_count+ASCII_MAX, 0);
-        
-        for(int i =0; i<T.size(); i++){
-            needed_count[T[i]]++; // collect the number of each char
         }
         
-        int minWin = INT_MAX; // If not found, then remaing INT_MAX;
-        int minStart = 0;
-        int wnd_start=0;
-        int wnd_end=0;
-        int numOfSatisfied=0;
-        
-        for(; wnd_end<S.size(); wnd_end++){
-            
-            // S[wnd_end] is in the T
-            if(needed_count[S[wnd_end]]>0){
-                existed_count[S[wnd_end]]++; // whatever this is the nth, it aloways add 1
-                if(existed_count[S[wnd_end]]<=needed_count[S[wnd_end]]){
-                    numOfSatisfied++; // This is needed number for each char in T
-                }
-            }
-            
-            if(numOfSatisfied == T.size()){
-                while((existed_count[S[wnd_start]]>needed_count[S[wnd_start]]) || needed_count[S[wnd_start]]==0){
-                    existed_count[S[wnd_start]]--;
-                    wnd_start++;
-                }
-                
-                
-                if(minWin>(wnd_end-wnd_start+1)){
-                    minWin=wnd_end-wnd_start+1;
-                    minStart=wnd_start;
-                }
-                
-            }
+        if (T.size() == 0) {
+            return "";
         }
-        if(minWin==INT_MAX) return "";
-        else return S.substr(minStart, minWin);
+        
+        if (S.size() < T.size()) {
+            return "";
+        }
+        
+        int w_start = 0;
+        int w_end = 0;
+        int min_wnd = INT_MAX;
+        int min_start = 0;
+        int numOfSatisfied = 0;
+        int numOfNeeded = 0;
+        
+        vector<int> needed(256, 0);
+        vector<int> existed(256, 0);
+        
+        for (int i = 0; i < T.size(); i++) {
+            needed[T[i]]++;
+            numOfNeeded++;
+        }
+        
+        for (; w_end < S.size(); w_end++) {
+            if (needed[S[w_end]] != 0) {
+                if (existed[S[w_end]] < needed[S[w_end]]) {
+                    numOfSatisfied++;
+                }
+                existed[S[w_end]]++;
+                
+            }
+            
+            if (numOfSatisfied == numOfNeeded) {
+                while (existed[S[w_start]] > needed[S[w_start]] || needed[S[w_start]] == 0) {
+                    existed[S[w_start]]--;
+                    w_start++;
+                }
+                
+                if (min_wnd > w_end - w_start + 1) {
+                    min_wnd = min (min_wnd, w_end - w_start + 1);
+                    min_start = w_start;
+                }
+            }
+           
+        }
+        
+        if (min_wnd == INT_MAX) {
+            return "";
+        } else {
+            return S.substr(min_start, min_wnd);
+        }
+        
         
     }
-    
 };
 
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-   
+    string S = "a";
+    string T = "a";
+    Solution su;
+    cout << su.minWindow(S, T) << endl;
     return 0;
 }
 

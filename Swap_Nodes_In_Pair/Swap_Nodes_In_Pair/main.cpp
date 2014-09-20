@@ -16,21 +16,6 @@ struct ListNode {
 class Solution {
 public:
     ListNode *swapPairs(ListNode *head) {
-//        ListNode dummy(-1);
-//        ListNode *prev = &dummy;
-//        dummy.next = head;
-//        
-//        while(head && head->next){
-//            ListNode *temp = head->next->next;
-//            prev->next = head->next;
-//            head->next->next = head;
-//            head->next = temp;
-//            prev = head;
-//            head = head->next;
-//        }
-//        
-//        
-//        return dummy.next;
         
         if (head == nullptr || head -> next == nullptr) {
             return head;
