@@ -9,28 +9,40 @@
 #include <iostream>
 using namespace std;
 
-class Solution{
-
+class Solution {
 public:
-    bool isPalindrome(int x){
+    bool isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
         
-        if(x<0) return false;
+        if (x < 10) {
+            return true;
+        }
         
+        int tmp = x;
         int division = 1;
-        while(x/division>=10) division*=10; // pay attention equals to 10   e.g. 1001
-        while(x>0){
-            int begin = x/division;
-            int end = x%10;
-            if(begin!=end) return false;
-            x =x%division/10;
-            division/=100;
+        while (tmp / division >= 10) {
+            division *= 10;
+            
+        }
+        
+        while (x > 0) {
+            int begin = x /division;
+            int end = x % 10;
+            if (begin != end) {
+                return false;
+            }
+            x = x % division / 10;
+            division = division / 100;
+            
         }
         
         return true;
+        
     }
-
+    
 };
-
 int main(int argc, const char * argv[])
 {
 
