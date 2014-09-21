@@ -10,49 +10,26 @@
 
 using namespace std;
 
-//class Solution {
-//public:
-//    int lengthOfLastWord(const char *s) {
-//        int count =0;
-//
-//        for(int i=(int)strlen(s)-1; i>=0; i--){
-//            if(::isalnum(s[i])){
-//                count++;
-//            }else{
-//                if(count == 0)
-//                    continue;
-//                else
-//                    return count;
-//            }
-//        }
-//        
-//        return count;
-//    }
-//};
-
 class Solution {
-
 public:
     int lengthOfLastWord(const char *s) {
-        int len = 0;
-        int result = 0;
-        while (*s != '\0') {
-            if (*s != ' ') {
-                len++;
-                result = len;
-                s++;
-            } else {
-                s++;
-                len = 0;
-            }
-            
+        int len = strlen(s);
+        int end = len - 1;
+        while (end >= 0 && s[end] == ' ') {
+            end--;
         }
         
-        return result;
+        if (end < 0) {
+            return 0;
+        }
         
+        int start = end;
+        while (start >= 0 && s[start] != ' ') {
+            start--;
+        }
+        
+        return end - start;
     }
-
-
 };
 
 int main(int argc, const char * argv[])

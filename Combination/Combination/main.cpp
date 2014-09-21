@@ -12,31 +12,63 @@
 using namespace std;
 
 
+//class Solution {
+//public:
+//    vector<vector<int> > combine(int n, int k) {
+//        vector<int> num;
+//        for (int i = 1; i <= n; i++) {
+//            num.push_back(i);
+//        }
+//        
+//        vector<vector<int>> result;
+//        vector<int> eachResult;
+//        
+//        dfs(0, num, result, eachResult, 0, k);
+//        return result;
+//    }
+//    
+//    
+//    void dfs (int start, vector<int> num, vector<vector<int>> &result, vector<int> &eachResult, int numOfEachResult, int k) {
+//        if (numOfEachResult == k) {
+//            result.push_back(eachResult);
+//            return;
+//        }
+//        
+//        for (int i = start; i < num.size(); i++) {
+//            eachResult.push_back(num[i]);
+//            dfs(i + 1, num, result, eachResult, numOfEachResult + 1, k);
+//            eachResult.pop_back();
+//        }
+//        
+//        return;
+//    }
+//};
+
 class Solution {
 public:
     vector<vector<int> > combine(int n, int k) {
+        vector<vector<int>> result;
+        vector<int> eachResult;
         vector<int> num;
         for (int i = 1; i <= n; i++) {
             num.push_back(i);
         }
         
-        vector<vector<int>> result;
-        vector<int> eachResult;
         
-        dfs(0, num, result, eachResult, 0, k);
+        dfs(num, 0, 0, eachResult, result, k);
         return result;
     }
     
     
-    void dfs (int start, vector<int> num, vector<vector<int>> &result, vector<int> &eachResult, int numOfEachResult, int k) {
-        if (numOfEachResult == k) {
+    void dfs(vector<int> &num, int index, int step, vector<int> &eachResult, vector<vector<int>> &result, int k) {
+        if (step == k) {
             result.push_back(eachResult);
             return;
         }
         
-        for (int i = start; i < num.size(); i++) {
+        for (int i = index; i < num.size(); i++) {
             eachResult.push_back(num[i]);
-            dfs(i + 1, num, result, eachResult, numOfEachResult + 1, k);
+            dfs(num, i + 1, step + 1, eachResult, result, k);
             eachResult.pop_back();
         }
         
