@@ -10,60 +10,43 @@
 #include <vector>
 using namespace std;
 
+
 class Solution {
 public:
     int threeSumClosest(vector<int> &num, int target) {
         if (num.size() == 0) {
-            return target;
+            return 0;
         }
+        
         sort(num.begin(), num.end());
-        
         int gap = INT_MAX;
-        int tempTarget = 0;
-        
-        for (int i = 0; i < num.size(); i++) {
-           
-            int left = i + 1;
-            int right = (int)num.size() - 1;
-            while (left < right) {
-                if (num[i] + num[left] + num[right] > target) {
-                    if (abs(num[i] + num[left] + num[right] - target) < gap) {
-                        gap = abs(num[i] + num[left] + num[right] - target);
-                        tempTarget = num[i] + num[left] + num[right];
+        int result = 0;
+        for (int i = 0; i < num.size() - 2; i++) {
+            int start = i + 1;
+            int end = num.size() - 1;
+            while (start < end) {
+                if (num[i] + num[start] + num[end] == target) {
+                    return target;
+                } else if (num[i] + num[start] + num[end] > target) {
+                    if (abs(num[i] + num[start] + num[end] - target) < gap) {
+                        result = num[i] + num[start] + num[end];
+                        gap = abs(num[i] + num[start] + num[end] - target);
                     }
-                    right--;
                     
-                } else if (num[i] + num[left] + num[right] < target){
-                    if (abs(num[i] + num[left] + num[right] - target) < gap) {
-                        gap = abs(num[i] + num[left] + num[right] - target);
-                        tempTarget = num[i] + num[left] + num[right];
-                    }
-                    left++;
-                    
+                    end--;
                 } else {
-                    tempTarget = target;
-                    gap = 0;
-                    while (left + 1 < right && num[left] == num[left + 1]) {
-                        left++;
+                    if (abs(num[i] + num[start] + num[end] - target) < gap) {
+                        result = num[i] + num[start] + num[end];
+                        gap = abs(num[i] + num[start] + num[end] - target);
                     }
                     
-                    while (right - 1 > left && num[right - 1] == num[right]) {
-                        right--;
-                    }
-                    
-                    left++;
-                    right--;
+                    start++;
                 }
             }
-            
-            while (i + 1 < num.size() && num[i] == num[i + 1]) {
-                i++;
-            }
         }
         
-        return tempTarget;
+        return result;
     }
-    
 };
 
 
@@ -71,8 +54,10 @@ int main(int argc, const char * argv[])
 {
 
     // insert code here...
-    vector<int> A = {1,1,1,0};
-    int target = 100;
+//    vector<int> A = {1,1,1,0};
+//    int target = 100;
+    vector<int> A = {0,1,2};
+    int target = 0;
     Solution su;
     cout << su.threeSumClosest(A, target) << endl;
     std::cout << "Hello, World!\n";
