@@ -14,33 +14,34 @@ using namespace std;
 class Solution {
 public:
     vector<int> getRow(int rowIndex) {
-        vector<int> last;
-        
-        for(int i = 0; i <= rowIndex; i++){
-            if(i == 0){
-                last.push_back(1);
-            }else{
-                vector<int> :: iterator it = last.begin();
-                last.insert(it, 0);
-                last.push_back(0);
-                for(int j = 0; j <= i; j++){
-                    last[j] = last[j] + last[j + 1];
+        vector<int> result;
+        int start = 0;
+        for (int i = start; i <= rowIndex; i++) {
+            if (i == 0) {
+                result.push_back(1);
+            } else {
+                vector<int> :: iterator it = result.begin();
+                result.insert(it, 0);
+                result.push_back(0);
+                for (int j = 0; j <= i; j++) {
+                    result[j] = result[j] + result[j + 1];
                 }
                 
-                last.pop_back();
+                result.pop_back();
             }
         }
         
+        return result;
         
-        return last;
     }
-    
 };
 
 int main(int argc, const char * argv[])
 {
 
-    
+    int rowIndex = 2;
+    Solution su;
+    su.getRow(rowIndex);
     return 0;
 }
 

@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7336D610-6826-4676-B9DE-4EB622448D97</string>
+	<string>E8A9CE64-11C9-4D03-8AEB-3B7ABAD897FC</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Pascal's Triangle II</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>8D1397A9-4D83-419D-89FF-9E0AED88A41E</key>
-		<string>https://github.com/uniquews/LC.git</string>
+		<key>0E4AD9E7-34DB-498B-9AFA-99CFCB98B7F7</key>
+		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Pascal's Triangle II/Pascal's Triangle II.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>8D1397A9-4D83-419D-89FF-9E0AED88A41E</key>
+		<key>0E4AD9E7-34DB-498B-9AFA-99CFCB98B7F7</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/uniquews/LC.git</string>
+	<string>ssh://github.com/uniquews/LC.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>8D1397A9-4D83-419D-89FF-9E0AED88A41E</string>
+	<string>0E4AD9E7-34DB-498B-9AFA-99CFCB98B7F7</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>8D1397A9-4D83-419D-89FF-9E0AED88A41E</string>
+			<string>0E4AD9E7-34DB-498B-9AFA-99CFCB98B7F7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LC</string>
 		</dict>
