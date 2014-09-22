@@ -10,71 +10,51 @@
 #include <vector>
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-    
-        vector<vector<int> > threeSum(vector<int> &num) {
-            if (num.size() == 0) {
-                return vector<vector<int>> {};
-            }
-            
-            sort(num.begin(), num.end());
-            
-            vector<vector<int>> result;
-            
-            for (int i = 0; i < num.size(); i++) {
-                
-                vector<int> eachResult;
-                int target = 0 - num[i];
-                eachResult.push_back(num[i]);
-                twoSum(num, i, target, eachResult, result);
-                eachResult.pop_back();
-                
-                while (i + 1 < num.size() && num[i] == num[i + 1]) {
-                    i++;
+    vector<vector<int> > threeSum(vector<int> &num) {
+        if (num.size() == 0) {
+            return vector<vector<int>> {};
+        }
+        
+        sort(num.begin(), num.end());
+        vector<vector<int>> result;
+        for (int i = 0; i < (int)num.size() - 2; i++) {
+            int tempGap = 0 - num[i];
+            int start = i + 1;
+            int end = (int)num.size() - 1;
+            while (start < end) {
+                if (num[start] + num[end] == tempGap) {
+                    vector<int> eachResult;
+                    eachResult.push_back(num[i]);
+                    eachResult.push_back(num[start]);
+                    eachResult.push_back(num[end]);
+                    result.push_back(eachResult);
+                    
+                    while (start + 1 < end && num[start] == num[start + 1]) {
+                        start++;
+                    }
+                    
+                    while (end - 1 > start && num[end] == num[end - 1]) {
+                        end--;
+                    }
+                    
+                    start++;
+                    end--;
+                } else if (num[start] + num[end] > tempGap) {
+                    end--;
+                } else {
+                    start++;
                 }
             }
             
-            return result;
-        }
-        
-        
-        void twoSum(vector<int> &num, int currentIndex, int target, vector<int> &eachResult, vector<vector<int>> &result) {
-            int left = currentIndex + 1;
-            int right = num.size() - 1;
-            
-            while (left < right) {
-                
-                int tmp = num[left] + num[right];
-                if (tmp > target) {
-                    right--;
-                } else if (tmp < target) {
-                    left++;
-                } else {
-                    eachResult.push_back(num[left]);
-                    eachResult.push_back(num[right]);
-                    result.push_back(eachResult);
-                    eachResult.pop_back();
-                    eachResult.pop_back();
-                    
-                    while (left + 1 < right && num[left] == num[left + 1]) {
-                        left++;
-                    }
-                    
-                    while (right - 1 > left && num[right] == num[right - 1]) {
-                        right--;
-                    }
-                    left++;
-                    right--;
-                    
-                } 
-                
-                
+            while (i + 1 < num.size() - 2 && num[i + 1] == num[i]) {
+                i++;
             }
-            return;
-            
         }
-    
+        
+        return result;
+    }
 };
 
 
@@ -89,6 +69,7 @@ int main(int argc, const char * argv[])
     // insert code here...
     vector<int> num = {-1, 0, 1, 2, -1, -4};
     vector<int> temp;
+//    vector<int> num = {0};
     Solution su;
    vector<vector<int>> result = su.threeSum(num);
     for(vector<vector<int>>::iterator it=result.begin(); it<result.end();it++){
