@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>2C4F5148-0CB7-401A-8290-62E7CCB0D617</string>
+	<string>503AD9EE-455D-4258-A0EE-8906BF448012</string>
 	<key>IDESourceControlProjectName</key>
-	<string>FlattenTree_Iteration</string>
+	<string>FlattenTree_Recursion</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>511C629B-E0B4-4F3D-BC11-200433278B9A</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FlattenTree_Iteration/FlattenTree_Iteration.xcodeproj/project.xcworkspace</string>
+	<string>FlattenTree_Recursion/FlattenTree_Recursion.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>511C629B-E0B4-4F3D-BC11-200433278B9A</key>

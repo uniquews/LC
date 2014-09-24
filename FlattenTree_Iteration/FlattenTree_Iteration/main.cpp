@@ -63,32 +63,6 @@ public:
 //    }
 //};
 
-
-class Solution {
-public:
-    
-    TreeNode *lastNode = nullptr;
-    void flatten(TreeNode *root) {
-        
-        if (root == nullptr) {
-            return;
-        }
-        
-        if (lastNode != nullptr) {
-            lastNode->left = nullptr;
-            lastNode->right = root;
-        }
-        
-        lastNode = root;
-        TreeNode *right = root->right;
-        flatten(root->left);
-        flatten(right);
-        
-        
-        return;
-    }
-};
-
 int main(int argc, const char * argv[])
 {
 
