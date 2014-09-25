@@ -60,75 +60,75 @@ using namespace std;
 //        return true;
 //    }
 //};
-class Solution {
-public:
-    vector<vector<string> > solveNQueens(int n) {
-        if (n == 0) {
-            return vector<vector<string>> {};
-        }
-        vector<vector<string>> result;
-        vector<int> f(n, INT_MAX);
-        
-        dfs(0, n, f, result);
-        
-        return result;
-    }
-    
-    
-    void dfs(int row, int num, vector<int> &f, vector<vector<string>> &result) {
-        if (row == num) {
-            getSolution(result, f, num);
-            return;
-        }
-        
-        for (int i = 0; i < num; i++) {
-            int tmp = f[row];
-            f[row] = i;
-            if (valid(num, f, row, i)) {
-                dfs(row + 1, num, f, result);
-            }
-            f[row] = tmp;
-        }
-    }
-    
-    
-    bool valid(int num, vector<int> &f, int row, int column) {
-        for (int i = 0; i < f.size(); i++) {
-            if (i == row) {
-                continue;
-            } else if (f[i] == f[row]) {
-                return false;
-            }
-        }
-        
-        for (int i = 0; i < f.size(); i++) {
-            if (i == row) {
-                continue;
-            } else if (f[i] != INT_MAX && abs(i - row) == abs(f[i] - f[row])) {
-                return false;
-            }
-        }
-        
-        return true;
-        
-    }
-    
-    
-    void getSolution(vector<vector<string>> &result, vector<int> &f, int num) {
-        
-        vector<string> eachResult;
-        for (int i = 0; i < f.size(); i++) {
-            string str(num, '.');
-            int column = f[i];
-            str[column] = 'Q';
-            eachResult.push_back(str);
-        }
-        
-        result.push_back(eachResult);
-        return;
-        
-    }
-};
+//class Solution {
+//public:
+//    vector<vector<string> > solveNQueens(int n) {
+//        if (n == 0) {
+//            return vector<vector<string>> {};
+//        }
+//        vector<vector<string>> result;
+//        vector<int> f(n, INT_MAX);
+//        
+//        dfs(0, n, f, result);
+//        
+//        return result;
+//    }
+//    
+//    
+//    void dfs(int row, int num, vector<int> &f, vector<vector<string>> &result) {
+//        if (row == num) {
+//            getSolution(result, f, num);
+//            return;
+//        }
+//        
+//        for (int i = 0; i < num; i++) {
+//            int tmp = f[row];
+//            f[row] = i;
+//            if (valid(num, f, row, i)) {
+//                dfs(row + 1, num, f, result);
+//            }
+//            f[row] = tmp;
+//        }
+//    }
+//    
+//    
+//    bool valid(int num, vector<int> &f, int row, int column) {
+//        for (int i = 0; i < f.size(); i++) {
+//            if (i == row) {
+//                continue;
+//            } else if (f[i] == f[row]) {
+//                return false;
+//            }
+//        }
+//        
+//        for (int i = 0; i < f.size(); i++) {
+//            if (i == row) {
+//                continue;
+//            } else if (f[i] != INT_MAX && abs(i - row) == abs(f[i] - f[row])) {
+//                return false;
+//            }
+//        }
+//        
+//        return true;
+//        
+//    }
+//    
+//    
+//    void getSolution(vector<vector<string>> &result, vector<int> &f, int num) {
+//        
+//        vector<string> eachResult;
+//        for (int i = 0; i < f.size(); i++) {
+//            string str(num, '.');
+//            int column = f[i];
+//            str[column] = 'Q';
+//            eachResult.push_back(str);
+//        }
+//        
+//        result.push_back(eachResult);
+//        return;
+//        
+//    }
+//};
 
 
 //class Solution {
@@ -281,6 +281,75 @@ public:
 //    
 //    
 //};
+
+class Solution {
+public:
+    vector<vector<string> > solveNQueens(int n) {
+        vector<int> board(n, INT_MAX);
+        vector<vector<string>> result;
+        dfs(0, n, board, result);
+        return result;
+    }
+    
+    void dfs(int index, int n, vector<int> &board, vector<vector<string>> &result) {
+        if (index == n) {
+            getSolution(board, result);
+            return;
+        }
+        
+        
+        for (int i = 0; i < n; i++) {
+            int tmp = board[index];
+            board[index] = i;
+            if (isValid(board, index, i)) {
+                dfs(index + 1, n, board, result);
+            }
+            board[index] = tmp;
+        }
+        
+        return;
+    }
+    
+    bool isValid(vector<int> &board, int row, int column) {
+        for (int i = 0; i < board.size(); i++) {
+            if (i == row) {
+                continue;
+            } else {
+                if (board[i] == column) {
+                    return false;
+                }
+            }
+        }
+        
+        
+        for (int i = 0; i < board.size(); i++) {
+        
+            if (i == row) {
+                continue;
+            } else {
+                if (abs(i - row) == abs(board[i] - column)) {
+                    return false;
+                }
+            
+            }
+        }
+        
+        return true;
+    }
+    
+    
+    void getSolution(vector<int> &board, vector<vector<string>> &result) {
+        vector<string> eachResult;
+        for (int i = 0; i < board.size(); i++) {
+            string eachLine(board.size(), '.');
+            eachLine[board[i]] = 'Q';
+            eachResult.push_back(eachLine);
+        }
+        
+        result.push_back(eachResult);
+        return;
+    }
+};
 
 int main(int argc, const char * argv[])
 {

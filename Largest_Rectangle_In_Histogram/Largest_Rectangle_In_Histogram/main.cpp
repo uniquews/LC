@@ -12,40 +12,6 @@
 
 using namespace std;
 
-//class Solution {
-//public:
-//    int largestRectangleArea(vector<int> &height) {
-//        if (height.size() == 0) {
-//            return 0;
-//        }
-//        
-//        stack<int> stk;
-//        int result = 0;
-//        for (int i = 0; i <= height.size(); i++) {
-//            int curt = i == height.size() ? -1 : height[i];
-//            while (stk.size() != 0 && curt < height[stk.top()]) {
-//
-//                int h = height[stk.top()];
-//                stk.pop();
-//                
-//                int w = 0;
-//                if (stk.size() == 0) {
-//                    w = i;
-//                } else {
-//                    w = i - stk.top() - 1;
-//                }
-//                result = max(result, h * w);
-//                
-//            }
-//            
-//            stk.push(i);
-//        }
-//        
-//        return result;
-//    }
-//    
-//};
-
 class Solution {
 public:
     int largestRectangleArea(vector<int> &height) {
@@ -53,22 +19,24 @@ public:
             return 0;
         }
         
-        
-        stack<int> stk;
         int result = 0;
+        stack<int> stk;
         for (int i = 0; i <= height.size(); i++) {
             int cur = i == height.size() ? -1 : height[i];
-            while (stk.size() != 0 && cur < stk.top()) {
+            while (stk.size() != 0 && cur < height[stk.top()]) {
                 int h = height[stk.top()];
                 stk.pop();
+                
                 int w = 0;
                 if (stk.size() == 0) {
-                    w = i;
+                    w = i; // 这个递增序列的前面有i个，递增序列的结尾是i - 1，被i弹出
                 } else {
                     w = i - stk.top() - 1;
                 }
                 
+                
                 result = max(result, h * w);
+                
             }
             
             stk.push(i);
@@ -80,12 +48,11 @@ public:
 
 
 
-
 int main(int argc, const char * argv[])
 {
 
-//    vector<int> h = {8, 4};
-    vector<int> h = {0};
+//    vector<int> h = {100, 1000, 8};
+    vector<int> h = {2,1,5,6,2,3};
     Solution su;
     su.largestRectangleArea(h);
     return 0;
