@@ -45,35 +45,74 @@ using namespace std;
 //};
 
 
+//class Solution {
+//public:
+//    int trap(int A[], int n) {
+//        int water = 0;
+//        int tallest = 0;
+//        
+//        for (int i = 0; i < n; i++) {
+//            if (A[i] > A[tallest]) {
+//                tallest = i;
+//            }
+//        }
+//        
+//        
+//        for (int i = 0, left = 0; i < tallest; i++) {
+//            if (A[i] > left) {
+//                left = A[i];
+//            } else {
+//                water += left - A[i];
+//            }
+//        }
+//        for (int i = n - 1, right = 0; i >= tallest; i--) {
+//            if (A[i] > right) {
+//                right = A[i];
+//            } else {
+//                water += right - A[i];
+//            }
+//        }
+//        
+//        return water;
+//    }
+//};
+
 class Solution {
 public:
     int trap(int A[], int n) {
-        int water = 0;
-        int tallest = 0;
+        if (n == 0) {
+            return 0;
+        }
         
+        int result = 0;
+        
+        int highest = 0;
         for (int i = 0; i < n; i++) {
-            if (A[i] > A[tallest]) {
-                tallest = i;
+            if (A[i] > A[highest]) {
+                highest = i;
             }
         }
         
-        
-        for (int i = 0, left = 0; i < tallest; i++) {
-            if (A[i] > left) {
-                left = A[i];
+        int leftHigh = 0;
+        for (int i = 0; i < highest; i++) {
+            if (A[i] < A[leftHigh]) {
+                result += A[leftHigh] - A[i];
             } else {
-                water += left - A[i];
-            }
-        }
-        for (int i = n - 1, right = 0; i >= tallest; i--) {
-            if (A[i] > right) {
-                right = A[i];
-            } else {
-                water += right - A[i];
+                leftHigh = i;
             }
         }
         
-        return water;
+        
+        int rightHigh = n - 1;
+        for (int i = n - 1; i > highest; i--) {
+            if (A[i] < A[rightHigh]) {
+                result += A[rightHigh] - A[i];
+            } else {
+                rightHigh = i;
+            }
+        }
+        
+        return result;
     }
 };
 

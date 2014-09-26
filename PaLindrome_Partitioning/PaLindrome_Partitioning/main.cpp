@@ -11,129 +11,15 @@
 
 using namespace std;
 
-//class Solution {
-//public:
-//    vector<vector<string>> partition(string s) {
-//        vector<vector<string>> result;
-//        vector<string> eachResult;
-//        
-//        if (s.size() == 0) {
-//            result.push_back(eachResult);
-//            return result;
-//        }
-//        
-//        dfs(s, 0, s.size() - 1, eachResult, result);
-//        return result;
-//    }
-//    
-//    
-//    void dfs(string s, int start, int end, vector<string> &eachResult, vector<vector<string>> &result) {
-//        if (start > end) {
-//            result.push_back(eachResult);
-//            return;
-//        }
-//        
-//        for (int i = start; i <= end; i++) {
-//            if (isPP(s, start, i - start + 1)) {
-//                eachResult.push_back(s.substr(start, i - start + 1));
-//                dfs (s, i + 1, end, eachResult, result);
-//                eachResult.pop_back();
-//            }
-//        }
-//        
-//        return;
-//    }
-//    
-//    bool isPP (string s, int start, int length) {
-//        string tmp = s.substr(start, length);
-//        int left = 0;
-//        int right = tmp.size() - 1;
-//        while (left <= right) {
-//            if (tmp[left] == tmp[right]) {
-//                left ++;
-//                right--;
-//            } else {
-//                return false;
-//            }
-//        }
-//        
-//        return true;
-//    }
-//};
 
-
-//class Solution {
-//public:
-//    vector<vector<string>> partition(string s) {
-//        if (s.size() == 0) {
-//            return vector<vector<string>> {};
-//        }
-//        
-//        vector<vector<string>> result;
-//        vector<string> eachResult;
-//
-//        
-//        dfs(s, 0, result, eachResult);
-//        return result;
-//    }
-//    
-//    void dfs(string &s, int cur, vector<vector<string>> &result, vector<string> &eachResult) {
-//        if (cur >= s.size()) {
-//            result.push_back(eachResult);
-//            return;
-//        }
-//        
-//        
-//        for (int length = 1; length <= s.size() - cur; length++) {
-//            string tmp = s.substr(cur, length);
-//            if (isPP(s, cur, cur + length - 1) == true) {
-//                eachResult.push_back(tmp);
-//                dfs(s, cur +  length, result, eachResult);
-//                eachResult.pop_back();
-//            }
-//        }
-//        
-//        return;
-//        
-//    }
-//    
-//    bool isPP(string &s, int start, int end) {
-//
-//        if (start == end) {
-//            return true;
-//        } else {
-//            string tmp = s.substr(start, end - start + 1);
-//            int left = start;
-//            int right = end;
-//            while (left < right) {
-//                if (s[left] == s[right]) {
-//                    left++;
-//                    right--;
-//                } else {
-//                    return false;
-//                }
-//            }
-//            
-//            return true;
-//        }
-//    }
-//
-//    
-//};
 
 class Solution {
 public:
     vector<vector<string>> partition(string s) {
-        if (s.size() == 0) {
-            return vector<vector<string>> {};
-        }
-        
         vector<vector<string>> result;
         vector<string> eachResult;
-        
         vector<vector<bool>> isPP(s.size(), vector<bool> (s.size(), false));
-        
-        for (int i = 0; i < (int)s.size(); i++) {
+        for (int i = 0; i < s.size(); i++) {
             isPP[i][i] = true;
         }
         
@@ -145,23 +31,24 @@ public:
             }
         }
         
-        dfs(s, 0, result, eachResult, isPP);
-        return result;
         
+        dfs(s, 0, eachResult, result, isPP);
+        return result;
     }
     
     
-    void dfs(string s, int start, vector<vector<string>> &result, vector<string> &eachResult, vector<vector<bool>> &isPP) {
+    
+    void dfs(string s, int start, vector<string> &eachResult, vector<vector<string>> &result, vector<vector<bool>> &isPP) {
         if (start == s.size()) {
             result.push_back(eachResult);
             return;
         }
         
-        for (int i = start; i < s.size(); i++) {
-            string tmp = s.substr(start, i - start + 1);
-            if (isPP[start][i]) {
+        for (int i = 1; i <= s.size() - start; i++) {
+            string tmp = s.substr(start, i);
+            if (isPP[start][i + start - 1]) {
                 eachResult.push_back(tmp);
-                dfs(s, i + 1, result, eachResult, isPP);
+                dfs(s, i + start, eachResult, result, isPP);
                 eachResult.pop_back();
             }
         }
@@ -169,7 +56,6 @@ public:
         return;
     }
 };
-
 
 
 

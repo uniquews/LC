@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-
+using namespace std;
 
 struct ListNode {
       int val;
@@ -36,6 +36,7 @@ public:
         
         leftDummy->next = rightStart->next;
         right_dummy->next = nullptr;
+        
         return leftStart->next;
         
     }
@@ -44,10 +45,25 @@ public:
 int main(int argc, const char * argv[])
 {
     ListNode *a = new ListNode(1);
-    ListNode *b = new ListNode(2);
-    b->next = a;
+    ListNode *b = new ListNode(4);
+    ListNode *c = new ListNode(3);
+    ListNode *d = new ListNode(2);
+    ListNode *e = new ListNode(5);
+    ListNode *f = new ListNode(2);
+    
+    a->next = b;
+    b->next = c;
+    c->next = d;
+    d->next = e;
+    e->next = f;
+    
     Solution s;
-    s.partition(b, 1);
+    ListNode *result = s.partition(a, 3);
+    while (result != nullptr) {
+        cout << result->val << " ";
+        result = result->next;
+    }
+    cout << endl;
     
     return 0;
 }
