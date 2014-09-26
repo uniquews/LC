@@ -18,82 +18,43 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-//class Solution {
-//public:
-//    vector<vector<int> > pathSum(TreeNode *root, int sum) {
-//        vector<vector<int>> result;
-//        vector<int> level;
-//        _pathSum(root, sum, result, level);
-//        return result;
-//    }
-//    
-//    void _pathSum(TreeNode *node, int sum, vector<vector<int>> &result, vector<int> level){
-//        if(node == nullptr){
-//            return;
-//        }
-//        
-//        level.push_back(node->val);
-//        if(node ->left == nullptr && node->right == nullptr && node->val == sum){
-//            result.push_back(level);
-//            level.pop_back();
-//            return;
-//        }
-//        
-//        _pathSum(node->left, sum - node->val, result, level);
-//        _pathSum(node->right, sum - node->val, result, level);
-//        
-//        level.pop_back();
-//        
-//        return;
-//    }
-//};
-
-
-/**
- * Definition for binary tree
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
 class Solution {
 public:
     vector<vector<int> > pathSum(TreeNode *root, int sum) {
-        vector<vector<int>> result;
-        vector<int> level;
         if (root == nullptr) {
-            return result;
+            return vector<vector<int>> {};
         }
-        
-        divide(root, sum, result, level);
+        vector<vector<int>> result;
+        vector<int> eachResult;
+        dfs(root, sum, eachResult, result);
         return result;
     }
     
-    void divide(TreeNode *root, int sum, vector<vector<int>> &result, vector<int> &level) {
-        if (root == nullptr) {
+    void dfs(TreeNode *node, int sum, vector<int> &eachResult, vector<vector<int>> &result) {
+        
+        if (node == nullptr) {
             return;
-
-        } else if (root->left == nullptr && root->right == nullptr) {
-            if (root->val == sum) {
-                level.push_back(root->val);
-                result.push_back(level);
-                level.pop_back();
-                return;
-            } else {
+        }
+        
+        if (node->left == nullptr && node->right == nullptr) {
+            if (node->val == sum) {
+                eachResult.push_back(node->val);
+                result.push_back(eachResult);
+                eachResult.pop_back();
                 return;
             }
             
-        } else {
-            level.push_back(root->val);
-            divide(root->left, sum - root->val, result, level);
-            divide(root->right, sum - root->val, result, level);
-            level.pop_back();
+            return;
         }
         
+        eachResult.push_back(node->val);
+        dfs(node->left, sum - node->val, eachResult, result);
+        dfs(node->right, sum - node->val, eachResult, result);
+        eachResult.pop_back();
         return;
+        
     }
+    
 };
 
 int main(int argc, const char * argv[])

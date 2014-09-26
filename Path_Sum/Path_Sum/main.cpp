@@ -18,25 +18,31 @@ struct TreeNode {
 class Solution {
 public:
     bool hasPathSum(TreeNode *root, int sum) {
-        return _hasPathSum(root, sum);
-    }
-    
-    bool _hasPathSum(TreeNode *node, int sum){
-        if(node == nullptr) return false;
-        
-        if(node->left == nullptr && node->right == nullptr){
-            if(node->val == sum) return true;
-            else return false;
+        if (root == nullptr) {
+            return false;
         }
         
-        if(_hasPathSum(node->left, sum- node->val))
-            return true;
-        
-        if(_hasPathSum(node->right, sum- node->val))
-            return true;
-        
-        return false;
+        return dfs(root, sum);
     }
+    
+    bool dfs(TreeNode *node, int sum) {
+        if (node == nullptr) {
+            return false;
+        }
+        
+        if (node->left == nullptr && node->right == nullptr) {
+            if (node->val == sum) {
+                return true;
+            }
+            return false;
+        }
+        
+        return dfs(node->left, sum - node->val) || dfs(node->right, sum - node->val);
+        
+        
+        
+    }
+    
 };
 
 int main(int argc, const char * argv[])
