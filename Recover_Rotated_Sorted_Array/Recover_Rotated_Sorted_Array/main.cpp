@@ -13,35 +13,53 @@ using namespace std;
 
 class Solution {
 public:
-    void recoverRotatedSortedArray(vector<int> &nums) {
+    void recoverRotatedSortedArray(int nums[], int n) {
         // write your code here
-        
-        if (nums.size() == 0) {
+        if (n == 0) {
             return;
         }
         
-        int pivot = INT_MIN;
+        int pivot = n - 1;
         
-        for (int i = 0; i < nums.size() - 1; i++) {
+        for (int i = 0; i < n - 1; i++) {
             if (nums[i] > nums[i + 1]) {
                 pivot = i;
+                break;
             }
         }
         
-        if (pivot == INT_MIN) {
-            return;
-        } else {
-            auto distance = pivot;
-            reverse(nums.begin(), next(nums.begin(), distance + 1));
-
-            reverse(next(nums.begin(), distance + 1), nums.end());
-            
-            reverse(nums.begin(), nums.end());
-
-            
-            
+        if (pivot == n - 1) {
             return;
         }
+        
+        int start = 0;
+        int end = pivot;
+        
+        while (start <= end) {
+            swap(nums[start], nums[end]);
+            start++;
+            end--;
+        }
+        
+        start = pivot + 1;
+        end = n - 1;
+        
+        while (start <= end) {
+            swap(nums[start], nums[end]);
+            start++;
+            end--;
+        }
+        
+        start = 0;
+        end = n - 1;
+        while (start <= end) {
+            swap(nums[start], nums[end]);
+            start++;
+            end--;
+        }
+        
+        return;
+     
     }
     
     
@@ -50,14 +68,13 @@ public:
 int main(int argc , const char * argv[])
 {
 
-    vector<int> arr = {4,1,2,3};
+    int nums[] = {1,1,1,1,1};
     
     Solution su;
-    su.recoverRotatedSortedArray(arr);
+    su.recoverRotatedSortedArray(nums, 5);
     
-    vector<int> :: iterator it = arr.begin();
-    for (; it != arr.end(); it++) {
-        cout << *it << " ";
+    for (int i = 0; i < 5; i++) {
+        cout << nums[i] <<endl;
     }
     
     cout << endl;
