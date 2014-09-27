@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>8E961514-7F6F-4787-AD84-657162E11201</string>
+	<string>5BA5858B-3287-4615-B754-9D63970FA8C1</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Median of Two Sorted Array</string>
+	<string>Min Depth BST</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>B4B12A85-73A0-4182-8B79-D84DA31A0F85</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Median of Two Sorted Array/Median of Two Sorted Array.xcodeproj/project.xcworkspace</string>
+	<string>Min Depth BST/Min Depth BST.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>B4B12A85-73A0-4182-8B79-D84DA31A0F85</key>

@@ -10,81 +10,73 @@
 #include <vector>
 #include <unordered_set>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
-
 //class Solution {
 //public:
 //    vector<string> wordBreak(string s, unordered_set<string> &dict) {
-//        if (s.size() == 0) {
-//            return vector<string> {};
-//        }
-//        
-//        vector<string> solution;
-//        string result = "";
-//        dfs(s, 0, s.length(), result, solution, dict);
-//        
-//        return solution;
+//        vector<string> result;
+//        string eachResult = "";
+//        vector<bool> possible (s.length() + 1, true);
+//        dfs(s, 0, eachResult, result, dict, possible);
+//        return result;
 //    }
 //    
-//    void dfs(string &s, int start, int len, string &result, vector<string> &solution, unordered_set<string> &dict) {
-//        if (start == len) {
-//            solution.push_back(result.substr(0, result.size()-1));//eliminate the last space
-//        }else {
-//            for (int i = start; i < len; i++) {
-//                string tmp = s.substr(start, i - start + 1);
-//                if (dict.find(tmp) != dict.end()) {
-//                    result.append(tmp).append(" "); // remember this way
-//                    dfs(s, i + 1, len, result, solution, dict);
-//                    result.resize(0, result.length() - tmp.length() - 1); // minus the last space
+//    void dfs(string &s, int index, string &eachResult, vector<string> &result, unordered_set<string> &dict, vector<bool> &possible) {
+//        if (index == s.size()) {
+//            eachResult.resize(eachResult.size() - 1);
+//            result.push_back(eachResult);
+//            return;
+//        }
+//        
+//        for (int i = 1; i <= s.size() - index; i++) {
+//            string tmp = s.substr(index, i);
+//            if (dict.find(tmp) != dict.end() && possible[index + i]) {
+//                string origin = eachResult;
+//                eachResult.append(tmp).append(" ");
+//                int beforeDfs = result.size();
+//                dfs(s, index + i, eachResult, result, dict, possible);
+//                if (result.size() == beforeDfs) {
+//                    possible[index + i] = false;
 //                }
+//                eachResult = origin;
 //            }
-//            
 //        }
 //        
 //        return;
-//        
 //    }
-//    
 //};
 
 
 class Solution {
 public:
     vector<string> wordBreak(string s, unordered_set<string> &dict) {
-        if (s.size() == 0) {
-            return vector<string> {};
-        }
+        unordered_map<int, vector<string>> *_map = new unordered_map<int, vector<string>>();
         
-        vector<string> solution;
-        string result = "";
-        vector<bool> possible(s.length() + 1, true);
-        dfs(s, 0, s.length(), result, solution, dict, possible);
+        int n = (int)s.size();
+        vector<string> *init= new vector<string> ();
+        init->push_back("");
+        _map->insert({n, *init});
         
-        return solution;
-    }
-    
-    void dfs(string &s, int start, int len, string &result, vector<string> &solution, unordered_set<string> &dict, vector<bool> &possible) {
-        if (start == len) {
-            solution.push_back(result.substr(0, result.size()-1));//eliminate the last space
-        }else {
-            for (int i = start; i < len; i++) {
-                string tmp = s.substr(start, i - start + 1);
-                if (dict.find(tmp) != dict.end() && possible[i + 1]) {
-                    result.append(tmp).append(" "); // remember this way
-                    int beforeChange = solution.size();
-                    dfs(s, i + 1, len, result, solution, dict, possible);
-                    if (solution.size() == beforeChange) {
-                        possible[i + 1] = false;
+        for (int i = n - 1; i >= 0; i--) {
+            vector<string> *tmp = new vector<string> ();
+            for (int j = i; j < n; j++) {
+                if (dict.find(s.substr(i, j - i + 1)) != dict.end()) {
+                    vector<string> later = _map->at(j + 1);
+                    for (auto str : later) {
+                        string result = s.substr(i, j - i + 1).append(str.size() == 0 ? "" : " ").append(str);
+                        tmp->push_back(result);
                     }
-                    result.resize(result.length() - tmp.length() - 1); // minus the last space
+                
                 }
             }
             
+            _map->insert({i, *tmp});
+            
         }
         
-        return;
-        
+        return _map->at(0);
     }
     
 };
@@ -95,7 +87,10 @@ int main(int argc, const char * argv[])
     string s = "aaaaaaa";
     unordered_set<string> dict = {"aaaa", "aaa"};
     Solution su;
-    su.wordBreak(s, dict);
+    vector<string> result = su.wordBreak(s, dict);
+    for (int i = 0; i < result.size(); i++) {
+        cout << result[i] << endl;
+    }
     return 0;
 }
 
