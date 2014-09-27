@@ -11,129 +11,60 @@
 
 
 using namespace std;
-
-//class Solution {
-//public:
-//    vector<int> searchRange(int A[], int n, int target) {
-//        vector<int> result;
-//        
-//        int first = 0;
-//        int end = n - 1;
-//        // search for lower bound
-//        while (first + 1 < end) {
-//            int mid = (first + end) / 2;
-//            if(A[mid] < target) {
-//                first = mid;
-//            } else {
-//                end = mid;
-//            }
-//        }
-//        
-//        if (A[first] == target) { // [2,2] we don't go into while loop, so we need to check A[first]
-//            result.push_back(first);
-//        }else if (A[end] == target) { // secondly check A[end] because when A[mid] = target, we move end = mid
-//            result.push_back(end);
-//        } else {
-//            result.push_back(-1);
-//        }
-//        
-//        
-//        //search for upper bound
-//        first = 0;
-//        end = n - 1;
-//        
-//        while(first + 1 < end) {
-//            int mid = (first + end) / 2;
-//            if (A[mid] > target) {
-//                end = mid;
-//            } else {
-//                first = mid;
-//            }
-//        }
-//        
-//        if (A[end] == target) { // same as [2,2]
-//            result.push_back(end);
-//        } else if (A[first] == target) {
-//            result.push_back(first);
-//        } else {
-//            result.push_back(-1);
-//        }
-//        
-//        return result;
-//    }
-//    
-//};
-
-
 class Solution {
 public:
     vector<int> searchRange(int A[], int n, int target) {
-        // search for upper bound
+        if (n == 0) {
+            return vector<int> {-1, -1};
+        }
         
-        int upper = 0;
-        int lower = 0;
-        
+        //lower bound
         int start = 0;
         int end = n - 1;
+        int lowerbound = -1;
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
-            if (target == A[mid]) {
-                start = mid;
-            } else if (target < A[mid]) {
+            if (A[mid] == target) {
                 end = mid;
-            } else {
+            } else if (A[mid] < target) {
                 start = mid;
+            } else {
+                end = mid;
             }
         }
         
         if (A[start] == target) {
-            if (A[end] == target) {
-                upper = end;
-            } else {
-                upper = start;
-            }
-        } else {
-            if (A[end] == target) {
-                upper = end;
-            } else {
-                upper = -1;
-            }
+            lowerbound = start;
+        } else if (A[end] == target) {
+            lowerbound = end;
         }
         
-        // search for lower bound
         start = 0;
         end = n - 1;
+        int upperbound = -1;
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
-            if (target == A[mid]) {
-                end = mid;
-            } else if (target < A[mid]) {
-                end = mid;
+            if (A[mid] == target) {
+                start = mid;
+            } else if (A[mid] > target) {
+                end =  mid;
             } else {
                 start = mid;
             }
         }
         
-        if (A[start] == target) {
-            lower = start;
-        } else {
-            if (A[end] == target) {
-                lower = end;
-            } else {
-                lower = -1;
-            }
+        if (A[end] == target) {
+            upperbound = end;
+        } else if (A[start] == target) {
+            upperbound = start;
         }
         
-        
         vector<int> result;
-        result.push_back(lower);
-        result.push_back(upper);
-        
+        result.push_back(lowerbound);
+        result.push_back(upperbound);
         return result;
-        
     }
 };
-
 
 
 int main(int argc, const char * argv[])

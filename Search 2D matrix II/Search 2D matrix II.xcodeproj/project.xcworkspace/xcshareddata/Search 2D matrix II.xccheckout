@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>FA48BFF8-08EF-4B30-BC77-425CC83E043B</string>
+	<string>CACB049C-61A2-41CE-ABF9-F91F8B8D783E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Search_For_A_Range</string>
+	<string>Search 2D matrix II</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>1D5E2D56-78DB-4C19-A192-F69FFD11EB0F</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Search_For_A_Range/Search_For_A_Range.xcodeproj/project.xcworkspace</string>
+	<string>Search 2D matrix II/Search 2D matrix II.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>1D5E2D56-78DB-4C19-A192-F69FFD11EB0F</key>
