@@ -31,26 +31,43 @@ public:
 class Solution {
 public:
     bool isBalanced(TreeNode *root) {
-        return maxLength(root) != -1;
-    }
-    
-    int maxLength(TreeNode *root) {
         if (root == nullptr) {
-            return 0;
+            return true;
         }
         
-        int left = maxLength(root->left);
-        int right = maxLength(root->right);
-        if (left == -1 || right == -1 || abs(left - right) > 1) {
+        if(isBalanced(root, 1) == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    int isBalanced(TreeNode *node, int depth) {
+        if (node == nullptr) {
+            return depth - 1;
+        }
+        
+        int left = isBalanced(node->left, depth + 1);
+        int right = isBalanced(node->right, depth + 1);
+        
+        if (left == -1) {
             return -1;
         }
         
-        return max(left, right) + 1;
+        if (right == -1) {
+            return -1;
+        }
+        
+        if (abs(left - right) > 1) {
+            return -1;
+        }
+        
+        return max(left, right);
+        
         
     }
     
 };
-
 int main(int argc, const char * argv[])
 {
 
