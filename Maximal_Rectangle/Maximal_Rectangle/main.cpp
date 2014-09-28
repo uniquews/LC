@@ -8,53 +8,67 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 using namespace std;
 
 class Solution {
 public:
-    
     int maximalRectangle(vector<vector<char> > &matrix) {
-        
-        if(matrix.empty()) return 0;
+        if (matrix.size() == 0) {
+            return 0;
+        }
         int row = (int)matrix.size();
-        int col = (int)matrix[0].size();
-        vector<int> H(col, 0);
-        vector<int> L(col, 0);
-        vector<int> R(col, col);
-        int ret = 0;
-        
-        for(int i = 0; i<row; i++){
-            int left =0; int right = col;
-            // calculate left(i, j)
-            for(int j = 0; j<col; j++){
-                if(matrix[i][j] == '1'){
-                    H[j]++;
-                    L[j] = max(L[j], left);
-                    
-                }else{
-                    H[j] = 0;
-                    left = j+1;
-                    L[j] = 0;
-                    R[j] = col;
-                }
-                
-                
-            }
-            
-            for(int j=col-1; j>=0; j--){
-                
-                if(matrix[i][j] == '1'){
-                    R[j] = min(R[j], right);
-                    ret = max(ret, H[j]*(R[j]-L[j]));
-                    
-                }else{
-                    
-                    right = j;
+        int column = (int)matrix[0].size();
+        int result = INT_MIN;
+        vector<vector<int>> height(row, vector<int>(column, 0));
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '0') {
+                    height[i][j] = 0;
+                } else {
+                    height[i][j] = i == 0 ? 1 : height[i - 1][j] + 1;
                 }
             }
         }
-        return ret;
+        
+        for (int i = 0; i < row; i++) {
+            int area = largestRectangleArea(height[i]);
+            if (area > result) {
+                result = area;
+            }
+        }
+        
+        return result;
     }
+    
+    
+    int largestRectangleArea(vector<int> &height) {
+        int result = 0;
+        stack<int> stk;
+        for (int i = 0; i <= (int)height.size(); i++) {
+            int cur = i != height.size() ? height[i] : -1;
+            while (stk.size() != 0 && cur < height[stk.top()]) {
+                int h = height[stk.top()];
+                stk.pop();
+                int w = 0;
+                if (stk.size() == 0) {
+                    w = i;
+                } else {
+                    w = i - stk.top() - 1;
+                }
+                
+                result = max(result, h * w);
+                
+            }
+            
+            stk.push(i);
+            
+        }
+        return result;
+        
+    }
+    
+    
     
 };
 
@@ -63,10 +77,9 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+
     Solution s;
-    vector<vector<char>> matrix = {{'0'}};
+    vector<vector<char>> matrix = {{'0'}, {'1'}};
     cout << s.maximalRectangle(matrix);
     return 0;
 }
