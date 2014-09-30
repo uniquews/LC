@@ -55,13 +55,17 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    ListNode *a = new ListNode(3);
-    ListNode *b = new ListNode(5);
-    ListNode *c = new ListNode(8);
+    ListNode *a = new ListNode(1);
+    ListNode *b = new ListNode(2);
+    ListNode *c = new ListNode(3);
+    ListNode *d = new ListNode(4);
+    ListNode *e = new ListNode(5);
     
     a->next = b;
     b->next = c;
-    c->next = nullptr;
+    c->next = d;
+    d->next = e;
+    e->next = nullptr;
     
     Solution su;
     su.sortedListToBST(a);

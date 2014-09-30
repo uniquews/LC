@@ -113,7 +113,7 @@ int main(int argc, const char * argv[])
    
     
     Solution su;
-    su.insertNodeBST(a, 9);
+    su.insertNodeBST(a, 11);
     
     vector<int> result = su.inorderTraversal(a);
     vector<int> :: iterator it = result.begin();
