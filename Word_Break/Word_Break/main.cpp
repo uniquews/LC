@@ -52,7 +52,7 @@ public:
                 
                 if (dict.find(tmp) != dict.end()) {
                     f[i] = f[i] || f[j];
-                }ÍÍÍ
+                }
             }
         }
         
