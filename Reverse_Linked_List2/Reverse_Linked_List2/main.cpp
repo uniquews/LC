@@ -45,20 +45,21 @@ public:
 };
 
 
+
 int main() {
 
     ListNode * a = new ListNode(1);
     ListNode * b = new ListNode(2);
-    ListNode * c = new ListNode(3);
-    ListNode * d = new ListNode(4);
+//    ListNode * c = new ListNode(3);
+//    ListNode * d = new ListNode(4);
     
     a->next = b;
-    b->next = c;
-    c->next = d;
-    d->next = nullptr;
+//    b->next = c;
+//    c->next = d;
+//    d->next = nullptr;
     
     Solution su;
-    cout << su.reverseBetween(a, 1, 4)->val << endl;
+    cout << su.reverseBetween(a, 2, 2)->val << endl;
     
     
     return 0;

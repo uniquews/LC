@@ -57,52 +57,45 @@ struct ListNode {
 
 
 
-struct ListNodeCompare {
-    
-    bool operator() (const ListNode *l1, const ListNode *l2) const {
-        return l1 -> val >= l2 -> val; // greater
-    
+class ListNodeCompare {
+public:
+    bool operator() (const ListNode *l1, const ListNode *l2) {
+        return l1->val >= l2->val;
     }
     
 };
 
-
 class Solution {
-
 public:
-    
-    
     ListNode *mergeKLists(vector<ListNode *> &lists) {
         if (lists.size() == 0) {
             return nullptr;
         }
         
-        
-        priority_queue<ListNode *, vector<ListNode *>, ListNodeCompare> heap;
-        
+        priority_queue <ListNode*, vector<ListNode *>, ListNodeCompare> heap;
         for (int i = 0; i < lists.size(); i++) {
-            ListNode *tmp = lists[i];
-            if (tmp != nullptr) {
-                heap.push(tmp);
+            if (lists[i] != nullptr) {
+                heap.push(lists[i]);
             }
         }
         
         ListNode dummy(-1);
-        ListNode *tail = &dummy;
-        while (!heap.empty()) {
-            ListNode *smallest = heap.top();
+        ListNode *prev = &dummy;
+        
+        while (heap.size() != 0) {
+            ListNode *tmp = heap.top();
             heap.pop();
-            tail->next = smallest;
-            tail = tail->next;
-            if (smallest->next != nullptr) {
-                heap.push(smallest->next);
+            prev->next = tmp;
+            if (tmp->next != nullptr) {
+                heap.push(tmp->next);
             }
+            prev = prev->next;
         }
         
+        prev->next = nullptr;
         return dummy.next;
         
     }
-
 };
 
 int main(int argc, const char * argv[])
