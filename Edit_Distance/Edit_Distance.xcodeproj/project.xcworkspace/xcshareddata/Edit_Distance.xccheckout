@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>480BD4F5-2721-4D86-9FF2-B770B7897A03</string>
+	<string>CDD92217-7728-42F9-8372-22266EFD07E1</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Longest Consecutive Sequence</string>
+	<string>Edit_Distance</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E68BCB84-2207-4883-9B16-24A5072485E8</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Longest Consecutive Sequence/Longest Consecutive Sequence.xcodeproj/project.xcworkspace</string>
+	<string>Edit_Distance/Edit_Distance.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E68BCB84-2207-4883-9B16-24A5072485E8</key>
