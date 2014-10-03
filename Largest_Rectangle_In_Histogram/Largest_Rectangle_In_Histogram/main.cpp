@@ -46,53 +46,49 @@ using namespace std;
 //    }
 //};
 
+
+
 class Solution {
 public:
     int largestRectangleArea(vector<int> &height) {
         if (height.size() == 0) {
             return  0;
         }
+        stack<int> stk;
+        int result = 0;
         
-        int n = height.size();
-        int area = 0;
-        vector<int> left(height.size(), 0);
-        vector<int> right(height.size(), 0);
-        vector<int> result(height.size(), 0);
-        
-        left[0] = 0;
-        for (int i = 1; i < left.size(); i++) {
-            if (height[i] <= height[i - 1]) {
-                left[i] = left[i - 1];
-            } else {
-                left[i] = i;
+        for (int i = 0; i <= height.size(); i++) {
+            int cur = i == height.size() ? - 1 : height[i];
+            while (stk.size() != 0 && cur < height[stk.top()]) {
+                int tmp = stk.top();
+                int h = height[tmp];
+                stk.pop();
+                int w;
+                if (stk.size() != 0) {
+                    w = i - stk.top() - 1;
+                } else {
+                    w = i;
+                }
+                
+                result = max(result, w * h);
             }
+            
+            stk.push(i);
         }
         
-        right[n - 1] = n - 1;
-        for (int i = n - 2; i >= 0; i--) {
-            if (height[i] > height[i + 1]) {
-                right[i] = i;
-            } else {
-                right[i] = right[i + 1];
-            }
-        }
-        
-        for (int i = 0; i < n; i++) {
-            result[i] = (left[i] - right[i] + 1) * height[i];
-            area = max(result[i], area);
-        }
-        return area;
+        return result;
         
     }
 };
-
 
 
 int main(int argc, const char * argv[])
 {
 
 //    vector<int> h = {100, 1000, 8};
-    vector<int> h = {2,1,5,6,2,3};
+//    vector<int> h = {2,1,5,6,2,3};
+    
+    vector<int> h = {0};
     Solution su;
     cout << su.largestRectangleArea(h) << endl;
     return 0;

@@ -26,17 +26,27 @@ public:
     
     int minNumber;
     
-    MinStack(){
+    
+    MinStack(stack<pair<int,int>> *p = NULL){
         
-        this->min=new stack<pair<int,int>>();
+        this->min = p;
+        cout << "excute constructor" << endl;
     
     }
     
     
     ~MinStack(){
-    
+        delete min;
+        cout << "excute destructor" << endl;
     }
-
+    
+    stack<pair<int,int>> & operator * () {
+        return *min;
+    }
+    
+    stack<pair<int,int>> * operator -> () {
+        return min;
+    }
 };
 
 bool MinStack::empty(){
@@ -85,21 +95,21 @@ size_t MinStack:: size(){
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
+    // insert code here...Ω
     
-    MinStack *minStack =new MinStack();
-    minStack->push(4);
-    minStack->push(5);
-    minStack->push(8);
+    MinStack minStack(new stack<pair<int,int>>());
+    minStack.push(4);
+    minStack.push(5);
+    minStack.push(8);
     
     
-    while (minStack->size() != 0) {
-        cout <<"The top is "<< minStack->top()<<" ";
-        cout<< "The min of the stack now is " << minStack->MinTop()<<" " << endl;
-        minStack->pop();
+    while (minStack.size() != 0) {
+        cout <<"The top is "<< minStack.top()<<" ";
+        cout<< "The min of the stack now is " << minStack.MinTop()<<" " << endl;
+        minStack.pop();
     }
     
-    minStack->push()
+
     
     return 0;
 }
