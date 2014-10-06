@@ -7,40 +7,43 @@
 //
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 class Solution {
-
 public:
-    
-    int majorityNumber(int A[], int n) {
-        int candidate = 0, count = 0;
+    /**
+     * @param nums: A list of integers
+     * @return: The majority number
+     */
+    int majorityNumber(vector<int> nums) {
+        // write your code here
+        if (nums.size() == 0) {
+            return 0;
+        }
         
-        for (int i = 0; i < n; i++) {
-            if (count == 0) {
-                candidate = A[i];
-                count++;
+        int maj = nums[0];
+        int count = 1;
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] != maj) {
+                count--;
             } else {
-                if (candidate == A[i]) {
-                    count++;
-                } else{
-                    count--;
-                }
+                count++;
+            }
+            
+            if (count == 0) {
+                maj = nums[i];
+                count++;
             }
         }
         
-        return candidate;
+        return maj;
     }
-
 };
-
 int main(int argc, const char * argv[])
 {
 
-    int A[] = {1,1,1,1,2,2};
-    Solution su;
-    cout << su.majorityNumber(A, 6) << endl;
-    return 0;
+        return 0;
 }
 

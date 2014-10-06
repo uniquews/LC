@@ -9,14 +9,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Permutation 2/main.cpp"
-            timestampString = "434179857.857367"
+            filePath = "Next_Permutation/main.cpp"
+            timestampString = "434181925.151624"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "class Solution"
-            landmarkType = "3">
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "nextPermutation(vector&lt;int&gt; &amp;num)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

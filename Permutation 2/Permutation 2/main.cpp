@@ -9,8 +9,11 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
+
+
 
 class Solution {
 public:
@@ -21,39 +24,36 @@ public:
         
         sort(num.begin(), num.end());
         
-        vector<vector<int>> result;
         vector<int> eachResult;
-        unordered_map<int, bool> visited;
-        dfs(num, 0, result, eachResult, visited);
+        vector<vector<int>> result;
+        unordered_set<int> visited;
+        dfs(0, num, eachResult, result, visited);
         return result;
-        
     }
     
-    void dfs(vector<int> &num, int step, vector<vector<int>> &result, vector<int> &eachResult, unordered_map<int, bool> &visited) {
+    void dfs(int step, vector<int> &num, vector<int> &eachResult, vector<vector<int>> &result, unordered_set<int> &visited) {
         if (step == num.size()) {
             result.push_back(eachResult);
             return;
         }
         
         for (int i = 0; i < num.size(); i++) {
-            if (visited[i] == false) {
+            if (visited.find(i) == visited.end()) {
+                visited.insert(i);
                 eachResult.push_back(num[i]);
-                visited[i] = true;
-                dfs(num, step + 1, result, eachResult, visited);
+                dfs(step + 1, num, eachResult, result, visited);
                 eachResult.pop_back();
-                visited[i] = false;
-                
+                visited.erase(i);
                 while (i + 1 < num.size() && num[i] == num[i + 1]) {
                     i++;
                 }
+                
             }
-            
-            
+           
         }
         
+        
         return;
-        
-        
     }
 };
 int main(int argc, const char * argv[])

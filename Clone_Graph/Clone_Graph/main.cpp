@@ -26,6 +26,55 @@ struct UndirectedGraphNode {
  *     UndirectedGraphNode(int x) : label(x) {};
  * };
  */
+//class Solution {
+//public:
+//    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+//        if (node == nullptr) {
+//            return nullptr;
+//        }
+//        
+//        vector<UndirectedGraphNode *> nodeList;
+//        unordered_map<UndirectedGraphNode *, UndirectedGraphNode *> nodeMap;
+//        
+//        nodeList.push_back(node);
+//        UndirectedGraphNode *newNode = new UndirectedGraphNode(node->label);
+//        nodeMap[node] = newNode;
+//        
+//        int index = 0;
+//        while (index < nodeList.size()) {
+//            UndirectedGraphNode *tmp = nodeList[index];
+//            index++;
+//            for (int i = 0; i < tmp->neighbors.size(); i++) {
+//                if (find(nodeList.begin(), nodeList.end(), tmp->neighbors[i]) != nodeList.end()) {
+//                    nodeList.push_back(tmp->neighbors[i]);
+//                    UndirectedGraphNode *newNeigh = new UndirectedGraphNode(tmp->neighbors[i]->label);
+//                    nodeMap[tmp->neighbors[i]] = newNeigh;
+//                }
+//                
+//            }
+//        }
+//        
+//        
+//        for (int i = 0; i < nodeList.size(); i++) {
+//            vector<UndirectedGraphNode *> thisNeigh = nodeList[i]->neighbors;
+//            for (int j = 0; j < thisNeigh.size(); j++) {
+//                nodeMap[nodeList[i]]->neighbors.push_back(nodeMap[thisNeigh[j]]);
+//            }
+//        }
+//        
+//        return nodeMap[node];
+//    }
+//};
+
+
+/**
+ * Definition for undirected graph.
+ * struct UndirectedGraphNode {
+ *     int label;
+ *     vector<UndirectedGraphNode *> neighbors;
+ *     UndirectedGraphNode(int x) : label(x) {};
+ * };
+ */
 class Solution {
 public:
     UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
@@ -33,36 +82,42 @@ public:
             return nullptr;
         }
         
-        vector<UndirectedGraphNode *> nodeList;
-        unordered_map<UndirectedGraphNode *, UndirectedGraphNode *> nodeMap;
+        vector<UndirectedGraphNode *> nodes;
+        unordered_map<UndirectedGraphNode *, UndirectedGraphNode*> _map;
         
-        nodeList.push_back(node);
+        nodes.push_back(node);
         UndirectedGraphNode *newNode = new UndirectedGraphNode(node->label);
-        nodeMap[node] = newNode;
+        _map[node] = newNode;
         
-        int index = 0;
-        while (index < nodeList.size()) {
-            UndirectedGraphNode *tmp = nodeList[index];
-            index++;
-            for (int i = 0; i < tmp->neighbors.size(); i++) {
-                if (find(nodeList.begin(), nodeList.end(), tmp->neighbors[i]) != nodeList.end()) {
-                    nodeList.push_back(tmp->neighbors[i]);
-                    UndirectedGraphNode *newNeigh = new UndirectedGraphNode(tmp->neighbors[i]->label);
-                    nodeMap[tmp->neighbors[i]] = newNeigh;
+        int start = 0;
+        while (start < nodes.size()) {
+            UndirectedGraphNode *cur = nodes[start++];
+            for (int i = 0; i < cur->neighbors.size(); i++) {
+                UndirectedGraphNode *tmp = cur->neighbors[i];
+                if (_map.find(tmp) == _map.end()) {
+                    nodes.push_back(tmp);
+                    UndirectedGraphNode *newTmp = new UndirectedGraphNode(tmp->label);
+                    _map[tmp] = newTmp;
                 }
                 
+                
             }
+            
         }
         
         
-        for (int i = 0; i < nodeList.size(); i++) {
-            vector<UndirectedGraphNode *> thisNeigh = nodeList[i]->neighbors;
-            for (int j = 0; j < thisNeigh.size(); j++) {
-                nodeMap[nodeList[i]]->neighbors.push_back(nodeMap[thisNeigh[j]]);
+        for (int i = 0; i < nodes.size(); i++) {
+            UndirectedGraphNode *curOld = nodes[i];
+            UndirectedGraphNode *curNew = _map[curOld];
+            
+            for (int j = 0; j < curOld->neighbors.size(); j++) {
+                UndirectedGraphNode *curOldNeighbor = curOld->neighbors[j];
+                curNew->neighbors.push_back(_map[curOldNeighbor]);
             }
         }
         
-        return nodeMap[node];
+        return _map[node];
+        
     }
 };
 

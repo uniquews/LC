@@ -23,49 +23,53 @@ using namespace std;
 class Solution {
 public:
     void nextPermutation(vector<int> &num) {
-        if (num.size() == 0) {
+        if (num.size() <= 1) {
             return;
         }
         
-        int largestPartitionIndex = -1;
-        int largestChangeIndex = -1;
-        
-        // step 1
-        for (int i = 0; i < num.size() - 1; i++) {
-            if (num[i] < num[i + 1]) {
-                largestPartitionIndex = i;
+        int start = (int)num.size() - 2;
+        while (start >= 0) {
+            if (num[start] < num[start + 1]) {
+                break;
             }
+            
+            start--;
         }
         
-        if (largestPartitionIndex == -1) {
-            return sort(num.begin(), num.end());
+        if (start == -1) {
+            sort(num.begin(), num.end());
+            return;
         }
         
-        
-        
-        // step 2
-        for (int i = 0; i < num.size(); i++) {
-            if (num[i] > num[largestPartitionIndex]) {
-                largestChangeIndex = i;
+        int end = (int)num.size() - 1;
+        int index = 0;
+        int find = INT_MAX;
+        while (end > start) {
+            if (num[end] > num[start] && num[end] < find) {
+                index = end;
+                find = num[index];
             }
+            
+            end--;
         }
         
-        // step 3
-        swap(num[largestPartitionIndex], num[largestChangeIndex]);
+        swap(num[start], num[index]);
         
-        reverse(num.begin() + largestPartitionIndex + 1, num.end());
-        
+        vector<int> :: iterator it = num.begin();
+        reverse(it + start + 1, num.end());
         return;
-        
-        
     }
 };
 
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    vector<int> num = {1,3,2};
+    Solution su;
+    su.nextPermutation(num);
+    for (int i = 0; i < num.size(); i++) {
+        cout << num[i] << endl;
+    }
     return 0;
 }
 

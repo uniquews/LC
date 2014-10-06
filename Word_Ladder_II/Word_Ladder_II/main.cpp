@@ -14,98 +14,193 @@
 
 using namespace std;
 
+//class Solution {
+//public:
+//    vector<vector<string>> findLadders(string start, string end, unordered_set<string> &dict) {
+//        vector<string> curLevel;
+//        vector<string> nextLevel;
+//        unordered_map<string, vector<string>> father;
+//        unordered_set<string> visited;
+//        vector<vector<string>> result;
+//        vector<string> eachResult;
+//        
+//        bool found = false;
+//        
+//        curLevel.push_back(start);
+//        
+//        
+//        while (curLevel.empty() == false) {
+//            if(find(curLevel.begin(), curLevel.end(), end)!=curLevel.end())
+//                return result;
+//            
+//            for(auto str: curLevel){
+//                visited.insert(str);
+//            }
+//            
+//            while (curLevel.empty() == false) {
+//                string current = curLevel.back();
+//                curLevel.pop_back();
+//                
+//                for (int i = 0; i < current.size(); i++) {
+//                    for (char tri = 'a'; tri <= 'z'; tri++) {
+//                        string tmp = current;
+//                        if (tmp[i] == tri) {
+//                            continue;
+//                        }
+//                        
+//                        tmp[i] = tri;
+//                        
+//                        
+//                        if (tmp == end) {
+//                            eachResult.push_back(tmp);
+//                            father[tmp].push_back(current);
+//                            getResult(tmp, father, result, eachResult);
+//                            eachResult.pop_back();
+//                            father.erase(tmp);
+//                            found  = true;
+//                            break;
+//                        }
+//                        
+//                        if (dict.find(tmp) != dict.end() && visited.count(tmp) == 0) {
+//                            if (find(nextLevel.begin(), nextLevel.end(), tmp) == nextLevel.end()) {
+//                                nextLevel.push_back(tmp);
+//                            }
+//                            father[tmp].push_back(current);
+//                            
+//                        }
+//                    }
+//                }
+//                
+//            }
+//            
+//            if (found) {
+//                nextLevel.clear();
+//            } else {
+//                curLevel = nextLevel;
+//                nextLevel.clear();
+//            }
+//            
+//        }
+//        
+//        return result;
+//    }
+//    
+//    
+//    void getResult(string str, unordered_map<string, vector<string>> &father, vector<vector<string>> &result, vector<string> &eachResult) {
+//        
+//        
+//        if (father.find(str) == father.end()) { // this is the start string
+//            reverse(eachResult.begin(), eachResult.end());
+//            result.push_back(eachResult);
+//            reverse(eachResult.begin(), eachResult.end());
+//            return;
+//        }
+//        
+//        
+//        vector<string> allFathers = father[str];
+//        for (auto f : allFathers) {
+//            eachResult.push_back(f);
+//            getResult(f, father, result, eachResult);
+//            eachResult.pop_back();
+//        }
+//        
+//        return;
+//    }
+//};
+
+
 class Solution {
 public:
     vector<vector<string>> findLadders(string start, string end, unordered_set<string> &dict) {
-        vector<string> curLevel;
+        if (start.size() == 0 || end.size() == 0) {
+            return vector<vector<string>> {};
+        }
+        
+        vector<string> currentLevel;
         vector<string> nextLevel;
-        unordered_map<string, vector<string>> father;
-        unordered_set<string> visited;
         vector<vector<string>> result;
         vector<string> eachResult;
-        
+        unordered_map<string, vector<string>> father;
+        unordered_set<string> visited;
         bool found = false;
         
-        curLevel.push_back(start);
+        currentLevel.push_back(start);
         
         
-        while (curLevel.empty() == false) {
-            if(find(curLevel.begin(), curLevel.end(), end)!=curLevel.end())
-                return result;
+        while (currentLevel.size() != 0) {
             
-            for(auto str: curLevel){
-                visited.insert(str);
+            for (int i = 0; i < currentLevel.size(); i++) {
+                visited.insert(currentLevel[i]);
             }
             
-            while (curLevel.empty() == false) {
-                string current = curLevel.back();
-                curLevel.pop_back();
+            while (currentLevel.size() != 0) {
                 
-                for (int i = 0; i < current.size(); i++) {
+                string cur = currentLevel.back();
+                
+                currentLevel.pop_back();
+                for (int j = 0; j < cur.size(); j++) {
                     for (char tri = 'a'; tri <= 'z'; tri++) {
-                        string tmp = current;
-                        if (tmp[i] == tri) {
+                        if (cur[j] == tri) {
                             continue;
                         }
                         
-                        tmp[i] = tri;
-                        
+                        string tmp = cur;
+                        tmp[j] = tri;
                         
                         if (tmp == end) {
                             eachResult.push_back(tmp);
-                            father[tmp].push_back(current);
+                            father[tmp].push_back(cur);
                             getResult(tmp, father, result, eachResult);
                             eachResult.pop_back();
                             father.erase(tmp);
-                            found  = true;
+                            found = true;
                             break;
                         }
                         
-                        if (dict.find(tmp) != dict.end() && visited.count(tmp) == 0) {
+                        if (dict.find(tmp) != dict.end() && visited.find(tmp) == visited.end()) {
                             if (find(nextLevel.begin(), nextLevel.end(), tmp) == nextLevel.end()) {
                                 nextLevel.push_back(tmp);
                             }
-                            father[tmp].push_back(current);
                             
+                            father[tmp].push_back(cur);
                         }
+                        
+                        
                     }
                 }
                 
             }
             
-            if (found) {
-                nextLevel.clear();
-            } else {
-                curLevel = nextLevel;
+            if (found == false) {
+                currentLevel = nextLevel;
                 nextLevel.clear();
             }
-            
         }
         
         return result;
+        
     }
     
-    
-    void getResult(string str, unordered_map<string, vector<string>> &father, vector<vector<string>> &result, vector<string> &eachResult) {
-        
-        
-        if (father.find(str) == father.end()) { // this is the start string
+    void getResult(string s, unordered_map<string, vector<string>> &father, vector<vector<string>> &result, vector<string> &eachResult) {
+        if (father.find(s) == father.end()) {
             reverse(eachResult.begin(), eachResult.end());
             result.push_back(eachResult);
             reverse(eachResult.begin(), eachResult.end());
             return;
         }
         
-        
-        vector<string> allFathers = father[str];
-        for (auto f : allFathers) {
+        vector<string> allFather = father[s];
+        for (auto f : allFather) {
             eachResult.push_back(f);
             getResult(f, father, result, eachResult);
             eachResult.pop_back();
         }
         
         return;
+        
     }
+    
+    
 };
 
 int main(int argc, const char * argv[])

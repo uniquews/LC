@@ -7,124 +7,87 @@
 //
 
 #include <iostream>
-#include <map>
+#include <unordered_map>
 
 using namespace std;
 
 class LRUCache{
-    
-public:
 
-    struct Node{
-        Node * prev;
-        Node * next;
-        int value;
+private:
+    struct Node {
+        int val;
+        Node *prev;
+        Node *next;
         int key;
-        Node (Node *p, Node *n, int value, int key):prev(p), next(n), value(value), key(key){}
-        Node (int value, int key):prev(nullptr), next(nullptr), value(value), key(key){}
         
+        Node (int key, int value) {
+            this->key = key;
+            this->val = value;
+            this->prev = nullptr;
+            this->next = nullptr;
+        
+        }
+        
+    
     };
     
     
-    map<int, Node *> map;
     int capacity;
-    Node *head;
-    Node * tail;
+    unordered_map<int, Node *> hs;
+    Node *head = new Node(-1, -1);
+    Node *tail = new Node(-1, -1);
     
     
-    //insert node at the tail of the link list
-    void insertNode(Node *n){
-        if(head==nullptr){
-            head=n;
-            tail=n;
-            
-        }else{
-            if(tail==nullptr){
-                tail=n;
-            }else{
-                tail->next=n;
-                n->prev=tail;
-                n->next=nullptr;
-                tail=tail->next;
-            }
-        }
-    }
+    
 
+public:
     
-    void removeNode(Node *n){
-        if(head==nullptr)
-            return;
-        if(n==head){
-            Node *temp = head->prev;
-            temp->next=nullptr;
-            head=temp;
-            delete n;
-            
-        }else if(n==tail){
-            Node *temp=n->next;
-            temp->prev=nullptr;
-            tail = temp;
-            delete n;
-        }else{
-            n->prev->next = n->next;
-            n->next->prev = n->prev;
-            n->prev = nullptr;
-            n->next= nullptr;
-            delete n;
-        }
+    
+    LRUCache(int capacity) {
+        this->capacity = capacity;
+        head->next = tail;
+        tail->prev = head;
     }
     
-    // move current node to the tail of the linked list
-    void moveNode(Node* node){
-        if (tail==node){
-            return;
-        }else{
-            if (node==head){
-                node->next->prev = NULL;
-                head = node->next;
-                tail->next = node;
-                node->prev = tail;
-                tail=tail->next;
-            }else{
-                node->prev->next = node->next;
-                node->next->prev = node->prev;
-                tail->next = node;
-                node->prev = tail;
-                tail=tail->next;
-            }
-        }
-    }
-    ///////////////////////////////////////////////////////////////////////
-    // get method
-    ///////////////////////////////////////////////////////////////////////
     int get(int key) {
-        if (map.find(key)==map.end()){
+        if (hs.find(key) == hs.end()) {
             return -1;
-        }else{
-            Node *tmp = map[key];
-            moveNode(tmp);
-            return map[key]->value;
         }
+        
+        Node *current = hs[key];
+        
+        current->prev->next = current->next;
+        current->next->prev = current->prev;
+        
+        moveToTail(current);
+        return hs[key]->val;
+        
     }
     
-    ///////////////////////////////////////////////////////////////////////
-    // set method
-    ///////////////////////////////////////////////////////////////////////
+    void moveToTail(Node *current) {
+        current->prev = tail->prev;
+        tail->prev = current;
+        current->prev->next = current;
+        current->next = tail;
+    }
+    
     void set(int key, int value) {
-        if (map.find(key)!=map.end()){
-            moveNode(map[key]);
-            map[key]->value = value;
-        }else{
-            if (map.size()==capacity){
-                map.erase(head->key);
-                removeNode(head);
-            }
-            Node * node = new Node(key,value);
-            map[key] = node;
-            insertNode(node);
+        if (get(key) != -1) {
+            hs[key]->val = value;
+            return;
+            
         }
+        
+        if (hs.size() == this->capacity) {
+            hs.erase(head->next->key);
+            head->next = head->next->next;
+            head->next->prev = head;
+        }
+        
+        Node *insert = new Node(key, value);
+        hs[key] = insert;
+        moveToTail(insert);
     }
-    
 };
 
 
@@ -134,9 +97,15 @@ public:
 
 int main(int argc, const char * argv[])
 {
-
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    LRUCache lcr(2);
+    lcr.set(2, 1);
+    lcr.set(1, 1);
+    lcr.set(2, 3);
+    lcr.set(4, 1);
+    
+    cout << lcr.get(1) << endl;
+    cout << lcr.get(2) << endl;
+    
     return 0;
 }
 
