@@ -84,7 +84,8 @@ int main(int argc, const char * argv[])
     
     
     Solution s;
-    vector<int> price = {3,2,6,5,0,3};
+//    vector<int> price = {3,2,6,5,0,3};
+    vector<int> price = {5,4,3,2,1,10};
     cout << s.maxProfit(price);
     return 0;
 }
