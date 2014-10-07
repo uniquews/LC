@@ -11,45 +11,80 @@
 
 using namespace std;
 
+//class Solution {
+//public:
+//    int maxProfit(vector<int> &prices) {
+//        if (prices.size() == 0) {
+//            return 0;
+//        }
+//        
+//        if (prices.size() == 1) {
+//            return 0;
+//        }
+//        
+//        vector<int> maxProfit(prices.size());
+//        int result = INT_MIN;
+//        
+//        int valley = prices[0];
+//        for (int i = 1; i < prices.size(); i++) {
+//            maxProfit[i] = max(maxProfit[i - 1], prices[i] - valley);
+//            valley = min(valley, prices[i]);
+//        }
+//        
+//        int peek = prices[prices.size() - 1];
+//        for (int i = prices.size() - 2; i >= 0; i--) {
+//            maxProfit[i] = max(maxProfit[i], maxProfit[i] + peek - prices[i]);
+//            peek = max(prices[i], peek);
+//            result = max(maxProfit[i], result);
+//        }
+//        
+//        return result;
+//    }
+//    
+//};
+
 class Solution {
 public:
     int maxProfit(vector<int> &prices) {
-        if (prices.size() == 0) {
+        if (prices.size() <= 1) {
             return 0;
         }
         
-        if (prices.size() == 1) {
-            return 0;
+        int n = (int)prices.size();
+        int result = 0;
+        vector<int> profit(n, 0);
+        profit[0] = 0;
+        for (int i = 1, valley = prices[0]; i < n; i++) {
+            profit[i] = max(profit[i - 1], prices[i] - valley);
+            
+            if (prices[i] < valley) {
+                valley = prices[i];
+            }
         }
         
-        vector<int> maxProfit(prices.size());
-        int result = INT_MIN;
-        
-        int valley = prices[0];
-        for (int i = 1; i < prices.size(); i++) {
-            maxProfit[i] = max(maxProfit[i - 1], prices[i] - valley);
-            valley = min(valley, prices[i]);
-        }
-        
-        int peek = prices[prices.size() - 1];
-        for (int i = prices.size() - 2; i >= 0; i--) {
-            maxProfit[i] = max(maxProfit[i], maxProfit[i] + peek - prices[i]);
-            peek = max(prices[i], peek);
-            result = max(maxProfit[i], result);
+        for (int i = n - 2, peak = prices[n - 1]; i >= 0; i--) {
+            if (i == 0) {
+                profit[i] = peak - prices[0];
+            } else {
+                profit[i] = peak - prices[i] + profit[i - 1];
+                if (prices[i] > peak) {
+                    peak = prices[i];
+                }
+            }
+            
+            result = max(result, profit[i]);
         }
         
         return result;
     }
-    
 };
-
 int main(int argc, const char * argv[])
 {
 
     
     
     Solution s;
-    vector<int> price = {2,1,2,0,1};
+    vector<int> price = {3,2,6,5,0,3};
     cout << s.maxProfit(price);
     return 0;
 }
