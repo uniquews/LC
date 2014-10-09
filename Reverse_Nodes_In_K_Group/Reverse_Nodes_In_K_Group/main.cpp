@@ -39,12 +39,6 @@ public:
         
         while (len >= k) {
             prepare = reverse(prepare, k);
-            int tmp = k;
-            while (tmp > 0) {
-                prepare = prepare->next;
-                tmp--;
-            }
-            
             len = len - k;
         }
         return dummy.next;
@@ -65,11 +59,12 @@ public:
             
         }
         
+        prepare = prev;
+        
         return prepare;
     }
     
 };
-
 int main(int argc, const char * argv[])
 {
 

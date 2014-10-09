@@ -59,7 +59,7 @@ using namespace std;
 //};
 
 
-//普通dp做法
+//普通dp做法 为什么不对（最后枚举n^2才是对的，注意left数组的反例，subarray和subsequence）
 
 class Solution {
 public:
