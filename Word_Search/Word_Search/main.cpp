@@ -11,59 +11,59 @@
 
 using namespace std;
 
+
 class Solution {
 public:
     bool exist(vector<vector<char> > &board, string word) {
-        if (board.size() == 0) {
+        if (board.size() == 0 || word.size() == 0) {
             return false;
         }
         
-        vector<vector<bool>> visited (board.size(), vector<bool> (board[0].size(), false));
+        int row = board.size();
+        int column = board[0].size();
+        vector<vector<bool>> visited(row, vector<bool>(column, false));
         
-        for (int i = 0; i < board.size(); i++) {
-            for (int j = 0; j < board[i].size(); j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
                 if (board[i][j] == word[0]) {
+                    
                     if (dfs(board, i, j, word, 0, visited)) {
                         return true;
                     }
+                    
                 }
-                
             }
-            
         }
-        
         
         return false;
     }
     
-    
-    bool dfs(vector<vector<char>> &board, int row, int column, string word, int index, vector<vector<bool>> &visited) {
+    bool dfs(vector<vector<char>> &board, int i, int j, string &word, int index, vector<vector<bool>> &visited) {
         if (index == word.size()) {
             return true;
         }
         
-        if (row < 0 || row >= board.size() || column < 0 || column >= board[row].size()) {
+        if (i < 0 || j < 0 || i == board.size() || j == board[0].size()) {
             return false;
         }
         
-        if (visited[row][column] == true) {
+        if (visited[i][j] == true) {
             return false;
         }
         
-        if (board[row][column] != word[index]) {
+        if (board[i][j] != word[index]) {
             return false;
         }
         
-        visited[row][column] = true;
         
-        if ( dfs(board, row + 1, column, word, index + 1, visited) || dfs(board, row, column + 1, word, index + 1, visited) ||
-            dfs(board, row - 1, column, word, index + 1, visited) || dfs(board, row, column - 1, word, index + 1, visited))         {
+        visited[i][j] = true;
+        if (dfs(board, i + 1, j, word, index + 1, visited) || dfs(board, i, j + 1, word, index + 1, visited) || dfs(board, i - 1, j, word, index + 1, visited) || dfs(board, i, j - 1, word, index + 1, visited)) {
             return true;
-        } else {
-            visited[row][column] = false;
-            return false;
         }
         
+        visited[i][j] = false;
+        
+        return false;
         
     }
 };

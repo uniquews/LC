@@ -12,31 +12,35 @@ using namespace std;
 
 class Solution {
 public:
-    bool isPalindrome(string s) {
+    static bool isPalindrome(string s) {
+        if (s.size() == 0) {
+            return true;
+        }
+        
         int start = 0;
-        int end =s.size() - 1;
+        int end = (int)s.size() - 1;
         transform(s.begin(), s.end(), s.begin(), ::tolower);
         while (start <= end) {
-            if (::isalnum(s[start]) == 0) {
+            while (start <= end && ::isalnum(s[start]) == 0) {
                 start++;
-                continue;
             }
             
-            if (::isalnum(s[end]) == 0) {
+            while (start <= end && ::isalnum(s[end]) == 0) {
                 end--;
-                continue;
             }
             
-            if (s[start] == s[end]) {
-                start++;
-                end--;
-            } else {
+            if (start <= end && s[start] != s[end]) {
                 return false;
             }
+            
+            start++;
+            end--;
         }
         
         return true;
+        
     }
+    
 };
 
 

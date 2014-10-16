@@ -51,38 +51,72 @@ using namespace std;
 //    }
 //};
 
+//class Solution {
+//public:
+//    vector<vector<int> > generate(int numRows) {
+//        vector<int> eachLevel;
+//        vector<int> nextLevel;
+//        vector<vector<int>> result;
+//        int start = 1;
+//        
+//        while (start <= numRows) {
+//            if (start == 1) {
+//                eachLevel.push_back(1);
+//                result.push_back(eachLevel);
+//                start++;
+//            } else {
+//                nextLevel.push_back(0);
+//                for (int i = 0 ; i < eachLevel.size(); i++) {
+//                    nextLevel.push_back(eachLevel[i]);
+//                }
+//                nextLevel.push_back(0);
+//                for (int i = 0; i < nextLevel.size() - 1; i++) {
+//                    nextLevel[i] = nextLevel[i] + nextLevel[i + 1];
+//                }
+//                
+//                nextLevel.pop_back();
+//                eachLevel = nextLevel;
+//                result.push_back(eachLevel);
+//                nextLevel.clear();
+//                start++;
+//            }
+//        }
+//        
+//        return result;
+//    }
+//};
+
 class Solution {
 public:
     vector<vector<int> > generate(int numRows) {
-        vector<int> eachLevel;
-        vector<int> nextLevel;
-        vector<vector<int>> result;
-        int start = 1;
-        
-        while (start <= numRows) {
-            if (start == 1) {
-                eachLevel.push_back(1);
-                result.push_back(eachLevel);
-                start++;
-            } else {
-                nextLevel.push_back(0);
-                for (int i = 0 ; i < eachLevel.size(); i++) {
-                    nextLevel.push_back(eachLevel[i]);
-                }
-                nextLevel.push_back(0);
-                for (int i = 0; i < nextLevel.size() - 1; i++) {
-                    nextLevel[i] = nextLevel[i] + nextLevel[i + 1];
-                }
-                
-                nextLevel.pop_back();
-                eachLevel = nextLevel;
-                result.push_back(eachLevel);
-                nextLevel.clear();
-                start++;
-            }
+        if (numRows == 0) {
+            
+            return vector<vector<int>> {};
+        }
+        vector<vector<int>> f(numRows);
+        for (int i = 0; i < numRows; i++) {
+            f[i] = vector<int>(i + 1);
         }
         
-        return result;
+        f[0][0] = 1;
+        int i = 1;
+        while (i < numRows) {
+            for (int j = 0; j <= i; j++) {
+                if (j == 0) {
+                    f[i][j] = 1;
+                } else if (j == i) {
+                    f[i][j] = 1;
+                } else {
+                    f[i][j] = f[i - 1][j - 1] + f[i - 1][j];
+                }
+                
+            }
+            
+            i++;
+            
+        }
+        
+        return f;
     }
 };
 int main(int argc, const char * argv[])
