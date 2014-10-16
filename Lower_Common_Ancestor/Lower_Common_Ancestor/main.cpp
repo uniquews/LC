@@ -24,84 +24,131 @@ struct TreeNode {
 //class Solution {
 //
 //public:
-//    
+//
 //    vector<TreeNode *>findRoot (TreeNode *node) {
-//        
+//
 //        if (node->parent == nullptr) {
 //            return vector<TreeNode *> {};
 //        }
-//        
+//
 //        vector<TreeNode *> nodeList;
-//        
+//
 //        while (node != nullptr) {
 //            nodeList.push_back(node);
 //            node = node->parent;
 //        }
 //
-//        
+//
 //        return nodeList; // root;
 //    }
-//    
+//
 //    TreeNode *findAncestor (TreeNode *node1, TreeNode *node2) {
 //        if (node1 == nullptr || node2 == nullptr) {
 //            return nullptr;
 //        }
-//        
+//
 //        vector<TreeNode *> nodeList1 = findRoot(node1);
 //        vector<TreeNode *> nodeList2 = findRoot(node2);
-//        
+//
 //        int i = (int)nodeList1.size() - 1;
 //        int j = (int)nodeList2.size() - 1;
-//        
+//
 //        for (; i >= 0, j >= 0; i--, j--) {
 //            if (nodeList1[i] != nodeList2[j]) {
 //                return nodeList1[i]->parent;
 //            }
-//            
+//
 //        }
-//        
-//        
+//
+//
 //        return nullptr;
 //    }
-//    
+//
 //};
 
 
 //Divide and Conquer
 
+//class Solution {
+//
+//public:
+//
+//    TreeNode* findLCA (TreeNode *root, TreeNode *p, TreeNode *q) {
+//        if (root == nullptr || root == p || root == q) {
+//            return root;
+//        }
+//
+//        TreeNode *left = findLCA(root->left, p, q);
+//        TreeNode *right = findLCA(root->right, p, q);
+//
+//        if (left != nullptr && right != nullptr) {
+//            return root;
+//        }
+//
+//        if (left != nullptr) {
+//            return left;
+//        }
+//
+//        if (right != nullptr) {
+//            return right;
+//        }
+//
+//        return nullptr; // in this sub-stree, no left and no right at all
+//    }
+//
+//
+//};
+
 class Solution {
-
 public:
-    
-    TreeNode* findLCA (TreeNode *root, TreeNode *p, TreeNode *q) {
-        if (root == nullptr || root == p || root == q) {
-            return root;
+    TreeNode *LCA(TreeNode *p, TreeNode *q) {
+        if (p == nullptr || q == nullptr) {
+            return nullptr;
         }
         
-        TreeNode *left = findLCA(root->left, p, q);
-        TreeNode *right = findLCA(root->right, p, q);
-        
-        if (left != nullptr && right != nullptr) {
-            return root;
+        TreeNode *root = p;
+        while (root->parent != nullptr) {
+            root = root->parent;
         }
         
-        if (left != nullptr) {
-            return left;
-        }
-    
-        if (right != nullptr) {
-            return right;
-        }
+        TreeNode *lca = divide(root, p, q);
+        return lca;
         
-        return nullptr; // in this sub-stree, no left and no right at all
     }
-
+    
+    TreeNode *divide(TreeNode *root, TreeNode *p, TreeNode *q) {
+        if (root == nullptr) {
+            return root;
+        }
+        
+        if (root == p || root == q) {
+            return root;
+        }
+        
+        TreeNode *leftResult = divide(root->left, p, q);
+        TreeNode *rightResult = divide(root->right, p, q);
+        
+        if (leftResult != nullptr && rightResult != nullptr) {
+            return root;
+        } else if (leftResult != nullptr) {
+            return leftResult;
+        } else if (rightResult != nullptr) {
+            return rightResult;
+        } else {
+            return nullptr;
+        }
+        
+        
+        
+    }
+    
+    
     
 };
 
 int main(int argc, const char * argv[])
 {
-
+    
     TreeNode *a = new TreeNode (1);
     TreeNode *b = new TreeNode (2);
     TreeNode *c = new TreeNode (3);
@@ -112,14 +159,14 @@ int main(int argc, const char * argv[])
     TreeNode *h = new TreeNode (8);
     TreeNode *i = new TreeNode (9);
     
-//    b->parent = a;
-//    c->parent = a;
-//    d->parent = b;
-//    e->parent = b;
-//    f->parent = c;
-//    g->parent = c;
-//    h->parent = d;
-//    i->parent = d;
+    b->parent = a;
+    c->parent = a;
+    d->parent = b;
+    e->parent = b;
+    f->parent = c;
+    g->parent = c;
+    h->parent = d;
+    i->parent = d;
     
     a->left = b;
     a->right = c;
@@ -135,8 +182,8 @@ int main(int argc, const char * argv[])
     
     
     Solution su;
-//    cout << su.findAncestor(h, e) -> val << endl;
-    cout << su.findLCA(a, h, e)->val << endl;
+//    cout << su.findLCA(a, h, e) -> val << endl;
+    cout << su.LCA(e, nullptr)->val << endl;
     
     
     return 0;
