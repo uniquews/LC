@@ -10,85 +10,51 @@
 #include <stack>
 #include <utility>
 
+
+#include <utility>
+#include <stack>
+
 using namespace std;
-class MinStack{
+
+
+class MinStack {
 public:
-    
-    stack<pair<int,int>> *min=nullptr;
-    
-    //function
-    bool empty();
-    void push(int);
-    void pop();
-    int top();
-    int MinTop();
-    size_t size();
-    
-    int minNumber;
-    
-    
-    MinStack(stack<pair<int,int>> *p = NULL){
+    stack<pair<int, int>> stk;
+    int _min = 2147483647;
+    MinStack() {
+        // do initialization if necessary
+         
         
-        this->min = p;
-        cout << "excute constructor" << endl;
-    
     }
-    
-    
-    ~MinStack(){
-        delete min;
-        cout << "excute destructor" << endl;
+
+    void push(int number) {
+        // write your code here
+        if (stk.size() == 0) {
+            _min = number;
+            stk.push(make_pair(number, number));
+        } else {
+            if (number < stk.top().second) {
+                stk.push(make_pair(number, number));
+            } else {
+                stk.push(make_pair(number, stk.top().second));
+            }
+            
+        }
     }
-    
-    stack<pair<int,int>> & operator * () {
-        return *min;
+
+    int pop() {
+        // write your code here
+        int result = stk.top().first;
+        stk.pop();
+        return result;
     }
-    
-    stack<pair<int,int>> * operator -> () {
-        return min;
+
+    int min() {
+        // write your code here
+        return stk.top().second;
     }
 };
 
-bool MinStack::empty(){
-    return this->min->empty();
-
-}
-
-void MinStack::push(int a){
-    if(this->empty()==true){// directly push element into the stack
-        
-        this->minNumber=a;
-        this->min->push(make_pair(a, a));
-        
-    }else{
-        if(a>=this->minNumber){// keep the original minNumber
-            this->min->push(make_pair(a, this->minNumber));
-        }else{ // update a new minNumber
-            this->minNumber = a;
-            this->min->push(make_pair(a, minNumber));
-        }
-    }
-    return;
-}
-
-void MinStack::pop(){
-    this->min->pop();
-
-}
-
-int MinStack::top(){
-    return this->min->top().first;
-
-}
-
-int MinStack::MinTop(){
-    return this->min->top().second;
-}
-
-
-size_t MinStack:: size(){
-    return this->min->size();
-}
 
 
 
