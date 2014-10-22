@@ -10,6 +10,53 @@
 #include <vector>
 using namespace std;
 
+//class Solution {
+//public:
+//    vector<vector<int> > threeSum(vector<int> &num) {
+//        if (num.size() == 0) {
+//            return vector<vector<int>> {};
+//        }
+//        
+//        sort(num.begin(), num.end());
+//        vector<vector<int>> result;
+//        for (int i = 0; i < (int)num.size() - 2; i++) {
+//            int tempGap = 0 - num[i];
+//            int start = i + 1;
+//            int end = (int)num.size() - 1;
+//            while (start < end) {
+//                if (num[start] + num[end] == tempGap) {
+//                    vector<int> eachResult;
+//                    eachResult.push_back(num[i]);
+//                    eachResult.push_back(num[start]);
+//                    eachResult.push_back(num[end]);
+//                    result.push_back(eachResult);
+//                    
+//                    while (start + 1 < end && num[start] == num[start + 1]) {
+//                        start++;
+//                    }
+//                    
+//                    while (end - 1 > start && num[end] == num[end - 1]) {
+//                        end--;
+//                    }
+//                    
+//                    start++;
+//                    end--;
+//                } else if (num[start] + num[end] > tempGap) {
+//                    end--;
+//                } else {
+//                    start++;
+//                }
+//            }
+//            
+//            while (i + 1 < num.size() - 2 && num[i + 1] == num[i]) {
+//                i++;
+//            }
+//        }
+//        
+//        return result;
+//    }
+//};
+
 class Solution {
 public:
     vector<vector<int> > threeSum(vector<int> &num) {
@@ -17,47 +64,51 @@ public:
             return vector<vector<int>> {};
         }
         
-        sort(num.begin(), num.end());
         vector<vector<int>> result;
-        for (int i = 0; i < (int)num.size() - 2; i++) {
-            int tempGap = 0 - num[i];
-            int start = i + 1;
-            int end = (int)num.size() - 1;
-            while (start < end) {
-                if (num[start] + num[end] == tempGap) {
-                    vector<int> eachResult;
-                    eachResult.push_back(num[i]);
-                    eachResult.push_back(num[start]);
-                    eachResult.push_back(num[end]);
-                    result.push_back(eachResult);
-                    
-                    while (start + 1 < end && num[start] == num[start + 1]) {
-                        start++;
-                    }
-                    
-                    while (end - 1 > start && num[end] == num[end - 1]) {
-                        end--;
-                    }
-                    
-                    start++;
-                    end--;
-                } else if (num[start] + num[end] > tempGap) {
-                    end--;
-                } else {
-                    start++;
-                }
-            }
-            
-            while (i + 1 < num.size() - 2 && num[i + 1] == num[i]) {
+        vector<int> eachResult;
+        
+        sort(num.begin(), num.end());
+        for (int i = 0; i < num.size(); i++) {
+            int tmp = 0 - num[i];
+            twoSum(num, i + 1, tmp, eachResult, result);
+            eachResult.clear();
+            while (i + 1 < num.size() && num[i] == num[i + 1]) {
                 i++;
             }
         }
         
         return result;
     }
+    
+    void twoSum(vector<int> &num, int index, int target, vector<int> &eachResult, vector<vector<int>> &result) {
+        int start = index;
+        int end = (int)num.size() - 1;
+        while (start < end) {
+            if (target == num[start] + num[end]) {
+                eachResult.push_back(num[index - 1]);
+                eachResult.push_back(num[start]);
+                eachResult.push_back(num[end]);
+                result.push_back(eachResult);
+                eachResult.clear();
+                while (start + 1 < end && num[start] == num[start + 1]) {
+                    start++;
+                }
+                
+                while (end - 1 > start && num[end] == num[end - 1]) {
+                    end--;
+                }
+                start++;
+                end--;
+            } else if (target < num[start] + num[end]) {
+                end--;
+            } else {
+                start++;
+            }
+        }
+        
+        return;
+    }
 };
-
-
 //-4 -1 -1 0 1 2
 
 
