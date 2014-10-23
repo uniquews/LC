@@ -6,36 +6,39 @@
 //  Copyright (c) 2014 Shuai Wang. All rights reserved.
 //
 
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
 class Solution {
 public:
     vector<vector<int> > subsets(vector<int> &S) {
-        vector<vector<int>> result;
-        vector<int> level;
-        result.push_back(level);
-        sort(S.begin(), S.end());
-        dfs(result, level, 0, S);
+        if (S.size() == 0) {
+            return vector<vector<int>> {};
+        }
         
+        sort(S.begin(), S.end());
+        vector<vector<int>> result;
+        vector<int> eachResult;
+        result.push_back(eachResult);
+        
+        dfs(S, 0, eachResult, result);
         return result;
     }
     
-    void dfs(vector<vector<int>> &result, vector<int> &level, int step, vector<int> &S){
-        for(int i = step; i<S.size(); i++){
-            level.push_back(S[i]);
-            result.push_back(level);
-            
-            if(i< S.size()-1){
-                dfs(result, level, i+1, S);
-            }
-            
-            level.pop_back();
+    void dfs(vector<int> &S, int start, vector<int> &eachResult, vector<vector<int>> &result) {
+        if (start == S.size()) {
+            return;
         }
+        
+        for (int i = start; i < S.size(); i++) {
+            eachResult.push_back(S[i]);
+            result.push_back(eachResult);
+            dfs(S, i + 1, eachResult, result);
+            eachResult.pop_back();
+        }
+        
+        return;
     }
 };
+
+
 
 int main(int argc, const char * argv[])
 {

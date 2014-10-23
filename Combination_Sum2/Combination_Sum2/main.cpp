@@ -11,51 +11,91 @@
 
 using namespace std;
 
-
 class Solution {
 public:
-    vector<vector<int>> combinationSum2(vector<int> &num, int target) {
-        vector<vector<int>> result;
-        vector<int> level;
-        
+    vector<vector<int> > combinationSum2(vector<int> &num, int target) {
         if (num.size() == 0) {
-            return result;
+            return vector<vector<int>> {};
         }
         
         sort(num.begin(), num.end());
-        
-        dfs(num, result, level, 0, target);
-        
+        vector<vector<int>> result;
+        vector<int> eachResult;
+        dfs(num, 0, target, result, eachResult);
         return result;
     }
     
-    void dfs(vector<int> &num, vector<vector<int>> &result, vector<int> &level, int step, int target) {
-        
+    void dfs(vector<int> &num, int index, int target, vector<vector<int>> &result, vector<int> &eachResult) {
         if (target == 0) {
-            result.push_back(level);
+            result.push_back(eachResult);
             return;
         }
         
-        if (step == num.size()) {
+        if (index == num.size()) {
             return;
         }
         
-        if (target < num[step]) {
+        if (target < 0) {
             return;
         }
         
-        for (int i = step; i < num.size(); i++) {
-            level.push_back(num[i]);
-            dfs(num, result, level, i + 1, target - num[i]);
-            level.pop_back();
+        for (int i = index; i < num.size(); i++) {
+            eachResult.push_back(num[i]);
+            dfs(num, i + 1, target - num[i], result, eachResult);
+            eachResult.pop_back();
             
-            while (i < num.size() - 1 && num[i] == num[i + 1]) {
+            while (i + 1 < num.size() && num[i] == num[i + 1]) {
                 i++;
             }
         }
+        
+        return;
     }
-    
 };
+//class Solution {
+//public:
+//    vector<vector<int>> combinationSum2(vector<int> &num, int target) {
+//        vector<vector<int>> result;
+//        vector<int> level;
+//        
+//        if (num.size() == 0) {
+//            return result;
+//        }
+//        
+//        sort(num.begin(), num.end());
+//        
+//        dfs(num, result, level, 0, target);
+//        
+//        return result;
+//    }
+//    
+//    void dfs(vector<int> &num, vector<vector<int>> &result, vector<int> &level, int step, int target) {
+//        
+//        if (target == 0) {
+//            result.push_back(level);
+//            return;
+//        }
+//        
+//        if (step == num.size()) {
+//            return;
+//        }
+//        
+//        if (target < num[step]) {
+//            return;
+//        }
+//        
+//        for (int i = step; i < num.size(); i++) {
+//            level.push_back(num[i]);
+//            dfs(num, result, level, i + 1, target - num[i]);
+//            level.pop_back();
+//            
+//            while (i < num.size() - 1 && num[i] == num[i + 1]) {
+//                i++;
+//            }
+//        }
+//    }
+//    
+//};
 
 int main(int argc, const char * argv[])
 {
