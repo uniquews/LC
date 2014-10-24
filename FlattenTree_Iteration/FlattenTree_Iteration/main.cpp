@@ -28,49 +28,13 @@ public:
 };
 
 
-//class Solution {
-//public:
-//    void flatten(TreeNode *root) {
-//        stack<TreeNode *> stk;
-//        
-//        if (root == nullptr) {
-//            return;
-//        }
-//        
-//        stk.push(root);
-//        while (stk.size() != 0) {
-//            TreeNode *tmp = stk.top();
-//            stk.pop();
-//            
-//            if (tmp->right != nullptr) {
-//                stk.push(tmp->right);
-//            }
-//            
-//            if (tmp->left != nullptr) {
-//                stk.push(tmp->left);
-//            }
-//            
-//            tmp->left = nullptr;
-//            if (stk.size() != 0) {
-//                tmp->right = stk.top();
-//            } else {
-//                tmp->right = nullptr;
-//            }
-//            
-//        }
-//        
-//        return;
-//    }
-//};
-
-
 class Solution {
 public:
     void flatten(TreeNode *root) {
         if (root == nullptr) {
             return;
         }
-        TreeNode *last = nullptr;
+        
         
         stack<TreeNode *> stk;
         stk.push(root);
@@ -78,29 +42,27 @@ public:
         while (stk.size() != 0) {
             TreeNode *cur = stk.top();
             stk.pop();
-          
-            if (cur->right) {
+            if (cur->right != nullptr) {
                 stk.push(cur->right);
             }
             
-            if (cur->left) {
+            if (cur->left != nullptr) {
                 stk.push(cur->left);
             }
             
-            if (last == nullptr) {
-                last = cur;
-            } else {
-                last->right = cur;
-                last = last->right;
-                
-            }
             cur->left = nullptr;
+            if (stk.size() != 0) {
+                cur->right = stk.top();
+            } else {
+                cur->right = nullptr;
+            }
             
         }
         
         return;
-        
     }
+    
+    
 };
 
 
