@@ -52,16 +52,54 @@ using namespace std;
 //    
 //};
 
+//class Solution {
+//public:
+//    double findMedianSortedArrays(int A[], int m, int B[], int n) {
+//        int num = m + n;
+//        if (num % 2 == 0) {
+//            return (findkth(A, m, B, n, num / 2) + findkth(A, m, B, n, num / 2 + 1)) / 2;
+//        } else {
+//            return findkth(A, m, B, n, num / 2 + 1);
+//        }
+//        
+//    }
+//    
+//    double findkth(int A[], int m, int B[], int n, int k) {
+//        if (m > n) {
+//            return findkth(B, n, A, m, k);
+//        }
+//        
+//        if (m == 0) {
+//            return B[k - 1];
+//        }
+//        
+//        if (k == 1) {
+//            return min(A[0], B[0]);
+//        }
+//        
+//        int pos = min(m, k / 2);
+//        int posInB =  k - pos;
+//        if (A[pos - 1] > B[posInB - 1]) {
+//            return findkth(A, m, B + posInB, n - posInB, k - posInB);
+//        } else if (A[pos - 1] < B[posInB - 1]) {
+//            return findkth(A + pos, m - pos, B, n, k - pos);
+//        } else {
+//            return A[pos - 1];
+//        }
+//    }
+//};
+
 class Solution {
 public:
     double findMedianSortedArrays(int A[], int m, int B[], int n) {
-        int num = m + n;
-        if (num % 2 == 0) {
-            return (findkth(A, m, B, n, num / 2) + findkth(A, m, B, n, num / 2 + 1)) / 2;
+        int sum = m + n;
+        if (sum % 2 == 0) {
+            double a = findkth(A, m, B, n, sum / 2);
+            double b =  findkth(A, m, B, n, sum / 2 + 1);
+            return (a + b) / 2;
         } else {
-            return findkth(A, m, B, n, num / 2 + 1);
+            return findkth(A, m, B, n, sum / 2 + 1);
         }
-        
     }
     
     double findkth(int A[], int m, int B[], int n, int k) {
@@ -78,7 +116,8 @@ public:
         }
         
         int pos = min(m, k / 2);
-        int posInB =  k - pos;
+        int posInB = k - pos;
+        
         if (A[pos - 1] > B[posInB - 1]) {
             return findkth(A, m, B + posInB, n - posInB, k - posInB);
         } else if (A[pos - 1] < B[posInB - 1]) {
@@ -92,8 +131,8 @@ int main(int argc, const char * argv[])
 {
 
     Solution su;
-    int A[] = {1,1};
-    int B[] = {1,1};
+    int A[] = {1,2};
+    int B[] = {1,2};
     int m = 2;
     int n = 2;
     cout << su.findMedianSortedArrays(A, m, B, n) << endl;

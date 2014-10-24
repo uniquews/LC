@@ -47,50 +47,90 @@ using namespace std;
 //    }
 //};
 
+//class Solution {
+//public:
+//    int search(int A[], int n, int target) {
+//		int start = 0;
+//		int end = n - 1;
+//        
+//		while (start + 1 < end) {
+//			int mid = start + (end - start) / 2;
+//			if (A[mid] == target) {
+//				return mid;
+//			} else if (A[start] < A[mid]) {
+//			    if (A[start] <= target && target < A[mid]) {
+//			        end = mid;
+//			    } else {
+//			        start = mid;
+//			    }
+//			} else {
+//			    if (A[mid] < target && target <= A[end]) {
+//			        start = mid;
+//			    } else {
+//			        end = mid;
+//			    }
+//			}
+//            
+//		}
+//        
+//		if (A[start] == target) {
+//			return start;
+//		}
+//        
+//		if (A[end] == target) {
+//			return end;
+//		}
+//        
+//		return -1;
+//    }
+//};
 class Solution {
 public:
     int search(int A[], int n, int target) {
-		int start = 0;
-		int end = n - 1;
+        if (n == 0) {
+            return -1;
+        }
         
-		while (start + 1 < end) {
-			int mid = start + (end - start) / 2;
-			if (A[mid] == target) {
-				return mid;
-			} else if (A[start] < A[mid]) {
-			    if (A[start] <= target && target < A[mid]) {
-			        end = mid;
-			    } else {
-			        start = mid;
-			    }
-			} else {
-			    if (A[mid] < target && target <= A[end]) {
-			        start = mid;
-			    } else {
-			        end = mid;
-			    }
-			}
-            
-		}
+        int start = 0;
+        int end = n - 1;
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (A[mid] == target) {
+                return mid;
+            } else if (A[start] < A[mid]) {
+                if (A[start] <= target && target < A[mid]) {
+                    end = mid;
+                } else {
+                    start = mid;
+                }
+            } else {
+                if (A[mid] < target && target <= A[end]) {
+                    start = mid;
+                } else {
+                    end = mid;
+                }
+            }
+        }
         
-		if (A[start] == target) {
-			return start;
-		}
+        if (A[start] == target) {
+            return start;
+        }
         
-		if (A[end] == target) {
-			return end;
-		}
+        if (A[end] == target) {
+            return end;
+        }
         
-		return -1;
+        return -1;
     }
 };
-
 
 int main(int argc, const char * argv[])
 {
 
-    int A[] = {4,5,6,7,8,1,2,3};
-    int target = 8;
+//    int A[] = {4,5,6,7,8,1,2,3};
+//    int target = 8;
+    int A[] = {3,5,1};
+    int target = 3;
     Solution su;
     cout << su.search(A, 8, 8) << endl;
     

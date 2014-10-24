@@ -11,6 +11,7 @@
 
 
 using namespace std;
+
 class Solution {
 public:
     vector<int> searchRange(int A[], int n, int target) {
@@ -18,50 +19,51 @@ public:
             return vector<int> {-1, -1};
         }
         
-        //lower bound
+        vector<int> result;
         int start = 0;
         int end = n - 1;
-        int lowerbound = -1;
+
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
             if (A[mid] == target) {
                 end = mid;
-            } else if (A[mid] < target) {
-                start = mid;
-            } else {
+            } else if (A[mid] > target) {
                 end = mid;
+            } else {
+                start = mid;
             }
         }
         
         if (A[start] == target) {
-            lowerbound = start;
+            result.push_back(start);
         } else if (A[end] == target) {
-            lowerbound = end;
+            result.push_back(end);
+        } else {
+            result.push_back(-1);
         }
+        
         
         start = 0;
         end = n - 1;
-        int upperbound = -1;
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
             if (A[mid] == target) {
                 start = mid;
             } else if (A[mid] > target) {
-                end =  mid;
+                end = mid;
             } else {
                 start = mid;
             }
         }
         
         if (A[end] == target) {
-            upperbound = end;
+            result.push_back(end);
         } else if (A[start] == target) {
-            upperbound = start;
+            result.push_back(start);
+        } else {
+            result.push_back(-1);
         }
         
-        vector<int> result;
-        result.push_back(lowerbound);
-        result.push_back(upperbound);
         return result;
     }
 };

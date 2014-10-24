@@ -10,74 +10,52 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <unordered_set>
 
 using namespace std;
 
-//class Solution {
-//public:
-//    int lengthOfLongestSubstring(string s) {
-//        int left=0;
-//        int right=0;
-//        if(s.size() == 0) return 0;
-//        if(s.size() ==1) return 1;
-//        unordered_map<char, bool> showUp; // map don't need to be initialized?
-//        int _max=1;
-//        
-//        while(left <s.size()  && right < s.size()){
-//            if(showUp[s[right]] == false){
-//                showUp[s[right]] = true;
-//                _max = max(_max, right -left +1);
-//                right++;
-//            }else{
-//                showUp[s[left]] = false;
-//                _max = max(_max, right-left);
-//                left++;
-//            }
-//        }
-//        
-//        return _max;
-//    }
-//    
-//};
 
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int left = 0;
-        int right = 1;
-        if (s.size() <= 1) {
-            return s.size();
+        if (s.size() == 0) {
+            return 0;
         }
         
-        unordered_map<int, bool> exist;
-        exist[s[0]] = true;
-        
-        int maxLen = 1;
-        
-        while (left < s.size() && right < s.size()) {
-            if (exist.find(s[right]) == exist.end() || exist[s[right]] == false) {
-                exist[s[right]] = true;
-                maxLen = max(right - left + 1, maxLen);
-                right++;
+        int start = 0;
+        int end = 0;
+        int result = INT_MIN;
+        unordered_set<char> hashSet;
+        while (end != s.size()) {
+            if (hashSet.find(s[end]) == hashSet.end()) {
+                hashSet.insert(s[end]);
+                result = max(result, end -start + 1);
+                end++;
+                
             } else {
-                exist[s[left]] = false;
-                left++;
-                maxLen = max(maxLen, right - left + 1);
+                while (s[start] != s[end]) {
+                    hashSet.erase(s[start]);
+                    start++;
+                }
+                
+                start++;
+                result = max(result, end -start + 1);
+                end++;
+                
             }
         }
         
-        return maxLen;
+        return result;
     }
 };
-
-
 int main(int argc, const char * argv[])
 {
 
     // insert code here...
 //    string s = "wlrbbmqbhcdarzowkkyhiddqscdxrjmowfrxsjybldbefsarcbynecdyggxxpklorellnmpapqfwkhopkmco";
-    
+//
 //    string s = "aaa";
+//      string s = "abcabcbb";
     
     string s = "hchzvfrkmlnozjk";
     Solution su;

@@ -11,7 +11,54 @@
 
 using namespace std;
 
-
+class Solution{
+    
+public:
+    vector<vector<string>> partition(string s) {
+        if (s.size() == 0) {
+            return vector<vector<string>> {{""}};
+        }
+        
+        vector<vector<bool>> isPP(s.size(), vector<bool>(s.size(), false));
+        for (int i = 0; i < s.size(); i++) {
+            isPP[i][i] = true;
+        }
+        
+        for (int i = (int)s.size() - 1; i >= 0; i--) {
+            for (int j = i; j < (int)s.size(); j++) {
+                if (s[i] == s[j] && (j - i <= 2 || isPP[i + 1][j - 1])) {
+                    isPP[i][j] = true;
+                }
+            }
+        }
+        
+        vector<vector<string>> result;
+        vector<string> eachResult;
+        dfs(s, 0, isPP, result, eachResult);
+        return result;
+    }
+    
+    void dfs(string s, int index, vector<vector<bool>> &isPP, vector<vector<string>> &result, vector<string> &eachResult) {
+        if (index == s.size()) {
+            result.push_back(eachResult);
+            return;
+        }
+        
+        for (int i = 1; i <= s.size(); i++) {
+            if (index + i <= s.size()) {
+                string tmp = s.substr(index, i);
+                if (isPP[index][index + i - 1]) {
+                    eachResult.push_back(tmp);
+                    dfs(s, index + i, isPP, result, eachResult);
+                    eachResult.pop_back();
+                }
+            }
+        }
+        
+        return;
+    }
+    
+};
 
 class Solution {
 public:

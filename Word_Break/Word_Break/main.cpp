@@ -35,29 +35,44 @@ using namespace std;
 //    
 //};
 
+//class Solution {
+//public:
+//    bool wordBreak(string s, unordered_set<string> &dict) {
+//        if (s.size() == 0) {
+//            return false;
+//        }
+//        
+//        int n = (int)s.size();
+//        
+//        vector<bool> f(n + 1, false);
+//        f[0] = true;
+//        for (int i = 1; i <= n; i++) {
+//            for (int j = 0; j < i; j++) {
+//                string tmp = s.substr(j, i - j);
+//                
+//                if (dict.find(tmp) != dict.end()) {
+//                    f[i] = f[i] || f[j];
+//                }
+//            }
+//        }
+//        
 class Solution {
 public:
     bool wordBreak(string s, unordered_set<string> &dict) {
-        if (s.size() == 0) {
-            return false;
-        }
-        
-        int n = (int)s.size();
-        
-        vector<bool> f(n + 1, false);
+        vector<bool> f(s.size() + 1, false);
         f[0] = true;
-        for (int i = 1; i <= n; i++) {
-            for (int j = 0; j < i; j++) {
+        
+        for (int i = 1; i <= s.size(); i++) {
+            for (int j = 0; j <= i - 1; j++) {
                 string tmp = s.substr(j, i - j);
-                
-                if (dict.find(tmp) != dict.end()) {
-                    f[i] = f[i] || f[j];
+                if (f[j] && dict.find(tmp) != dict.end()) {
+                    f[i] = true;
                 }
             }
         }
         
-        return f[n];
         
+        return f[s.size()];
     }
 };
 
