@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>90062039-5401-4D83-90B5-7ADD6576A079</string>
+	<string>4A087A34-D97C-4424-B16F-3F577F2B3177</string>
 	<key>IDESourceControlProjectName</key>
-	<string>BinaryTreeZigzagTraverse</string>
+	<string>BinaruTreeLevelOrderTraverse</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>55BE0FA7-9597-4BE6-B617-C86CF2439049</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BinaryTreeZigzagTraverse/BinaryTreeZigzagTraverse.xcodeproj/project.xcworkspace</string>
+	<string>BinaruTreeLevelOrderTraverse/BinaruTreeLevelOrderTraverse.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>55BE0FA7-9597-4BE6-B617-C86CF2439049</key>

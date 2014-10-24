@@ -82,10 +82,11 @@ int main(int argc, const char * argv[])
     // insert code here...
     
     TreeNode *root = new TreeNode(1);
-    Tree t(root);
+    
     TreeNode *left1 = new TreeNode(2);
-    //    TreeNode *right1 = new TreeNode(3);
+    TreeNode *right1 = new TreeNode(3);
     root->left = left1;
+    root->right = right1;
     
     
     Solution s;
