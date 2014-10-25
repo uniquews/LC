@@ -23,31 +23,43 @@ struct ListNode {
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
+        if (head == nullptr || head->next == nullptr) {
+            return head;
+        }
+        
         ListNode dummy(-1);
         ListNode *tail = &dummy;
         ListNode *cur = head;
-        bool isSame = false;
+        bool isDup = false;
+        
         while (cur != nullptr) {
             while (cur->next != nullptr && cur->val == cur->next->val) {
+                isDup = true;
                 cur = cur->next;
-                isSame = true;
             }
             
-            if (isSame) {
+            if (isDup == false) {
+                tail->next = cur;
                 cur = cur->next;
-                isSame = false;
-                continue;
+                tail = tail->next;
+            } else {
+                cur = cur->next;
+                isDup = false;
+                tail->next = cur;
             }
-            
-            tail->next = cur;
-            cur = cur->next;
-            tail = tail->next;
         }
         
-        tail->next = nullptr;
         return dummy.next;
     }
     

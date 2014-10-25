@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>90A9B10E-1756-406E-9EAC-313B2124F294</string>
+	<string>118D7ED7-A9C4-4B63-AACE-F2D6F6ED29D0</string>
 	<key>IDESourceControlProjectName</key>
-	<string>FlattenTree_Recursion</string>
+	<string>Sum Root to Leaf Number</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>55BE0FA7-9597-4BE6-B617-C86CF2439049</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FlattenTree_Recursion/FlattenTree_Recursion.xcodeproj/project.xcworkspace</string>
+	<string>Sum Root to Leaf Number/Sum Root to Leaf Number.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>55BE0FA7-9597-4BE6-B617-C86CF2439049</key>

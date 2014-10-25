@@ -15,50 +15,52 @@ struct ListNode {
       ListNode(int x) : val(x), next(NULL) {}
   };
 
+
 class Solution {
 public:
     ListNode *partition(ListNode *head, int x) {
-        if(head==nullptr) return nullptr;
-        ListNode *leftDummy = new ListNode(-1);
-        ListNode *right_dummy = new ListNode(-1);
-        ListNode* leftStart = leftDummy;
-        ListNode * rightStart  = right_dummy;
-        
-        for(; head!=nullptr; head = head->next){
-            if(head->val >= x){
-                right_dummy->next = head;
-                right_dummy = right_dummy->next;
-            }else{
-                leftDummy->next  = head;
-                leftDummy = leftDummy->next;
-            }
+        if (head == nullptr) {
+            return nullptr;
         }
         
-        leftDummy->next = rightStart->next;
-        right_dummy->next = nullptr;
+        ListNode leftDummy(-1);
+        ListNode rightDummy(-1);
+        ListNode *leftTail = &leftDummy;
+        ListNode *rightTail = &rightDummy;
+        while (head != nullptr) {
+            if (head->val < x) {
+                leftTail->next = head;
+                leftTail = leftTail->next;
+            } else {
+                rightTail->next = head;
+                rightTail = rightTail->next;
+            }
+            head = head->next;
+        }
         
-        return leftStart->next;
-        
+        rightTail->next = nullptr;
+        leftTail->next = rightDummy.next;
+        return leftDummy.next;
     }
 };
 
 int main(int argc, const char * argv[])
 {
     ListNode *a = new ListNode(1);
-    ListNode *b = new ListNode(4);
-    ListNode *c = new ListNode(3);
-    ListNode *d = new ListNode(2);
-    ListNode *e = new ListNode(5);
-    ListNode *f = new ListNode(2);
-    
-    a->next = b;
-    b->next = c;
-    c->next = d;
-    d->next = e;
-    e->next = f;
+//    ListNode *b = new ListNode(4);
+//    ListNode *c = new ListNode(3);
+//    ListNode *d = new ListNode(2);
+//    ListNode *e = new ListNode(5);
+//    ListNode *f = new ListNode(2);
+    a->next = nullptr;
+//    a->next = b;
+//    b->next = c;
+//    c->next = d;
+//    d->next = e;
+//    e->next = f;
     
     Solution s;
-    ListNode *result = s.partition(a, 3);
+    ListNode *result = s.partition(a, 0);
     while (result != nullptr) {
         cout << result->val << " ";
         result = result->next;
