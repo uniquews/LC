@@ -15,20 +15,21 @@ class Solution {
 public:
     int findMin(vector<int> &num) {
         if (num.size() == 0) {
-            return -1;
+            return 0;
         }
         
         int start = 0;
-        int end = (int)num.size() - 1;
+        int end = num.size() - 1;
+        
         while (start + 1 < end) {
+            if (num[start] < num[end]) {
+                return num[start];
+            }
+            
             int mid = start + (end - start) / 2;
-            if (num[mid] < num[mid - 1] && num[mid] < num[mid + 1]) {
-                return num[mid];
-            } else if ((num[start] < num[mid]) && num[mid] < num[end]) {
-                end = mid;
-            } else if (num[start] < num[mid]) {
+            if (num[start] < num[mid]) {
                 start = mid;
-            } else if (num[mid] < num[end]) {
+            } else {
                 end = mid;
             }
             
@@ -40,8 +41,9 @@ public:
             return num[end];
         }
         
+        
+        
     }
-    
     
 };
 

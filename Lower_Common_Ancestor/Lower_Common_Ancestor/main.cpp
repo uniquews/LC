@@ -99,50 +99,89 @@ struct TreeNode {
 //
 //};
 
+//class Solution {
+//public:
+//    TreeNode *LCA(TreeNode *p, TreeNode *q) {
+//        if (p == nullptr || q == nullptr) {
+//            return nullptr;
+//        }
+//        
+//        TreeNode *root = p;
+//        while (root->parent != nullptr) {
+//            root = root->parent;
+//        }
+//        
+//        TreeNode *lca = divide(root, p, q);
+//        return lca;
+//        
+//    }
+//    
+//    TreeNode *divide(TreeNode *root, TreeNode *p, TreeNode *q) {
+//        if (root == nullptr) {
+//            return root;
+//        }
+//        
+//        if (root == p || root == q) {
+//            return root;
+//        }
+//        
+//        TreeNode *leftResult = divide(root->left, p, q);
+//        TreeNode *rightResult = divide(root->right, p, q);
+//        
+//        if (leftResult != nullptr && rightResult != nullptr) {
+//            return root;
+//        } else if (leftResult != nullptr) {
+//            return leftResult;
+//        } else if (rightResult != nullptr) {
+//            return rightResult;
+//        } else {
+//            return nullptr;
+//        }
+//        
+//        
+//        
+//    }
+//    
+//    
+//    
+//};
+
 class Solution {
+    
 public:
-    TreeNode *LCA(TreeNode *p, TreeNode *q) {
+    int LCA (TreeNode *p, TreeNode *q, TreeNode *root) {
         if (p == nullptr || q == nullptr) {
-            return nullptr;
+            return -1;
         }
         
-        TreeNode *root = p;
-        while (root->parent != nullptr) {
-            root = root->parent;
+        if (p == root) {
+            return p->val;
         }
         
-        TreeNode *lca = divide(root, p, q);
-        return lca;
+        if(q == root) {
+            return q->val;
+        }
         
+        int leftVal = LCA(p, q, root->left);
+        int rightVal = LCA(p, q, root->right);
+        
+        if (leftVal == -1 && rightVal == -1) {
+            return -1;
+        }
+        
+        if (leftVal != -1 && rightVal != -1) {
+            return root->val;
+        }
+        
+        if (leftVal != -1) {
+            return leftVal;
+        }
+        
+        if (rightVal != -1) {
+            return rightVal;
+        }
+        return -1;
     }
-    
-    TreeNode *divide(TreeNode *root, TreeNode *p, TreeNode *q) {
-        if (root == nullptr) {
-            return root;
-        }
-        
-        if (root == p || root == q) {
-            return root;
-        }
-        
-        TreeNode *leftResult = divide(root->left, p, q);
-        TreeNode *rightResult = divide(root->right, p, q);
-        
-        if (leftResult != nullptr && rightResult != nullptr) {
-            return root;
-        } else if (leftResult != nullptr) {
-            return leftResult;
-        } else if (rightResult != nullptr) {
-            return rightResult;
-        } else {
-            return nullptr;
-        }
-        
-        
-        
-    }
-    
-    
     
 };
 
@@ -183,7 +222,7 @@ int main(int argc, const char * argv[])
     
     Solution su;
 //    cout << su.findLCA(a, h, e) -> val << endl;
-    cout << su.LCA(e, nullptr)->val << endl;
+//    cout << su.LCA(e, nullptr)->val << endl;
     
     
     return 0;
