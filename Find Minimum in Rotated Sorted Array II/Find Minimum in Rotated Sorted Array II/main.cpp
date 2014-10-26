@@ -17,22 +17,23 @@ public:
         if (num.size() == 0) {
             return 0;
         }
-        
         int start = 0;
-        int end = (int)num.size() - 1;
+        int end = num.size() - 1;
+        
         while (start + 1 < end) {
             if (num[start] < num[end]) {
                 return num[start];
-            } else {
-                int mid = start + (end - start) / 2;
-                if (num[mid] > num[start]) {
-                    start = mid;
-                } else if (num[mid] < num[start]) {
-                    end = mid;
-                } else {
-                    start++;
-                }
             }
+            
+            int mid = start + (end - start) / 2;
+            if (num[start] < num[mid]) {
+                start = mid;
+            } else if (num[start] > num[mid]) {
+                end = mid;
+            } else {
+                start++;
+            }
+            
         }
         
         if (num[start] <= num[end]) {
@@ -41,6 +42,7 @@ public:
             return num[end];
         }
     }
+    
 };
 
 int main(int argc, const char * argv[])
