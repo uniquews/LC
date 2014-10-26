@@ -76,13 +76,39 @@ struct ListNode {
 //    return 0;
 //}
 
+class Solution {
+public:
+    ListNode *removeNthFromEnd(ListNode *head, int n) {
+        if (head == nullptr) {
+            return head;
+        }
+        
+        ListNode dummy(-1);
+        dummy.next = head;
+        ListNode *p = &dummy;
+        ListNode *q = &dummy;
+        
+        while (n > 0) {
+            p = p->next;
+            n--;
+        }
+        
+        while (p->next != nullptr) {
+            p = p->next;
+            q = q->next;
+        }
+        
+        q->next = q->next->next;
+        return dummy.next;
+    }
+};
+
 #include <stdio.h>
 int main(void)
 {
-    int arr[] = {10, 20};
-    int *p = arr;
-    *++p;
-    printf("arr[0] = %d, arr[1] = %d, *p = %d", arr[0], arr[1], *p);
+    ListNode *a = new ListNode(1);
+    Solution su;
+    su.removeNthFromEnd(a, 1);
     return 0;
 }
 

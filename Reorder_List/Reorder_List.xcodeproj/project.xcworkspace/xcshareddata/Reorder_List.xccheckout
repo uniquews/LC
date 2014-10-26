@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>5092449C-D417-4591-BE85-006921A7D3FE</string>
+	<string>5E967396-07E3-4F2F-B218-A2016268C6C2</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Reorder_List</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>40CE51FE-52BB-4BFB-9F45-8967C4952F4C</key>
+		<key>3BF7CA76-107A-4C6A-8CE9-7B1532D21EF2</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Reorder_List/Reorder_List.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>40CE51FE-52BB-4BFB-9F45-8967C4952F4C</key>
+		<key>3BF7CA76-107A-4C6A-8CE9-7B1532D21EF2</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>40CE51FE-52BB-4BFB-9F45-8967C4952F4C</string>
+	<string>3BF7CA76-107A-4C6A-8CE9-7B1532D21EF2</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>40CE51FE-52BB-4BFB-9F45-8967C4952F4C</string>
+			<string>3BF7CA76-107A-4C6A-8CE9-7B1532D21EF2</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LC</string>
 		</dict>

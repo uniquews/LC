@@ -154,6 +154,68 @@ struct ListNode {
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+//class Solution {
+//public:
+//    ListNode *sortList(ListNode *head) {
+//        if (head == nullptr || head->next == nullptr) {
+//            return head;
+//        }
+//        
+//        ListNode *middle = findMiddle(head);
+//        ListNode *rightNode = middle->next;
+//        middle->next = nullptr;
+//        ListNode *leftNode = sortList(head);
+//        rightNode = sortList(rightNode);
+//        leftNode = merge(leftNode, rightNode);
+//        return leftNode;
+//    }
+//    
+//    ListNode *findMiddle(ListNode *head) {
+//        if (head == nullptr || head->next == nullptr) {
+//            return head;
+//        }
+//        ListNode *first = head;
+//        ListNode *second = head->next;
+//        
+//        while (second != nullptr && second->next != nullptr) {
+//            first = first->next;
+//            second = second->next->next;
+//        }
+//        
+//        return first;
+//        
+//    }
+//    
+//    ListNode *merge(ListNode *p, ListNode *q) {
+//        ListNode dummy(-1);
+//        ListNode *prev = &dummy;
+//        while (p != nullptr || q != nullptr) {
+//            int val1 = p == nullptr ? INT_MAX : p->val;
+//            int val2 = q == nullptr ? INT_MAX : q->val;
+//            if (val1 <= val2) {
+//                prev->next = p;
+//                p = p->next;
+//            } else {
+//                prev->next = q;
+//                q = q->next;
+//            }
+//            prev = prev->next;
+//            
+//        }
+//        
+//        return dummy.next;
+//    }
+//    
+//};
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
     ListNode *sortList(ListNode *head) {
@@ -166,46 +228,49 @@ public:
         middle->next = nullptr;
         ListNode *leftNode = sortList(head);
         rightNode = sortList(rightNode);
-        leftNode = merge(leftNode, rightNode);
-        return leftNode;
+        return merge(leftNode, rightNode);
     }
     
-    ListNode *findMiddle(ListNode *head) {
+    ListNode *findMiddle (ListNode *head) {
         if (head == nullptr || head->next == nullptr) {
             return head;
         }
-        ListNode *first = head;
-        ListNode *second = head->next;
         
-        while (second != nullptr && second->next != nullptr) {
-            first = first->next;
-            second = second->next->next;
+        ListNode *slow = head;
+        ListNode *fast = head->next;
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
         }
         
-        return first;
-        
+        return slow;
     }
     
     ListNode *merge(ListNode *p, ListNode *q) {
+        if (p == nullptr && q == nullptr) {
+            return nullptr;
+        }
+        
         ListNode dummy(-1);
-        ListNode *prev = &dummy;
+        ListNode *tail = &dummy;
+        
         while (p != nullptr || q != nullptr) {
             int val1 = p == nullptr ? INT_MAX : p->val;
             int val2 = q == nullptr ? INT_MAX : q->val;
+            
             if (val1 <= val2) {
-                prev->next = p;
+                tail->next = p;
                 p = p->next;
             } else {
-                prev->next = q;
+                tail->next = q;
                 q = q->next;
             }
-            prev = prev->next;
             
+            tail = tail->next;
         }
         
         return dummy.next;
     }
-    
 };
 int main(int argc, const char * argv[])
 {
