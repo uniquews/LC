@@ -6,15 +6,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Longest Consecutive Sequence/main.cpp"
-            timestampString = "434014872.31138"
+            timestampString = "436050226.186913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "longestConsecutive(vector&lt;int&gt; &amp;num)"
             landmarkType = "5">
          </BreakpointContent>

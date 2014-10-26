@@ -20,6 +20,47 @@
 
 using namespace std;
 
+//class Solution {
+//public:
+//    void nextPermutation(vector<int> &num) {
+//        if (num.size() <= 1) {
+//            return;
+//        }
+//        
+//        int start = (int)num.size() - 2;
+//        while (start >= 0) {
+//            if (num[start] < num[start + 1]) {
+//                break;
+//            }
+//            
+//            start--;
+//        }
+//        
+//        if (start == -1) {
+//            sort(num.begin(), num.end());
+//            return;
+//        }
+//        
+//        int end = (int)num.size() - 1;
+//        int index = 0;
+//        int find = INT_MAX;
+//        while (end > start) {
+//            if (num[end] > num[start] && num[end] < find) {
+//                index = end;
+//                find = num[index];
+//            }
+//            
+//            end--;
+//        }
+//        
+//        swap(num[start], num[index]);
+//        
+//        vector<int> :: iterator it = num.begin();
+//        reverse(it + start + 1, num.end());
+//        return;
+//    }
+//};
+
 class Solution {
 public:
     void nextPermutation(vector<int> &num) {
@@ -27,44 +68,35 @@ public:
             return;
         }
         
-        int start = (int)num.size() - 2;
-        while (start >= 0) {
-            if (num[start] < num[start + 1]) {
-                break;
-            }
-            
+        int start = (int)num.size() - 1;
+        while (start - 1 >= 0 && num[start - 1] > num[start]) {
             start--;
         }
         
-        if (start == -1) {
-            sort(num.begin(), num.end());
+        if (start == 0) {
+            reverse(num.begin(), num.end());
             return;
         }
         
+        start--;
         int end = (int)num.size() - 1;
-        int index = 0;
-        int find = INT_MAX;
-        while (end > start) {
-            if (num[end] > num[start] && num[end] < find) {
-                index = end;
-                find = num[index];
-            }
-            
+        while (num[end] <= num[start]) {
             end--;
         }
         
-        swap(num[start], num[index]);
-        
+        swap(num[start], num[end]);
         vector<int> :: iterator it = num.begin();
-        reverse(it + start + 1, num.end());
+        it = it + start + 1;
+        reverse(it, num.end());
         return;
+        
     }
 };
 
 int main(int argc, const char * argv[])
 {
 
-    vector<int> num = {1,3,2};
+    vector<int> num = {1,2,3};
     Solution su;
     su.nextPermutation(num);
     for (int i = 0; i < num.size(); i++) {
