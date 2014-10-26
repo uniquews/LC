@@ -13,85 +13,6 @@
 
 using namespace std;
 
-//class Solution {
-//public:
-//    int longestConsecutive(vector<int> &num) {
-//        int maxLength = 0;
-//        unordered_map<int, bool> used;
-//        for (auto i : num) {
-//            used[i] = false;
-//        }
-//        
-//        for (auto i : num) {
-//            int len = 1;
-//            if (used[i] == true) {
-//                continue;
-//            }
-//            
-//            used[i] = true;
-//            int j = i + 1;
-//            while (used.find(j) != used.end()) {
-//                used[j] = true;
-//                j++;
-//                len++;
-//            }
-//            
-//            j = i - 1;
-//            while (used.find(j) != used.end()) {
-//                used[j] = true;
-//                j--;
-//                len++;
-//            }
-//            
-//            maxLength = max(maxLength, len);
-//            
-//        }
-//        
-//        return maxLength;
-//    }
-//};
-
-//class Solution {
-//public:
-//    int longestConsecutive(vector<int> &num) {
-//        if (num.size() == 0) {
-//            return 0;
-//        }
-//        
-//        int result = 0;
-//        unordered_set<int> exist;
-//        for (int i = 0; i < num.size(); i++) {
-//            if (exist.find(num[i]) != exist.end()) {
-//                continue;
-//            }
-//            
-//            int a = num[i];
-//            
-//            exist.insert(num[i]);
-//            
-//            int small = num[i] - 1;
-//            int large = num[i] + 1;
-//            int tmpLen = 1;
-//            
-//            while (exist.find(small) != exist.end()) {
-//                exist.insert(small);
-//                tmpLen++;
-//                small--;
-//                
-//            }
-//            
-//            while (exist.find(large) != exist.end()) {
-//                exist.insert(large);
-//                tmpLen++;
-//                large++;
-//            }
-//            
-//            result = max(result, tmpLen);
-//        }
-//        
-//        return result;
-//    }
-//};
 
 class Solution {
 public:
@@ -101,27 +22,34 @@ public:
         }
         
         int result = 1;
-        
         unordered_set<int> hashSet;
+        
         for (int i = 0; i < num.size(); i++) {
-            int len = 1;
+            hashSet.insert(num[i]);
+        }
+        
+        for (int i = 0; i < num.size(); i++) {
             
-            if (hashSet.find(num[i]) != hashSet.end()) {
+            if (hashSet.find(num[i]) == hashSet.end()) {
                 continue;
             }
-            hashSet.insert(num[i]);
-            int tmp = num[i];
-            int increase = tmp;
-            int decrease = tmp;
             
-            while (hashSet.find(++increase) != hashSet.end()) {
-                hashSet.insert(increase);
+            int len = 1;
+            
+            hashSet.erase(num[i]);
+            int increase = num[i] + 1;
+            int decrease = num[i] - 1;
+            
+            while (hashSet.find(increase) != hashSet.end()) {
+                hashSet.erase(increase);
                 len++;
+                increase++;
             }
             
-            while (hashSet.find(--decrease) != hashSet.end()) {
-                hashSet.insert(decrease);
+            while (hashSet.find(decrease) != hashSet.end()) {
+                hashSet.erase(decrease);
                 len++;
+                decrease--;
             }
             
             result = max(result, len);
