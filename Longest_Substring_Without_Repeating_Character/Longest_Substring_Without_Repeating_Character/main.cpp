@@ -23,15 +23,13 @@ public:
         }
         
         int start = 0;
-        int end = 0;
-        int result = INT_MIN;
+        
         unordered_set<char> hashSet;
-        while (end != s.size()) {
+        int result = 1;
+        for (int end = 0; end < s.size(); end++) {
             if (hashSet.find(s[end]) == hashSet.end()) {
                 hashSet.insert(s[end]);
-                result = max(result, end -start + 1);
-                end++;
-                
+                result = max(result, end - start + 1);
             } else {
                 while (s[start] != s[end]) {
                     hashSet.erase(s[start]);
@@ -39,14 +37,14 @@ public:
                 }
                 
                 start++;
-                result = max(result, end -start + 1);
-                end++;
+                result = max(result, end - start + 1);
                 
             }
+            
         }
-        
         return result;
     }
+    
 };
 int main(int argc, const char * argv[])
 {

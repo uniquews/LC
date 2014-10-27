@@ -20,51 +20,47 @@ struct TreeNode {
 };
 
 
-//Traditional traverse with parent pointer
-//class Solution {
-//
-//public:
-//
-//    vector<TreeNode *>findRoot (TreeNode *node) {
-//
-//        if (node->parent == nullptr) {
-//            return vector<TreeNode *> {};
-//        }
-//
-//        vector<TreeNode *> nodeList;
-//
-//        while (node != nullptr) {
-//            nodeList.push_back(node);
-//            node = node->parent;
-//        }
-//
-//
-//        return nodeList; // root;
-//    }
-//
-//    TreeNode *findAncestor (TreeNode *node1, TreeNode *node2) {
-//        if (node1 == nullptr || node2 == nullptr) {
-//            return nullptr;
-//        }
-//
-//        vector<TreeNode *> nodeList1 = findRoot(node1);
-//        vector<TreeNode *> nodeList2 = findRoot(node2);
-//
-//        int i = (int)nodeList1.size() - 1;
-//        int j = (int)nodeList2.size() - 1;
-//
-//        for (; i >= 0, j >= 0; i--, j--) {
-//            if (nodeList1[i] != nodeList2[j]) {
-//                return nodeList1[i]->parent;
-//            }
-//
-//        }
-//
-//
-//        return nullptr;
-//    }
-//
-//};
+class Solution {
+    
+public:
+    TreeNode* LCA (TreeNode *p, TreeNode *q) {
+        vector<TreeNode *> first;
+        vector<TreeNode *> second;
+        
+        TreeNode *tmp1 = p;
+        while (tmp1->parent != nullptr) {
+            first.push_back(tmp1);
+            tmp1 = tmp1->parent;
+        }
+        
+        TreeNode *tmp2 = q;
+        while (tmp2->parent != nullptr) {
+            second.push_back(tmp2);
+            tmp2 = tmp2->parent;
+        }
+        
+        
+        int i = first.size() - 1;
+        int j = second.size() - 1;
+        
+        while (i >= 0 && j >= 0) {
+            if (first[i] != second[j]) {
+                return first[i]->parent;
+            }
+            i--;
+            j--;
+            
+        }
+        
+        if (i < 0) {
+            return first[0];
+        } else {
+            return second[0];
+        }
+        
+    }
+    
+};
 
 
 //Divide and Conquer
@@ -146,44 +142,44 @@ struct TreeNode {
 //    
 //};
 
-class Solution {
-    
-public:
-    int LCA (TreeNode *p, TreeNode *q, TreeNode *root) {
-        if (p == nullptr || q == nullptr) {
-            return -1;
-        }
-        
-        if (p == root) {
-            return p->val;
-        }
-        
-        if(q == root) {
-            return q->val;
-        }
-        
-        int leftVal = LCA(p, q, root->left);
-        int rightVal = LCA(p, q, root->right);
-        
-        if (leftVal == -1 && rightVal == -1) {
-            return -1;
-        }
-        
-        if (leftVal != -1 && rightVal != -1) {
-            return root->val;
-        }
-        
-        if (leftVal != -1) {
-            return leftVal;
-        }
-        
-        if (rightVal != -1) {
-            return rightVal;
-        }
-        return -1;
-    }
-    
-};
+//class Solution {
+//    
+//public:
+//    int LCA (TreeNode *p, TreeNode *q, TreeNode *root) {
+//        if (p == nullptr || q == nullptr) {
+//            return -1;
+//        }
+//        
+//        if (p == root) {
+//            return p->val;
+//        }
+//        
+//        if(q == root) {
+//            return q->val;
+//        }
+//        
+//        int leftVal = LCA(p, q, root->left);
+//        int rightVal = LCA(p, q, root->right);
+//        
+//        if (leftVal == -1 && rightVal == -1) {
+//            return -1;
+//        }
+//        
+//        if (leftVal != -1 && rightVal != -1) {
+//            return root->val;
+//        }
+//        
+//        if (leftVal != -1) {
+//            return leftVal;
+//        }
+//        
+//        if (rightVal != -1) {
+//            return rightVal;
+//        }
+//        return -1;
+//    }
+//    
+//};
 
 int main(int argc, const char * argv[])
 {
@@ -223,6 +219,7 @@ int main(int argc, const char * argv[])
     Solution su;
 //    cout << su.findLCA(a, h, e) -> val << endl;
 //    cout << su.LCA(e, nullptr)->val << endl;
+    cout << su.LCA(i, c)->val << endl;
     
     
     return 0;
