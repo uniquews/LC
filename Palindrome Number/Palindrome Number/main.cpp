@@ -16,39 +16,32 @@ public:
             return false;
         }
         
-        if (x < 10) {
-            return true;
-        }
-        
-        int tmp = x;
         int division = 1;
-        while (tmp / division >= 10) {
+        while (x / division >= 10) {
             division *= 10;
-            
         }
         
         while (x > 0) {
-            int begin = x /division;
+            int start = x / division;
             int end = x % 10;
-            if (begin != end) {
+            if (start != end) {
                 return false;
             }
-            x = x % division / 10;
-            division = division / 100;
             
+            x = x % division;
+            x = x / 10;
+            division = division / 100;
         }
         
         return true;
-        
     }
-    
 };
 int main(int argc, const char * argv[])
 {
 
     // insert code here...
     Solution *s = new Solution();
-    cout<< s->isPalindrome(1001)<< endl;
+    cout<< s->isPalindrome(111111)<< endl;
     return 0;
 }
 
