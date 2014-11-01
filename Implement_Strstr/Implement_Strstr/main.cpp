@@ -8,68 +8,35 @@
 
 #include <iostream>
 
-//class Solution {
-//public:
-//    char *strStr(char *haystack, char *needle) {
-//        if(haystack==NULL|| needle==NULL)
-//            return NULL;
-//        int hlength = strlen(haystack);
-//        int nlength = strlen(needle);
-//        
-//        if(nlength > hlength)
-//            return NULL;
-//        
-//        for(int i=0; i< hlength-nlength+1; i++){
-//            int j=0;
-//            char *p =&haystack[i];
-//            for(; j< nlength; j++){
-//                if(*p != needle[j]){
-//                    break;
-//                }
-//                p++;
-//            }
-//            
-//            if(j == nlength){
-//                return &haystack[i];
-//            }
-//        }
-//        
-//        return NULL;
-//    }
-//};
-
 class Solution {
 public:
     char *strStr(char *haystack, char *needle) {
-        
-        
         if (haystack == nullptr || needle == nullptr) {
-            return NULL;
+            return nullptr;
         }
         
-        int hayLength = strlen(haystack);
-        int needleLength = strlen(needle);
+        int hayLen = strlen(haystack);
+        int neeLen = strlen(needle);
         
-        int i = 0;
-        int j = 0;
+        if (neeLen > hayLen) {
+            return nullptr;
+        }
         
-        for (; i < hayLength - needleLength + 1; i++) {
-            for (; j < needleLength; j++) {
-                if (haystack[i + j] != needle[j]) {
-                    j = 0;
-                    break;
-                }
+        for (int i = 0; i <= hayLen - neeLen; i++) {
+            int j = 0;
+            while (j < neeLen && haystack[i + j] == needle[j]) {
+                j++;
             }
             
-            if (j == needleLength) {
+            if (j == neeLen) {
                 return &haystack[i];
             }
         }
         
-        return NULL;
+        return nullptr;
+        
     }
 };
-
 int main(int argc, const char * argv[])
 {
 

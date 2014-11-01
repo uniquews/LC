@@ -10,29 +10,29 @@
 	<string>MergeSort</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>DC38A44F-5168-476D-94F0-0D3221657061</key>
-		<string>https://github.com/uniquews/LC.git</string>
+		<key>C116D29A2A61A6AD31478699326D2D5B3100A182</key>
+		<string>github.com:uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MergeSort/MergeSort.xcodeproj/project.xcworkspace</string>
+	<string>MergeSort/MergeSort.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>DC38A44F-5168-476D-94F0-0D3221657061</key>
+		<key>C116D29A2A61A6AD31478699326D2D5B3100A182</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/uniquews/LC.git</string>
+	<string>github.com:uniquews/LC.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DC38A44F-5168-476D-94F0-0D3221657061</string>
+	<string>C116D29A2A61A6AD31478699326D2D5B3100A182</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DC38A44F-5168-476D-94F0-0D3221657061</string>
+			<string>C116D29A2A61A6AD31478699326D2D5B3100A182</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LC</string>
 		</dict>

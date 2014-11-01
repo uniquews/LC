@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>38411655-26CD-4697-B5F4-F0AD1C728D75</string>
+	<string>382F8A60-3E81-4EF9-90E0-135EEF3EA2F1</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Implement_Strstr</string>
+	<string>Jump Game III</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B4B12A85-73A0-4182-8B79-D84DA31A0F85</key>
+		<key>3BF7CA76-107A-4C6A-8CE9-7B1532D21EF2</key>
 		<string>ssh://github.com/uniquews/LC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Implement_Strstr/Implement_Strstr.xcodeproj/project.xcworkspace</string>
+	<string>Jump Game III/Jump Game III.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B4B12A85-73A0-4182-8B79-D84DA31A0F85</key>
+		<key>3BF7CA76-107A-4C6A-8CE9-7B1532D21EF2</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B4B12A85-73A0-4182-8B79-D84DA31A0F85</string>
+	<string>3BF7CA76-107A-4C6A-8CE9-7B1532D21EF2</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B4B12A85-73A0-4182-8B79-D84DA31A0F85</string>
+			<string>3BF7CA76-107A-4C6A-8CE9-7B1532D21EF2</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LC</string>
 		</dict>

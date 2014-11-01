@@ -11,24 +11,61 @@
 class Solution {
 public:
     bool isNumber(const char *s) {
-        char *endptr;
-        strtod(s, &endptr);
-        
-        if(s == endptr) return false;
-        
-        for(; *endptr; endptr++){
-            if(!isspace(*endptr)) return false;
+        int start = 0;
+        int end = (int)strlen(s) - 1;
+        while (start <= end && s[start] == ' ') {
+            start++;
         }
         
-        return true;
+        if (start > end) {
+            return false;
+        }
+        
+        while (end >= start && s[end] == ' ') {
+            end--;
+        }
+        
+        if (s[start] == '+' || s[start] == '-') {
+            start++;
+        }
+        
+        bool num = false;
+        bool exp = false;
+        bool dot = false;
+        while (start <= end) {
+            if (s[start] >= '0' && s[start] <= '9') {
+                num = true;
+            } else if (s[start] == 'e') {
+                if (exp || (num == false)) {
+                    return false;
+                }
+                exp = true;
+                num = false;
+            } else if (s[start] == '.') {
+                if (exp || dot) {
+                    return false;
+                }
+                dot = true;
+            } else if (s[start] == '+' || s[start] == '-') {
+                if (s[start - 1] != 'e') {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            start++;
+            
+        }
+        
+        return num;
     }
 };
 
 int main(int argc, const char * argv[])
 {
 
-    char a = '3';
-    char *s = &a;
+//    char *s = "3";
+    char *s = "32.e-80123";
     Solution su;
     std::cout << su.isNumber(s);
     
