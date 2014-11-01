@@ -78,49 +78,103 @@ struct TreeLinkNode {
  * };
  */
 
+//class Solution {
+//public:
+//    void connect(TreeLinkNode *root) {
+//        if(root==nullptr) return;
+//        vector<TreeLinkNode *> layer;
+//        queue<TreeLinkNode *> nodeQueue;
+//        
+//        int currentLayer = 1;
+//        int nextLayer = 0;
+//        
+//        nodeQueue.push(root);
+//        
+//        TreeLinkNode dummy(-1);
+//        TreeLinkNode *prev = &dummy;
+//        
+//        while(!nodeQueue.empty()){
+//            TreeLinkNode *p = nodeQueue.front();
+//            nodeQueue.pop();
+//            currentLayer--;
+//            prev->next = p;
+//            prev = prev->next;
+//            
+//            if(p->left){
+//                nodeQueue.push(p->left);
+//                nextLayer++;
+//                
+//            }
+//            
+//            if(p->right){
+//                nodeQueue.push(p->right);
+//                nextLayer++;
+//            }
+//            
+//            if(currentLayer == 0){
+//                prev->next = nullptr;
+//                prev = &dummy;
+//                currentLayer = nextLayer;
+//                nextLayer = 0;
+//            }
+//            
+//        }
+//        
+//        return;
+//    }
+//};
+
+/**
+ * Definition for binary tree with next pointer.
+ * struct TreeLinkNode {
+ *  int val;
+ *  TreeLinkNode *left, *right, *next;
+ *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
-        if(root==nullptr) return;
-        vector<TreeLinkNode *> layer;
-        queue<TreeLinkNode *> nodeQueue;
+        if (root == nullptr) {
+            return;
+        }
         
-        int currentLayer = 1;
-        int nextLayer = 0;
-        
-        nodeQueue.push(root);
-        
-        TreeLinkNode dummy(-1);
-        TreeLinkNode *prev = &dummy;
-        
-        while(!nodeQueue.empty()){
-            TreeLinkNode *p = nodeQueue.front();
-            nodeQueue.pop();
-            currentLayer--;
-            prev->next = p;
-            prev = prev->next;
-            
-            if(p->left){
-                nodeQueue.push(p->left);
-                nextLayer++;
+        TreeLinkNode *parent = root;
+        TreeLinkNode *prev = nullptr;
+        TreeLinkNode *nextStart = nullptr;
+        while (parent != nullptr) {
+            prev = nullptr;
+            nextStart = nullptr;
+            while (parent != nullptr) {
+                if (nextStart == nullptr) {
+                    nextStart = parent->left == nullptr ? parent->right : parent->left;
+                }
+                if (parent->left != nullptr) {
+                    if (prev == nullptr) {
+                        prev = parent->left;
+                    } else {
+                        prev->next = parent->left;
+                        prev = prev->next;
+                    }
+                }
                 
+                if (parent->right != nullptr) {
+                    if (prev == nullptr) {
+                        prev = parent->right;
+                    } else {
+                        prev->next = parent->right;
+                        prev = prev->next;
+                    }
+                }
+                
+                parent = parent->next;
             }
             
-            if(p->right){
-                nodeQueue.push(p->right);
-                nextLayer++;
-            }
-            
-            if(currentLayer == 0){
-                prev->next = nullptr;
-                prev = &dummy;
-                currentLayer = nextLayer;
-                nextLayer = 0;
-            }
-            
+            parent = nextStart;
         }
         
         return;
+        
     }
 };
 
