@@ -11,51 +11,6 @@
 
 using namespace std;
 
-class Solution {
-public:
-    int atoi(const char *str) {
-        if (strlen(str) == 0) {
-            return 0;
-        }
-        
-        int i = 0;
-        int result = 0;
-        bool exist = false;
-        while (str[i] == ' ') {
-            i++;
-        }
-        
-        bool sign = true;
-        if (str[i] == '+') {
-            sign = true;
-            exist = true;
-        }
-        
-        if (str[i] == '-') {
-            sign = false;
-            exist = true;
-        }
-        
-        if (exist == true) {
-            i++;
-        }
-        
-        for (int j = i; j < strlen(str); j++) {
-            if (str[j] < '0' || str[j] > '9') {
-                break;
-            }
-            
-            if (INT_MAX / 10 < result || (INT_MAX / 10 == result && INT_MAX % 10 < (str[j] - '0'))) {
-                return sign == false ? INT_MIN : INT_MAX;
-            }
-            
-            result = result * 10 + str[j] - '0';
-        }
-        
-        return sign == false ? result * (-1) : result;
-    }
-};
-
 //class Solution {
 //public:
 //    int atoi(const char *str) {
@@ -110,13 +65,61 @@ public:
 
 
 
-
+class Solution {
+public:
+    int atoi(const char *str) {
+        int result = 0;
+        int len = strlen(str);
+        int start = 0;
+        bool neg = false;
+        while (start <= len - 1 && str[start] == ' ') {
+            start++;
+        }
+        
+        if (start == len) {
+            return result;
+        }
+        
+        if (str[start] == '+') {
+            if (str[start + 1] == '-') {
+                return result;
+            }
+            start++;
+        }
+        
+        if (str[start] == '-') {
+            if (str[start + 1] == '+') {
+                return result;
+            }
+            start++;
+            neg = true;
+        }
+        
+        for (int i = start; i < len; i++) {
+            if (str[i] < '0' || str[i] > '9') {
+                break;
+            }
+            
+            if (INT_MAX / 10 < result || ((INT_MAX / 10 == result) && (INT_MAX % 10 < str[i] - '0'))) {
+                return neg == true ? INT_MIN : INT_MAX;
+            }
+            
+            result = result * 10 + str[i] - '0';
+        }
+        
+        if (neg == true) {
+            return (-1) * result;
+        } else {
+            return result;
+        }
+    }
+};
 int main(int argc, const char * argv[])
 {
 
-    char *s = "+-2";
+    char *s = "-2147483649";
     Solution su;
-    su.atoi(s);
+    cout << su.atoi(s) << endl;
     
     return 0;
 }
