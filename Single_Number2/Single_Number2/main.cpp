@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+using namespace std;
 class Solution {
 public:
     int singleNumber(int A[], int n) {
@@ -16,10 +17,11 @@ public:
         for (int i = 0; i < 32; i++) {
             int count  = 0;
             for (int j = 0; j < n; j++) {
-                count += ((A[j] >> i) & 1);
+                count += ((A[j] >> i) & 1); // count 只有可能是0或1，所以后面不会进位
             }
             
-            result |= (count % 3) << i;
+            
+            result += (count % 5) << i;
         }
         
         return result;
@@ -29,8 +31,9 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    int A[] = {5,5,5,5,5,7};
+    Solution su;
+    cout << su.singleNumber(A, 6) << endl;
     return 0;
 }
 
