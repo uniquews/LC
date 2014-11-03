@@ -22,45 +22,56 @@ struct Point {
 };
 
 
+/**
+ * Definition for a point.
+ * struct Point {
+ *     int x;
+ *     int y;
+ *     Point() : x(0), y(0) {}
+ *     Point(int a, int b) : x(a), y(b) {}
+ * };
+ */
 class Solution {
-    
 public:
     int maxPoints(vector<Point> &points) {
         unordered_map<float, int> eachKey;
         int maxSame = 0;
         
-        for(int i=0; i<points.size(); i++){
-            int duplicate = 1;
+        for (int i = 0; i < points.size(); i++) {
             eachKey.clear();
-            eachKey[INT_MIN] = 0; //[0,0][0,0]  or [1,1] [1,1] [1,1]... only has duplicate points
-            for(int j =0; j<points.size(); j++){
-                if(i == j) continue;
-                
-                //count duplicate
-                if(points[j].x == points[i].x && points[j].y == points[i].y){
-                    duplicate++;
+            eachKey[INT_MIN] = 0;
+            int duplicate = 1;
+            for (int j = 0; j < points.size(); j++) {
+                if (i == j) {
                     continue;
+                } else if (points[i].x == points[j].x && points[i].y == points[j].y) {
+                    duplicate++;
+                } else {
+                    if (points[i].y == points[j].y) {
+                        eachKey[0]++;
+                    } else {
+                        if (points[i].x == points[j].x) {
+                            eachKey[INT_MAX]++;
+                        } else {
+                            float key = (float)((points[i].x - points[j].x) / (float)(points[i].y - points[j].y));
+                            eachKey[key]++;
+                        }
+                    }
                 }
                 
-                //for line is vertical to the x axis
-                
-            // Dividing two integer to produce a float result: http://stackoverflow.com/questions/12447325/dividing-two-integers-to-produce-a-float-result
-                float key = (points[j].x - points[i].x) == 0 ?INT_MAX :(float) (points[j].y - points[i].y) / (float)(points[j].x - points[i].x);                eachKey[key]++;
             }
             
-            unordered_map<float, int>::iterator it = eachKey.begin();
-            for(; it!=eachKey.end(); it++){
-                if(it->second + duplicate > maxSame)
+            unordered_map<float, int> :: iterator it = eachKey.begin();
+            for (; it != eachKey.end(); it++) {
+                if (it->second + duplicate > maxSame) {
                     maxSame = it->second + duplicate;
+                }
             }
             
         }
         
         return maxSame;
-        
-        
     }
- 
 };
 
 
@@ -68,17 +79,26 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    Point a (84,250);
-    Point b (0,0);
-    Point c (1,0);
-    Point d (0,-70);
-    Point e (0,-70);
-    Point f (1,-1);
-    Point g (21,10);
-    Point h (42,90);
-    Point i (-42,-230);
+//    Point a (84,250);
+//    Point b (0,0);
+//    Point c (1,0);
+//    Point d (0,-70);
+//    Point e (0,-70);
+//    Point f (1,-1);
+//    Point g (21,10);
+//    Point h (42,90);
+//    Point i (-42,-230);
     
-    vector<Point> v = {a,b,c,d,e,f,g,h,i};
+//    Point a (1,1);
+//    Point b (0,0);
+//    Point c (2,2);
+//    Point d (2,3);
+//    Point e (4,10);
+//    Point f (1,1);
+    
+    Point a (0,0);
+    
+    vector<Point> v = {a};
     
     
     Solution su;
