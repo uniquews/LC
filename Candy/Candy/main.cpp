@@ -11,6 +11,8 @@
 
 using namespace std;
 
+
+
 class Solution {
 public:
     int candy(vector<int> &ratings) {
@@ -18,39 +20,27 @@ public:
             return 0;
         }
         
-        vector<int> eachPerson(ratings.size());
-        for (int i = 0; i <ratings.size(); i++) {
-            if (i == 0) {
-                eachPerson[i] = 1;
-            } else {
-                if (ratings[i] <= ratings[i - 1]) {
-                    eachPerson[i] = 1;
-                } else if (ratings[i] > ratings[i - 1]) {
-                    eachPerson[i] = eachPerson[i - 1] + 1;
-                }
-            }
-            
-        }
-        
-        
-        for (int i = (int)ratings.size() - 1, candy = 1; i >= 0; i--) {
-            if (i == ratings.size() - 1) {
-                eachPerson[i] = max(candy, eachPerson[i]);
-                candy = eachPerson[i];
-            } else {
-                if (ratings[i] > ratings[i + 1]) {
-                    eachPerson[i] = max(candy + 1, eachPerson[i]);
-                    candy = eachPerson[i];
-                } else if (ratings[i] <= ratings[i + 1]) {
-                    eachPerson[i] = max(1, eachPerson[i]);
-                    candy = eachPerson[i];
-                }
-            }
-        }
-        
         int result = 0;
-        for (int i = 0; i < eachPerson.size(); i++) {
-            result += eachPerson[i];
+        vector<int> child(ratings.size());
+        child[0] = 1;
+        for (int i = 0; i < child.size(); i++) {
+            if (ratings[i] > ratings[i - 1]) {
+                child[i] = child[i - 1] + 1;
+            } else {
+                child[i] = 1;
+            }
+        }
+        
+        for (int i = (int)child.size() - 2;  i >= 0; i--) {
+            if (ratings[i] > ratings[i + 1]) {
+                child[i] = max(child[i], child[i + 1] + 1);
+            } else {
+                child[i] = max(child[i], 1);
+            }
+        }
+        
+        for (int i = 0; i < child.size(); i++) {
+            result += child[i];
         }
         
         return result;
@@ -58,11 +48,12 @@ public:
 };
 
 
-
 int main(int argc, const char * argv[])
 {
 
-    vector<int> ratings = {2,2,1};
+//    vector<int> ratings = {2,2,1};
+    vector<int> ratings = {1,2};
+    
     Solution su;
     cout << su.candy(ratings) << endl;
     return 0;
