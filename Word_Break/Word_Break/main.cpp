@@ -56,6 +56,26 @@ using namespace std;
 //            }
 //        }
 //        
+//class Solution {
+//public:
+//    bool wordBreak(string s, unordered_set<string> &dict) {
+//        vector<bool> f(s.size() + 1, false);
+//        f[0] = true;
+//        
+//        for (int i = 1; i <= s.size(); i++) {
+//            for (int j = 0; j <= i - 1; j++) {
+//                string tmp = s.substr(j, i - j);
+//                if (f[j] && dict.find(tmp) != dict.end()) {
+//                    f[i] = true;
+//                }
+//            }
+//        }
+//        
+//        
+//        return f[s.size()];
+//    }
+//};
+
 class Solution {
 public:
     bool wordBreak(string s, unordered_set<string> &dict) {
@@ -63,14 +83,13 @@ public:
         f[0] = true;
         
         for (int i = 1; i <= s.size(); i++) {
-            for (int j = 0; j <= i - 1; j++) {
-                string tmp = s.substr(j, i - j);
-                if (f[j] && dict.find(tmp) != dict.end()) {
+            for (int j = 0; j < i; j++) {
+                if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
                     f[i] = true;
                 }
             }
+            
         }
-        
         
         return f[s.size()];
     }
