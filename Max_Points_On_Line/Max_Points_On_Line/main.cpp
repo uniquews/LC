@@ -39,7 +39,6 @@ public:
         
         for (int i = 0; i < points.size(); i++) {
             eachKey.clear();
-            eachKey[INT_MIN] = 0;
             int duplicate = 1;
             for (int j = 0; j < points.size(); j++) {
                 if (i == j) {
@@ -64,8 +63,12 @@ public:
             unordered_map<float, int> :: iterator it = eachKey.begin();
             for (; it != eachKey.end(); it++) {
                 if (it->second + duplicate > maxSame) {
-                    maxSame = it->second + duplicate;
+                    maxSame = max(maxSame, it->second + duplicate);
                 }
+            }
+            
+            if (maxSame == 0) {
+                maxSame = duplicate;
             }
             
         }
@@ -73,7 +76,6 @@ public:
         return maxSame;
     }
 };
-
 
 
 int main(int argc, const char * argv[])
