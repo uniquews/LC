@@ -22,33 +22,66 @@ struct ListNode {
 };
 
 
+//class Solution {
+//public:
+//    TreeNode *sortedListToBST(ListNode *head) {
+//        int len = 0;
+//        ListNode *p = head;
+//        while (p) {
+//            len++;
+//            p = p->next;
+//        }
+//        
+//        return build(head, 0, len - 1);
+//    }
+//    
+//    TreeNode *build(ListNode *&head, int start, int end) {
+//        if (start > end) {
+//            return nullptr;
+//        }
+//        
+//        int mid = start + (end - start) / 2;
+//        TreeNode *leftChild = build(head, start, mid - 1);
+//        TreeNode *parent = new TreeNode(head->val);
+//        parent->left = leftChild;
+//        head = head->next;
+//
+//        
+//        parent->right = build(head, mid + 1, end);
+//        return parent;
+//    }
+//};
+
 class Solution {
 public:
     TreeNode *sortedListToBST(ListNode *head) {
-        int len = 0;
-        ListNode *p = head;
-        while (p) {
-            len++;
-            p = p->next;
-        }
-        
-        return build(head, 0, len - 1);
-    }
-    
-    TreeNode *build(ListNode *&head, int start, int end) {
-        if (start > end) {
+        if (head == nullptr) {
             return nullptr;
         }
         
-        int mid = start + (end - start) / 2;
-        TreeNode *leftChild = build(head, start, mid - 1);
-        TreeNode *parent = new TreeNode(head->val);
-        parent->left = leftChild;
-        head = head->next;
-
+        int len = 0;
+        ListNode *tmp = head;
+        while (tmp != nullptr) {
+            len++;
+            tmp = tmp->next;
+        }
         
-        parent->right = build(head, mid + 1, end);
-        return parent;
+        return convert(head, 0, len - 1);
+    }
+    
+    TreeNode * convert(ListNode *&node, int start, int end) {
+        if (start > end) {
+            return nullptr;
+        } else {
+            int mid = start + (end - start) / 2;
+            TreeNode *leftNode = convert(node, start, mid - 1);
+            TreeNode *root = new TreeNode(node->val);
+            node = node->next;
+            TreeNode *rightNode = convert(node, mid + 1, end);
+            root->left = leftNode;
+            root->right = rightNode;
+            return root;
+        }
     }
 };
 
