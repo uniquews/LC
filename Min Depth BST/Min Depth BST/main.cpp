@@ -24,25 +24,19 @@ public:
             return 0;
         }
         
-        if (root->left == nullptr && root->right == nullptr) {
-            return 1;
+        int leftDepth = minDepth(root->left);
+        int rightDepth = minDepth(root->right);
+        if (leftDepth == 0) {
+            return rightDepth + 1;
         }
         
-        int left = minDepth(root->left);
-        int right = minDepth(root->right);
-        
-        if (left == 0) {
-            return right + 1;
+        if (rightDepth == 0) {
+            return leftDepth + 1;
         }
         
-        if (right == 0) {
-            return left + 1;
-        }
-        
-        return min(left, right) + 1;
+        return min(leftDepth, rightDepth) + 1;
     }
 };
-
 int main(int argc, const char * argv[])
 {
 

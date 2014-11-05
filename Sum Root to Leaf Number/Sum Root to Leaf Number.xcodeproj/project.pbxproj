@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		60EA60F219CF551E002839AD /* Sum Root to Leaf Number */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Sum Root to Leaf Number"; sourceTree = BUILT_PRODUCTS_DIR; };
-		60EA60F519CF551E002839AD /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		60EA60F519CF551E002839AD /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; usesTabs = 0; };
 		60EA60F719CF551E002839AD /* Sum_Root_to_Leaf_Number.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Sum_Root_to_Leaf_Number.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,6 +227,7 @@
 				60EA60FD19CF551E002839AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

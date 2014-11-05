@@ -132,6 +132,59 @@ struct TreeLinkNode {
  *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
  * };
  */
+//class Solution {
+//public:
+//    void connect(TreeLinkNode *root) {
+//        if (root == nullptr) {
+//            return;
+//        }
+//        
+//        TreeLinkNode *parent = root;
+//        TreeLinkNode *prev = nullptr;
+//        TreeLinkNode *nextStart = nullptr;
+//        while (parent != nullptr) {
+//            prev = nullptr;
+//            nextStart = nullptr;
+//            while (parent != nullptr) {
+//                if (nextStart == nullptr) {
+//                    nextStart = parent->left == nullptr ? parent->right : parent->left;
+//                }
+//                if (parent->left != nullptr) {
+//                    if (prev == nullptr) {
+//                        prev = parent->left;
+//                    } else {
+//                        prev->next = parent->left;
+//                        prev = prev->next;
+//                    }
+//                }
+//                
+//                if (parent->right != nullptr) {
+//                    if (prev == nullptr) {
+//                        prev = parent->right;
+//                    } else {
+//                        prev->next = parent->right;
+//                        prev = prev->next;
+//                    }
+//                }
+//                
+//                parent = parent->next;
+//            }
+//            
+//            parent = nextStart;
+//        }
+//        
+//        return;
+//        
+//    }
+//};
+/**
+ * Definition for binary tree with next pointer.
+ * struct TreeLinkNode {
+ *  int val;
+ *  TreeLinkNode *left, *right, *next;
+ *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
@@ -139,45 +192,41 @@ public:
             return;
         }
         
-        TreeLinkNode *parent = root;
-        TreeLinkNode *prev = nullptr;
-        TreeLinkNode *nextStart = nullptr;
-        while (parent != nullptr) {
-            prev = nullptr;
-            nextStart = nullptr;
-            while (parent != nullptr) {
-                if (nextStart == nullptr) {
-                    nextStart = parent->left == nullptr ? parent->right : parent->left;
-                }
-                if (parent->left != nullptr) {
-                    if (prev == nullptr) {
-                        prev = parent->left;
-                    } else {
-                        prev->next = parent->left;
-                        prev = prev->next;
-                    }
+        TreeNode *cur = root;
+        TreeNode *tail = nullptr;
+        TreeNode *nextCur = nullptr;
+        
+        while (cur != nullptr) {
+            tail = nullptr;
+            nextCur = nullptr;
+            while (cur != nullptr) {
+                if (nextCur == nullptr) {
+                    nextCur = cur->left != nullptr ? cur->left : cur->right;
                 }
                 
-                if (parent->right != nullptr) {
-                    if (prev == nullptr) {
-                        prev = parent->right;
+                if (cur->left != nullptr) {
+                    if (tail == nullptr) {
+                        tail = cur->left;
                     } else {
-                        prev->next = parent->right;
-                        prev = prev->next;
+                        tail->next = cur->left;
+                        tail = tail->next;
+                    }
+                } else {
+                    if (tail == nullptr) {
+                        tail = cur->right;
+                    } else {
+                        tail->next = cur->right;
+                        tail = tail->next;
                     }
                 }
-                
-                parent = parent->next;
             }
             
-            parent = nextStart;
+            cur = nextCur;
         }
         
         return;
-        
     }
 };
-
 
 int main(int argc, const char * argv[])
 {
