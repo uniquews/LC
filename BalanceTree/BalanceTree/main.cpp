@@ -35,38 +35,39 @@ public:
             return true;
         }
         
-        if(isBalanced(root, 1) == -1) {
+        if (check(root) == -1) {
             return false;
         } else {
             return true;
         }
+        
     }
     
-    int isBalanced(TreeNode *node, int depth) {
+    int check(TreeNode *node) {
         if (node == nullptr) {
-            return depth - 1;
+            return 0;
         }
         
-        int left = isBalanced(node->left, depth + 1);
-        int right = isBalanced(node->right, depth + 1);
+        if (node->left == nullptr && node->right == nullptr) {
+            return 1;
+        }
         
-        if (left == -1) {
+        int leftDepth = check(node->left);
+        int rightDepth = check(node->right);
+        if (leftDepth == -1 || rightDepth == -1 || abs(leftDepth - rightDepth) > 1) {
             return -1;
         }
         
-        if (right == -1) {
-            return -1;
+        if (leftDepth == 0) {
+            return rightDepth + 1;
         }
         
-        if (abs(left - right) > 1) {
-            return -1;
+        if (rightDepth == 0) {
+            return leftDepth + 1;
         }
         
-        return max(left, right);
-        
-        
+        return max(leftDepth, rightDepth) + 1;
     }
-    
 };
 int main(int argc, const char * argv[])
 {
