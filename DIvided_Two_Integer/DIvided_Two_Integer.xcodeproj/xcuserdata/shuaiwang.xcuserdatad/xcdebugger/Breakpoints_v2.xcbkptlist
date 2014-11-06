@@ -10,27 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DIvided_Two_Integer/main.cpp"
-            timestampString = "429052766.981222"
+            timestampString = "436948595.739173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "divide(int dividend, int divisor)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DIvided_Two_Integer/main.cpp"
-            timestampString = "429052999.243868"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "main(int argc, const char * argv[])"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DIvided_Two_Integer/main.cpp"
-            timestampString = "429053050.66998"
+            timestampString = "436948593.584853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "divide(int dividend, int divisor)"
             landmarkType = "5">
          </BreakpointContent>

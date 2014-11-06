@@ -16,34 +16,67 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> fourSum(vector<int> &num, int target) {
+        if (num.size() == 0) {
+            return vector<vector<int>> ();
+        }
         
-        if(num.size()<4) return vector<vector<int>> {};
         sort(num.begin(), num.end());
         
-        map<int, vector<pair<int, int>>> cache; // store each two numbers sum as a pair
-        for(size_t first =0; first< num.size()-1; first++){
-            for(size_t second = first+1; second < num.size(); second++){
-                int key = num[first] + num[second];
-                cache[key].push_back(make_pair(first, second)); // store the index
-            }
-        }
+        vector<vector<int>> result;
         
-        set<vector<int>> result;
-        for(size_t third = 2; third < num.size()-1; third++){
-            for(size_t fourth = third+1; fourth < num.size(); fourth++){
-                int gap = target - num[third] - num[fourth];
-                if(cache.find(gap)!=cache.end()){
-                    for(size_t k =0; k< cache[gap].size(); k++){
-                        if(third <= cache[gap][k].second)
-                            continue;
-                        result.insert(vector<int>{num[cache[gap][k].first], num[cache[gap][k].second], num[third], num[fourth]});
-                    }
+        for (int i = 0; i < num.size(); i++) {
+            vector<int> eachResult;
+            eachResult.push_back(num[i]);
+            for (int j = i + 1; j < num.size(); j++) {
+                eachResult.push_back(num[j]);
+                int tmp = target - num[i] - num[j];
+                twoSum(num, result, eachResult, tmp, j);
+                eachResult.pop_back();
+                
+                
+                while (j + 1 < num.size() && num[j] == num[j + 1]) {
+                    j++;
                 }
             }
+            eachResult.pop_back();
+            
+            while (i + 1 < num.size() && num[i] == num[i + 1]) {
+                i++;
+            }
         }
         
-        return vector<vector<int>> {result.begin(), result.end()};
+        return result;
+    }
+    
+    void twoSum(vector<int> num, vector<vector<int>> &result, vector<int> &eachResult, int target, int currentIndex) {
+        int left = currentIndex + 1;
+        int right = num.size() - 1;
+        while (left < right) {
+            if (num[left] + num[right] > target) {
+                right--;
+            } else if (num[left] + num[right] < target) {
+                left++;
+            } else {
+                eachResult.push_back(num[left]);
+                eachResult.push_back(num[right]);
+                result.push_back(eachResult);
+                while (left + 1 < right && num[left] == num[left + 1]) {
+                    left++;
+                }
+                
+                while (right - 1 >  left && num[right] == num[right - 1]) {
+                    right--;
+                }
+                
+                left++;
+                right--;
+                eachResult.pop_back();
+                eachResult.pop_back();
+            }
+            
+        }
         
+        return;
     }
     
 };

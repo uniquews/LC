@@ -54,7 +54,8 @@ int main(int argc, const char * argv[])
     // insert code here...
 //    int a[]={1,2,3,4,5};
 //    vector<int> a={1,2,3,4,5,4,2};
-    vector<int> a={8,7,6,1,4,3,10,9};
+//    vector<int> a={8,7,6,1,4,3,10,9};
+    vector<int> a={1,2,3,9,9,6,7,8};
     int end = (int)a.size();
 
     

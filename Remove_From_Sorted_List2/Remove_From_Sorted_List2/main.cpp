@@ -31,44 +31,75 @@ struct ListNode {
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+//class Solution {
+//public:
+//    ListNode *deleteDuplicates(ListNode *head) {
+//        if (head == nullptr || head->next == nullptr) {
+//            return head;
+//        }
+//        
+//        ListNode dummy(-1);
+//        ListNode *tail = &dummy;
+//        ListNode *cur = head;
+//        bool isDup = false;
+//        
+//        while (cur != nullptr) {
+//            while (cur->next != nullptr && cur->val == cur->next->val) {
+//                isDup = true;
+//                cur = cur->next;
+//            }
+//            
+//            if (isDup == false) {
+//                tail->next = cur;
+//                cur = cur->next;
+//                tail = tail->next;
+//            } else {
+//                cur = cur->next;
+//                isDup = false;
+//                tail->next = cur;
+//            }
+//        }
+//        
+//        return dummy.next;
+//    }
+//    
+//};
+
 class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
-        if (head == nullptr || head->next == nullptr) {
-            return head;
+        if (head == nullptr) {
+            return nullptr;
         }
         
+        bool dup = false;
         ListNode dummy(-1);
-        ListNode *tail = &dummy;
+        ListNode *prev = &dummy;
         ListNode *cur = head;
-        bool isDup = false;
         
         while (cur != nullptr) {
             while (cur->next != nullptr && cur->val == cur->next->val) {
-                isDup = true;
                 cur = cur->next;
+                dup = true;
             }
             
-            if (isDup == false) {
-                tail->next = cur;
-                cur = cur->next;
-                tail = tail->next;
+            if (dup) {
+                dup = false;
             } else {
-                cur = cur->next;
-                isDup = false;
-                tail->next = cur;
+                prev->next = cur;
+                prev = prev->next;
             }
+            
+            cur = cur->next;
         }
-        
         return dummy.next;
     }
-    
 };
 int main(int argc, const char * argv[])
 {
 
     ListNode *a = new ListNode(1);
-    ListNode *b = new ListNode(1);
+    ListNode *b = new ListNode(2);
 //    ListNode *c = new ListNode(1);
 //    ListNode *d = new ListNode(1);
     ListNode *e = new ListNode(2);
