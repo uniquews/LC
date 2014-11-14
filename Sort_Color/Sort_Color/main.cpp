@@ -10,74 +10,36 @@
 
 using namespace std;
 
-//class Solution {
-//public:
-//    void sortColors(int A[], int n) {
-//        int red = 0; // from left to right, the first one is not red
-//        int blue = n-1; // from right to left, the first one is not blue
-//        
-//        for(int i=0; i<=blue;){
-//            if(A[i] == 0){
-//                swap(A[i++], A[red++]);
-//            }else if(A[i] == 2){
-//                swap(A[i], A[blue--]);
-//            }else{
-//                i++;
-//            }
-//        }
-//        
-//        return;
-//    }
-//};
 
 class Solution {
 public:
     void sortColors(int A[], int n) {
-        if (n == 0) {
-            return;
-        }
-        
-        int start = 0;
-        int end = n - 1;
-        while (start <= end) {
-            while (A[start] == 0) {
-                start++;
-            }
-            
-            while(A[end] == 1 || A[end] ==2) {
-                end--;
-            }
-            
-            if (start <= end) {
-                int tmp = A[start];
-                A[start] = A[end];
-                A[end] = tmp;
-                start++;
-                end--;
-            }
-        }
-        
-        start = start;
-        end = n - 1;
-        while (start <= end) {
-            while (A[start] == 1) {
-                start++;
-            }
-            
-            while (A[end] == 2) {
-                end--;
-            }
-            
-            if (start <= end) {
-                int tmp = A[start];
-                A[start] = A[end];
-                A[end] = tmp;
-                start++;
-                end--;
-            }
-        }
-        
+        quicksort(A, 0, n - 1);
         return;
+    }
+    
+    void quicksort(int A[], int start, int end) {
+        if (start < end) {
+            int index = partition(A, start, end);
+            quicksort(A, start, index - 1);
+            quicksort(A, index + 1, end);
+        }
+        return;
+    }
+    
+    int partition(int A[], int start, int end) {
+        int pivot = A[end];
+        int leftTail = start - 1;
+        for (int rightHead = start; rightHead <= end - 1; rightHead++) {
+            if (A[rightHead] <= pivot) {
+                leftTail++;
+                swap(A[leftTail], A[rightHead]);
+            }
+        }
+        
+        swap(A[leftTail + 1], A[end]);
+        return leftTail + 1;
+        
     }
 };
 

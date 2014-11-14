@@ -8,71 +8,9 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
-
-//class Solution {
-//public:
-//    string minWindow(string S, string T) {
-//        if (S.size() == 0) {
-//            return "";
-//        }
-//        
-//        if (T.size() == 0) {
-//            return "";
-//        }
-//        
-//        if (S.size() < T.size()) {
-//            return "";
-//        }
-//        
-//        int w_start = 0;
-//        int w_end = 0;
-//        int min_wnd = INT_MAX;
-//        int min_start = 0;
-//        int numOfSatisfied = 0;
-//        int numOfNeeded = 0;
-//        
-//        vector<int> needed(256, 0);
-//        vector<int> existed(256, 0);
-//        
-//        for (int i = 0; i < T.size(); i++) {
-//            needed[T[i]]++;
-//            numOfNeeded++;
-//        }
-//        
-//        for (; w_end < S.size(); w_end++) {
-//            if (needed[S[w_end]] != 0) {
-//                if (existed[S[w_end]] < needed[S[w_end]]) {
-//                    numOfSatisfied++;
-//                }
-//                existed[S[w_end]]++;
-//                
-//            }
-//            
-//            if (numOfSatisfied == numOfNeeded) {
-//                while (existed[S[w_start]] > needed[S[w_start]] || needed[S[w_start]] == 0) {
-//                    existed[S[w_start]]--;
-//                    w_start++;
-//                }
-//                
-//                if (min_wnd > w_end - w_start + 1) {
-//                    min_wnd = min (min_wnd, w_end - w_start + 1);
-//                    min_start = w_start;
-//                }
-//            }
-//           
-//        }
-//        
-//        if (min_wnd == INT_MAX) {
-//            return "";
-//        } else {
-//            return S.substr(min_start, min_wnd);
-//        }
-//        
-//        
-//    }
-//};
 
 class Solution {
 public:
@@ -81,68 +19,63 @@ public:
             return "";
         }
         
-        if (S.size() < T.size()) {
+        if (T.size() > S.size()) {
             return "";
         }
         
-        int w_start = 0;
-        int w_end = 0;
-        int minw_start = 0;
-        int minw = INT_MAX;
-        int numOfNeed = 0;
-        int numOfSatisfied = 0;
-        
-        vector<int> exist(256, 0);
-        vector<int> need(256, 0);
-        
+        unordered_map<char, int> exist;
+        unordered_map<char, int> needed;
+        int num = 0;
         for (int i = 0; i < T.size(); i++) {
-            need[T[i]]++;
-            numOfNeed++;
+            needed[T[i]]++;
         }
         
-        for (; w_end < S.size(); w_end++) {
-            if (need[S[w_end]] != 0) {
-                if (need[S[w_end]] > exist[S[w_end]]) {
-                    numOfSatisfied++;
+        int start = 0;
+        int end = 0;
+        int w_start = 0;
+        int wnd = INT_MAX;
+        
+        while (end < S.size()) {
+            while (end < S.size() && num < T.size()) {
+                if (needed[S[end]] > exist[S[end]]) {
+                    num++;
                 }
-                exist[S[w_end]]++;
+                exist[S[end]]++;
+                end++;
             }
-            
-            if (numOfNeed == numOfSatisfied) {
-                while (need[S[w_start]] == 0 || need[S[w_start]] < exist[S[w_start]]) {
-                    
-                    if (need[S[w_start]] != 0) {
-                        exist[S[w_start]]--;
-                    }
-                    w_start++;
+            if (num == T.size()) {
+                while (needed[S[start]] == 0 || exist[S[start]] > needed[S[start]]) {
+                    exist[S[start]]--;
+                    start++;
                 }
                 
-                
-                if (minw > w_end - w_start + 1) {
-                    minw = w_end - w_start + 1;
-                    minw_start = w_start;
+                if (wnd > end - start) {
+                    wnd = end - start;
+                    w_start = start;
                 }
-                
+
+                exist[S[start]]--;
+                start++;
+                num--;
             }
-            
-            
+
         }
         
-        if (minw == INT_MAX) {
+        if (wnd == INT_MAX) {
             return "";
-        } else {
-            return S.substr(minw_start, minw);
         }
         
-        
+        return S.substr(w_start, wnd);
     }
 };
-
 int main(int argc, const char * argv[])
 {
 
-    string S = "cabwefgewcwaefgcf";
-    string T = "cae";
+//    string S = "cabwefgewcwaefgcf";
+//    string T = "cae";
+    string S = "ADOBECODEBANC";
+    string T = "ABC";
+    
     Solution su;
     cout << su.minWindow(S, T) << endl;
     return 0;
