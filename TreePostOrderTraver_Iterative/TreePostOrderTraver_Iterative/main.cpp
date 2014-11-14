@@ -127,20 +127,20 @@ int main(int argc, const char * argv[])
     TreeNode *root = new TreeNode(1);
     Tree t(root);
     TreeNode *left1 = new TreeNode(2);
-    TreeNode *right1 = new TreeNode(3);
+//    TreeNode *right1 = new TreeNode(3);
     root->left = left1;
-    root->right = right1;
+//    root->right = right1;
     
-    TreeNode *left21 = new TreeNode (4);
-    TreeNode * right22 = new TreeNode (5);
-    
-    left1->left = left21;
-    left1->right = right22;
-    
-    TreeNode * left23 = new TreeNode(6);
-    TreeNode * right24 = new TreeNode(7);
-    right1->left = left23;
-    right1->right =right24;
+//    TreeNode *left21 = new TreeNode (4);
+//    TreeNode * right22 = new TreeNode (5);
+//    
+//    left1->left = left21;
+//    left1->right = right22;
+//    
+//    TreeNode * left23 = new TreeNode(6);
+//    TreeNode * right24 = new TreeNode(7);
+//    right1->left = left23;
+//    right1->right =right24;
     
     Solution s;
     vector<int> result = s.postorderTraversal(root);

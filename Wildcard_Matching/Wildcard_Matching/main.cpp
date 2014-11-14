@@ -7,67 +7,59 @@
 //
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-//递归解法
 class Solution {
 public:
     bool isMatch(const char *s, const char *p) {
+        int m = (int)strlen(s);
+        int n = (int)strlen(p);
         
-        if (*s == '\0') {
-            while(*p == '*') {
-                p++;
-            }
-            return *p == '\0';
+        vector<vector<bool>> f(m + 1, vector<bool>(n + 1, false));
+        
+        f[0][0] = true;
+        for (int i = 1; i <= m; i++) {
+            f[i][0] = false;
         }
         
-        if (*p == '\0') {
-            return false;
-        }
-        
-        while (*s && *p) {
-            if (*s != *p) {
-                if (*p == '?') {
-                    s++, p++;
-                } else if (*p == '*') {
-                    
-                    while(*p == '*') {
-                        p++;//跳过连续的*号
-                    }
-                    
-                    if (*p == '\0') {
-                        return true;//如果跳过*号就到达结尾，那么是匹配的
-                    }
-                    
-                    while (*s) {
-                        if (isMatch(s, p)) {
-                            return true;//不停的尝试
-                        }
-                        
-                        s++;
-                    }
-                } else {
-                    return false;
-                }
+        for (int i = 1; i <= n; i++) {
+            if (p[i - 1] == '*') {
+                f[0][i] = f[0][i - 1];
             } else {
-                s++, p++;
+                f[0][i] = false;
             }
         }
-        return isMatch(s, p);
+        
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s[i - 1] == p[j - 1] || p[j - 1] == '?') {
+                    f[i][j] = f[i - 1][j - 1];
+                } else if (p[j - 1] == '*') {
+                    f[i][j] = f[i - 1][j] | f[i][j - 1];
+                    f[i][j] = f[i - 1][j - 1] | f[i][j];
+                }
+            }
+        }
+        
+        return f[m][n];
     }
 };
 
 int main(int argc, const char * argv[])
 {
 
-    char *s = "aa";
-    char *p = "?*?";
+//    char *s = "aa";
+//    char *p = "?*?";
+    
+    char *s = "aab";
+    char *p = "c*a*b";
     
     Solution su;
     cout << su.isMatch(s, p) << endl;
     // insert code here...
-    std::cout << "Hello, World!\n";
+    
     return 0;
 }
 
