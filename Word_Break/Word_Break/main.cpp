@@ -76,19 +76,35 @@ using namespace std;
 //    }
 //};
 
+//class Solution {
+//public:
+//    bool wordBreak(string s, unordered_set<string> &dict) {
+//        vector<bool> f(s.size() + 1, false);
+//        f[0] = true;
+//        
+//        for (int i = 1; i <= s.size(); i++) {
+//            for (int j = 0; j < i; j++) {
+//                if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
+//                    f[i] = true;
+//                }
+//            }
+//            
+//        }
+//        
+//        return f[s.size()];
+//    }
+//};
+
 class Solution {
 public:
     bool wordBreak(string s, unordered_set<string> &dict) {
-        vector<bool> f(s.size() + 1, false);
+        vector<bool> f(s.size() + 1);
         f[0] = true;
-        
         for (int i = 1; i <= s.size(); i++) {
             for (int j = 0; j < i; j++) {
-                if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
-                    f[i] = true;
-                }
+                string tmp = s.substr(j, i - j);
+                f[i] = f[j] && (dict.find(tmp) != dict.end());
             }
-            
         }
         
         return f[s.size()];
@@ -98,8 +114,8 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    string s = "a";
-    unordered_set<string> hash_set = {"a"};
+    string s = "abcd";
+    unordered_set<string> hash_set = {"a","abc","b","cd"};
     Solution su;
     cout << su.wordBreak(s, hash_set) <<endl;
     return 0;
