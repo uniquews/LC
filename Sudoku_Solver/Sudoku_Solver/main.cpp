@@ -28,7 +28,8 @@ public:
                     return false;
                 }
             }
-        }  // for the last number is not '.', you should return true here. Otherwise, it will return false and the board will be empty.
+        }  // for the last number is not '.', you should return true here. Otherwise, it will return
+        //false and the board will be empty.
         
         return true;
     }
