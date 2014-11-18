@@ -11,65 +11,37 @@
 
 using namespace std;
 
-class Solution{
-    
+class Solution {
 public:
     vector<vector<string>> partition(string s) {
-        if (s.size() == 0) {
-            return vector<vector<string>> {{""}};
-        }
-        
         vector<vector<bool>> isPP(s.size(), vector<bool>(s.size(), false));
-        for (int i = 0; i < s.size(); i++) {
-            isPP[i][i] = true;
-        }
-        
-        for (int i = (int)s.size() - 1; i >= 0; i--) {
-            for (int j = i; j < (int)s.size(); j++) {
-                if (s[i] == s[j] && (j - i <= 2 || isPP[i + 1][j - 1])) {
-                    isPP[i][j] = true;
-                }
-            }
-        }
-        
+        isPalindrome(s, isPP);
         vector<vector<string>> result;
         vector<string> eachResult;
-        dfs(s, 0, isPP, result, eachResult);
+        dfs(s, 0, eachResult, result, isPP);
         return result;
     }
     
-    void dfs(string s, int index, vector<vector<bool>> &isPP, vector<vector<string>> &result, vector<string> &eachResult) {
-        if (index == s.size()) {
+    void dfs(string &s, int start, vector<string> &eachResult, vector<vector<string>> &result, vector<vector<bool>> &isPP) {
+        if (start == s.size()) {
             result.push_back(eachResult);
             return;
         }
         
-        for (int i = 1; i <= s.size(); i++) {
-            if (index + i <= s.size()) {
-                string tmp = s.substr(index, i);
-                if (isPP[index][index + i - 1]) {
-                    eachResult.push_back(tmp);
-                    dfs(s, index + i, isPP, result, eachResult);
-                    eachResult.pop_back();
-                }
+        for (int i = start; i < s.size(); i++) {
+            if (isPP[start][i]) {
+                string tmp = s.substr(start, i - start + 1);
+                eachResult.push_back(tmp);
+                dfs(s, i + 1, eachResult, result, isPP);
+                eachResult.pop_back();
             }
         }
         
         return;
     }
     
-};
-
-class Solution {
-public:
-    vector<vector<string>> partition(string s) {
-        vector<vector<string>> result;
-        vector<string> eachResult;
-        vector<vector<bool>> isPP(s.size(), vector<bool> (s.size(), false));
-        for (int i = 0; i < s.size(); i++) {
-            isPP[i][i] = true;
-        }
-        
+    void isPalindrome(string &s, vector<vector<bool>> &isPP) {
+        vector<int> f(s.size() + 1, INT_MAX);
         for (int i = (int)s.size() - 1; i >= 0; i--) {
             for (int j = i; j < s.size(); j++) {
                 if (s[i] == s[j] && (j - i <= 2 || isPP[i + 1][j - 1])) {
@@ -77,33 +49,9 @@ public:
                 }
             }
         }
-        
-        
-        dfs(s, 0, eachResult, result, isPP);
-        return result;
-    }
-    
-    
-    
-    void dfs(string s, int start, vector<string> &eachResult, vector<vector<string>> &result, vector<vector<bool>> &isPP) {
-        if (start == s.size()) {
-            result.push_back(eachResult);
-            return;
-        }
-        
-        for (int i = 1; i <= s.size() - start; i++) {
-            string tmp = s.substr(start, i);
-            if (isPP[start][i + start - 1]) {
-                eachResult.push_back(tmp);
-                dfs(s, i + start, eachResult, result, isPP);
-                eachResult.pop_back();
-            }
-        }
-        
         return;
     }
 };
-
 
 
 
