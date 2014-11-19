@@ -14,38 +14,24 @@ using namespace std;
 class Solution {
 public:
     string countAndSay(int n) {
-        string begin = "1";
-        
-        if (n == 0) {
-            return "";
-        }
-        
-        if (n == 1) {
-            return begin;
-        }
-        
+        string startStr = "1";
         while (n > 1) {
-            string newStr = "";
-            int i = 0;
-            while (i < begin.size()) {
-                char tmp = begin[i];
-                int j = i;
-                int start = i;
-                while (j < begin.size() && begin[j] == tmp) {
-                    j++;
+            string tmp = "";
+            int start = 0;
+            while (start < startStr.size()) {
+                int end = start;
+                while (end < startStr.size() && startStr[end] == startStr[start]) {
+                    end++;
                 }
+                int len = end - start;
+                tmp.append(to_string(len)).append(string next(1, startStr[start]));
+                start = end;
                 
-                newStr.append(to_string(j - start));
-                newStr += tmp;
-                i = j;
-            
             }
-            begin = newStr;
+            startStr = tmp;
             n--;
-            
         }
-        
-      return begin;
+        return startStr;
     }
 };
 

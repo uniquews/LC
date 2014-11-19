@@ -73,8 +73,10 @@ int main(int argc, const char * argv[])
 
 //    string S = "cabwefgewcwaefgcf";
 //    string T = "cae";
-    string S = "ADOBECODEBANC";
-    string T = "ABC";
+//    string S = "ADOBECODEBANC";
+//    string T = "ABC";
+    string S = "ADOBEAODENABC";
+    string T = "ABA";
     
     Solution su;
     cout << su.minWindow(S, T) << endl;
