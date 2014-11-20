@@ -37,25 +37,54 @@ public:
                 }
                 
                 start++;
-                result = max(result, end - start + 1);
                 
             }
             
         }
         return result;
     }
-    
 };
+
+//超时的做法
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if (s.size() == 0) {
+            return 0;
+        }
+        int start = 0;
+        int result = 1;
+        unordered_map<char, int> hashMap;
+        while (start < s.size() - 1) {
+            hashMap[s[start]] = 1;
+            int end = start + 1;
+            while (end < s.size() && hashMap[s[end]] < 1) {
+                hashMap[s[end]]++;
+                end++;
+            }
+            
+            result = max(result, end - start);
+            while (s[start] != s[end]) {
+                start++;
+            }
+            start++;
+            hashMap.clear();
+        }
+        return result;
+    }
+};
+
+
 int main(int argc, const char * argv[])
 {
 
     // insert code here...
-//    string s = "wlrbbmqbhcdarzowkkyhiddqscdxrjmowfrxsjybldbefsarcbynecdyggxxpklorellnmpapqfwkhopkmco";
+    string s = "wlrbbmqbhcdarzowkkyhiddqscdxrjmowfrxsjybldbefsarcbynecdyggxxpklorellnmpapqfwkhopkmco";
 //
 //    string s = "aaa";
 //      string s = "abcabcbb";
     
-    string s = "hchzvfrkmlnozjk";
+//    string s = "hchzvfrkmlnozjk";
     Solution su;
     cout << su.lengthOfLongestSubstring(s);
     return 0;
