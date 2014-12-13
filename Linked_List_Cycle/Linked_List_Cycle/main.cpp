@@ -39,14 +39,10 @@ public:
             }
         }
         
-        if (fast == nullptr || fast->next == nullptr) {
-            return nullptr;
-            
-        }
-        
         return false;
         
     }
+    
     
 };
 

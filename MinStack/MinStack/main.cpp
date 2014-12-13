@@ -16,42 +16,39 @@
 
 using namespace std;
 
-
 class MinStack {
 public:
-    stack<pair<int, int>> stk;
-    int _min = 2147483647;
-    MinStack() {
-        // do initialization if necessary
-         
-        
-    }
-
-    void push(int number) {
-        // write your code here
-        if (stk.size() == 0) {
-            _min = number;
-            stk.push(make_pair(number, number));
-        } else {
-            if (number < stk.top().second) {
-                stk.push(make_pair(number, number));
-            } else {
-                stk.push(make_pair(number, stk.top().second));
-            }
-            
+    stack<int> stk;
+    stack<int> minStk;
+    void push(int x) {
+        stk.push(x);
+        if (minStk.size() == 0 || minStk.top() > x) {
+            minStk.push(x);
         }
+        return;
     }
-
-    int pop() {
-        // write your code here
-        int result = stk.top().first;
-        stk.pop();
-        return result;
+    
+    void pop() {
+        if (stk.size() == 0) {
+            return;
+        }
+        
+        int tmp = stk.top();
+        if (tmp == minStk.top()) {
+            stk.pop();
+            minStk.pop();
+        } else {
+            stk.pop();
+        }
+        return;
     }
-
-    int min() {
-        // write your code here
-        return stk.top().second;
+    
+    int top() {
+        return stk.top();
+    }
+    
+    int getMin() {
+        return minStk.top();
     }
 };
 
@@ -63,17 +60,20 @@ int main(int argc, const char * argv[])
 
     // insert code here...Ω
     
-    MinStack minStack(new stack<pair<int,int>>());
-    minStack.push(4);
-    minStack.push(5);
-    minStack.push(8);
+    MinStack minStack;
+    minStack.push(0);
+    minStack.push(1);
+    minStack.push(0);
+    minStack.getMin();
+    minStack.pop();
+    minStack.getMin();
     
     
-    while (minStack.size() != 0) {
-        cout <<"The top is "<< minStack.top()<<" ";
-        cout<< "The min of the stack now is " << minStack.MinTop()<<" " << endl;
-        minStack.pop();
-    }
+//    while (minStack.size() != 0) {
+//        cout <<"The top is "<< minStack.top()<<" ";
+//        cout<< "The min of the stack now is " << minStack.MinTop()<<" " << endl;
+//        minStack.pop();
+//    }
     
 
     
