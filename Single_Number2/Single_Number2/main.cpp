@@ -21,7 +21,7 @@ public:
             }
             
             
-            result += (count % 5) << i;
+            result += (count % 3) << i;
         }
         
         return result;
@@ -31,9 +31,9 @@ public:
 int main(int argc, const char * argv[])
 {
 
-    int A[] = {5,5,5,5,5,7};
+    int A[] = {0,0,0,1};
     Solution su;
-    cout << su.singleNumber(A, 6) << endl;
+    cout << su.singleNumber(A, 4) << endl;
     return 0;
 }
 
