@@ -28,7 +28,7 @@ public:
     }
     
     TreeNode * convert(vector<int> &inorder, int instart, int inend, vector<int> &postorder, int poststart, int postend) {
-        
+        // [2,1] [2,1] 右子树越界。
         if (instart > inend || poststart > postend) {
             return nullptr;
         }
