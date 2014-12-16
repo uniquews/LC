@@ -13,56 +13,51 @@
 
 using namespace std;
 
-//class Solution {
-//public:
-//    
-//    int CHAR_SIZE = 26;
-//    
-//    bool isScramble(string s1, string s2) {
-//        return isScrambleHelper(s1, s2);
-//    }
-//    
-//    bool isScrambleHelper(string &s1, string &s2) {
-//        if (s1.size() != s2.size())
-//            return false;
-//        if (s1 == s2)
-//            return true;
-//        
-//        int size = s1.size();
-//        vector<int> bucket(CHAR_SIZE, 0);
-//        string s11, s12, s21, s22;
-//        
-//        // Check wheter they have the same chars
-//        for (int i = 0; i < s1.size(); ++i) {
-//            bucket[s1[i] - 'a'] += 1;
-//            bucket[s2[i] - 'a'] -= 1;
-//        }
-//        for (int i = 0; i < CHAR_SIZE; ++i) {
-//            if (bucket[i] != 0)
-//                return false;
-//        }
-//        
-//        
-//        for (int i = 1; i < size; ++i) {
-//            s11 = s1.substr(0, i);
-//            s12 = s1.substr(i);
-//            
-//            s21 = s2.substr(0, i);
-//            s22 = s2.substr(i);
-//            if (isScrambleHelper(s11, s21) && isScrambleHelper(s12, s22))
-//                return true;
-//            
-//            s21 = s2.substr(size - i);
-//            s22 = s2.substr(0, size - i);
-//            if (isScrambleHelper(s11, s21) && isScrambleHelper(s12, s22))
-//                return true;
-//        }
-//        
-//        return false;
-//    }
-//    
-//    
-//};
+class Solution {
+public:
+    
+    int CHAR_SIZE = 26;
+    
+    bool isScramble(string s1, string s2) {
+        return isScrambleHelper(s1, s2);
+    }
+    
+    bool isScrambleHelper(string &s1, string &s2) {
+        if (s1.size() != s2.size())
+            return false;
+        if (s1 == s2)
+            return true;
+        string tmp1 = s1;
+        string tmp2 = s2;
+        sort(tmp1.begin(), tmp1.end());
+        sort(tmp2.begin(), tmp2.end());
+        if (tmp1 != tmp2) {
+            return false;
+        }
+        
+        int size = s1.size();
+        string s11, s12, s21, s22;
+        
+        for (int i = 1; i < size; ++i) {
+            s11 = s1.substr(0, i);
+            s12 = s1.substr(i);
+            
+            s21 = s2.substr(0, i);
+            s22 = s2.substr(i);
+            if (isScrambleHelper(s11, s21) && isScrambleHelper(s12, s22))
+                return true;
+            
+            s21 = s2.substr(size - i);
+            s22 = s2.substr(0, size - i);
+            if (isScrambleHelper(s11, s21) && isScrambleHelper(s12, s22))
+                return true;
+        }
+        
+        return false;
+    }
+    
+    
+};
 
 class Solution{
 
