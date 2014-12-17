@@ -15,23 +15,18 @@ using namespace std;
 class Solution {
 public:
     int maxSubArray(int A[], int n) {
-        int prev = 0;
-        vector<int> sum(n);
-        for (int i = 0; i < n; i++) {
-            prev = prev + A[i];
-            sum[i] = prev;
-        }
-        
-        int _min = 0;
-        int result = INT_MIN;
-        for (int i = 0; i < sum.size(); i++) {
-            result = max(result, sum[i] - _min);
-            
-            _min = min(_min, sum[i]);
+        vector<int> f(n);
+        f[0] = A[0];
+        int result = f[0];
+        for (int i = 1; i < n; i++) {
+            f[i] = max(f[i - 1] + A[i], A[i]);
+            result = max(result, f[i]);
         }
         
         return result;
+        
     }
+    
 };
 
 int main(int argc, const char * argv[])
