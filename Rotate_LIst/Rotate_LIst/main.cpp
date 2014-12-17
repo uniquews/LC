@@ -14,56 +14,6 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
-
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-//class Solution {
-//public:
-//    ListNode *rotateRight(ListNode *head, int k) {
-//        ListNode *cur = head;
-//        ListNode *tail = nullptr;
-//        
-//        if (head == nullptr || k == 0) {
-//            return head;
-//        }
-//        
-//        int length = 0;
-//        
-//        while (cur != nullptr) {
-//            if (cur -> next == nullptr) {
-//                tail = cur;
-//            }
-//            cur = cur->next;
-//            length++;
-//            
-//        }
-//        
-//        k = k % length;
-//        tail -> next = head;
-//        
-//        int step = length - k;
-//        cur = head;
-//        
-//        while (step > 1) {
-//            cur = cur -> next;
-//            step--;
-//        }
-//        
-//        ListNode *newHead = cur -> next;
-//        cur -> next = nullptr;
-//        
-//        return newHead;
-//        
-//        
-//    }
-//};
-
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -95,37 +45,46 @@ public:
         
         cur = &dummy;
         
-        while (k > 0) {
-            cur = cur->next;
-            k--;
+        if (k > 0) {
+            while (k > 0) {
+                cur = cur->next;
+                k--;
+            }
+            
+            while (cur->next != nullptr) {
+                prev = prev->next;
+                cur = cur->next;
+            }
         }
         
-        while (cur->next != nullptr) {
-            prev = prev->next;
-            cur = cur->next;
-        }
         
         ListNode *newHead = prev->next;
         prev->next = nullptr;
         cur->next = head;
         return newHead;
     }
+    
 };
 int main(int argc, const char * argv[])
 {
 
+//    ListNode *a = new ListNode(1);
+//    ListNode *b = new ListNode(2);
+//    ListNode *c = new ListNode(3);
+//    ListNode *d = new ListNode(4);
+//    ListNode *e = new ListNode(5);
+//    a->next = b;
+//    b->next = c;
+//    c->next = d;
+//    d->next = e;
+//    e->next = nullptr;
+    
     ListNode *a = new ListNode(1);
     ListNode *b = new ListNode(2);
-    ListNode *c = new ListNode(3);
-    ListNode *d = new ListNode(4);
-    ListNode *e = new ListNode(5);
     a->next = b;
-    b->next = c;
-    c->next = d;
-    d->next = e;
-    e->next = nullptr;
+    b->next = nullptr;
     Solution su;
-    su.rotateRight(a, 2);
+    su.rotateRight(a, 0);
     return 0;
 }
 
