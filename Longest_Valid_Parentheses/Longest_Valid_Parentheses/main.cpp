@@ -38,6 +38,34 @@ using namespace std;
 //    }
 //};
 
+//class Solution {
+//public:
+//    int longestValidParentheses(string s) {
+//        int last = -1;
+//        stack<int> stk;
+//        int result = 0;
+//        for (int i = 0; i < s.size(); i++) {
+//            if (s[i] == '(') {
+//                stk.push(i);
+//            } else {
+//                if (stk.size() == 0 || s[stk.top()] != '(') {
+//                    stk.push(i);
+//                    last = i;
+//                } else {
+//                    stk.pop();
+//                    if (stk.size() != 0) {
+//                        result = max(result, i - stk.top());
+//                    } else {
+//                        result = max(result, i - last);
+//                    }
+//                }
+//            }
+//        }
+//        
+//        return result;
+//    }
+//};
+
 class Solution {
 public:
     int longestValidParentheses(string s) {
@@ -48,15 +76,18 @@ public:
             if (s[i] == '(') {
                 stk.push(i);
             } else {
-                if (stk.size() == 0 || s[stk.top()] != '(') {
-                    stk.push(i);
+                if (stk.size() == 0) {
                     last = i;
-                } else {
+                } else if (s[stk.top()] == '(') {
                     stk.pop();
-                    if (stk.size() != 0) {
-                        result = max(result, i - stk.top());
+                    if (stk.size() == 0) {
+                        result = max(i - last, result);
                     } else {
-                        result = max(result, i - last);
+                        if (s[stk.top()] == '(') {
+                            result = max(i - stk.top(), result);
+                        } else {
+                            result = max(i - last, result);
+                        }
                     }
                 }
             }
@@ -66,11 +97,13 @@ public:
     }
 };
 
+
 int main(int argc, const char * argv[])
 {
 
 //    string input = ")()())";
-    string input = "((()()))";
+//    string input = "((()()))";
+    string input = "(()";
     Solution su;
     cout << su.longestValidParentheses(input)<< endl;
     return 0;

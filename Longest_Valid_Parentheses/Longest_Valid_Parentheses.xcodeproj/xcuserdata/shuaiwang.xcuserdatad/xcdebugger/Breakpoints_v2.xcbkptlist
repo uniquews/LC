@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Longest_Valid_Parentheses/main.cpp"
-            timestampString = "438063939.771269"
+            timestampString = "440556325.945899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "longestValidParentheses(string s)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,29 +26,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Longest_Valid_Parentheses/main.cpp"
-            timestampString = "438064062.70487"
+            timestampString = "440556345.191769"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "longestValidParentheses(string s)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Longest_Valid_Parentheses/main.cpp"
-            timestampString = "438064382.59613"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "longestValidParentheses(string s)"
-            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Solution::longestValidParentheses(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;)"
+                  moduleName = "Longest_Valid_Parentheses"
+                  urlString = "file:///Users/shuaiwang/Documents/xcode/LC/Longest_Valid_Parentheses/Longest_Valid_Parentheses/main.cpp"
+                  timestampString = "440556363.642246"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "1226">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Solution::longestValidParentheses(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;)"
+                  moduleName = "Longest_Valid_Parentheses"
+                  urlString = "file:///Users/shuaiwang/Documents/xcode/LC/Longest_Valid_Parentheses/Longest_Valid_Parentheses/main.cpp"
+                  timestampString = "440556363.642429"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "1355">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
